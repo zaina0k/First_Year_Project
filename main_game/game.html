@@ -4,23 +4,42 @@
     <meta charset="utf-8">
     <script type="text/javascript">
     var scot_pop = 0;
+    var data = 0;
+    var click = 1;
     var infect_chance = 0.2;
 
+    var upgrade1_cost = 10;
+
     function update(){
-      random_infect();
-      document.getElementById("Scotland").value = scot_pop;
+      document.getElementById("Data").value = (data+" KB");
+      document.getElementById("Scotland").value = (scot_pop);
+      document.getElementById("upgrade1").value = (upgrade1_cost);
     }
 
     function infect(){
-    scot_pop += 1;
+    scot_pop += click;
+    data += 1;
+    update();
     }
 
     function random_infect(){
     if (Math.random() <= infect_chance){
-      scot_pop += 1;
+      infect();
     }
     }
-    setInterval(update, 1000);
+
+    function upgrade(num){
+      if (num == 1){
+        if (data >= document.getElementById("upgrade1").value){
+          click += 1;
+          data -= document.getElementById("upgrade1").value;
+          upgrade1_cost *=2;
+          update();
+        }
+      }
+    }
+
+    setInterval(random_infect, 1000);
 
     </script>
 
@@ -28,6 +47,10 @@
   </head>
   <body>
     <button onclick="infect()">INFECT</button>
-    <div>Scotland<input type="text" disabled id="Scotland" placeholder="0"></div>
+    <div>Data <input type="text" disabled id="Data"></div>
+    <div>Scotland <input type="text" disabled id="Scotland" placeholder="0"></div>
+    <br>
+    <div>UPGRADES</div>
+    <div>Increases infect per click by 1 <input id="upgrade1"><button onclick="upgrade(1)">BUY</button></div>
   </body>
 </html>
