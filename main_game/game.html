@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+    var scot_pop = 0;
+    var infect_chance = 0.2;
+
+    function update(){
+      random_infect();
+      document.getElementById("Scotland").value = scot_pop;
+    }
+
+    function infect(){
+    scot_pop += 1;
+    }
+
+    function random_infect(){
+    if (Math.random() <= infect_chance){
+      scot_pop += 1;
+    }
+    }
+    setInterval(update, 1000);
+
+    </script>
+
+    <title>PROJECT IMAP</title>
+  </head>
+  <body>
+    <button onclick="infect()">INFECT</button>
+    <div>Scotland<input type="text" disabled id="Scotland" placeholder="0"></div>
+  </body>
+</html>
