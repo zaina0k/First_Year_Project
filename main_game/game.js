@@ -10,6 +10,44 @@ var upgrade2_offer = 0.1; //"offer" refers to what the upgrade is offering, whic
 var upgrade3_cost = 100;
 var upgrade3_offer = 0.2;
 
+function save(){
+  localStorage.setItem("scot_pop", scot_pop);
+  localStorage.setItem("data", data);
+  localStorage.setItem("click", click);
+  localStorage.setItem("auto_data", auto_data);
+  localStorage.setItem("infect_chance", infect_chance);
+  localStorage.setItem("upgrade1_cost", upgrade1_cost);
+  localStorage.setItem("upgrade2_cost", upgrade2_cost);
+  localStorage.setItem("upgrade2_offer", upgrade2_offer);
+  localStorage.setItem("upgrade3_cost", upgrade3_cost);
+  localStorage.setItem("upgrade3_offer", upgrade3_offer);
+}
+
+function load(){
+ scot_pop = localStorage.getItem("scot_pop");
+ scot_pop = parseInt(scot_pop);
+ data = localStorage.getItem("data");
+ data = parseInt(data);
+ click = localStorage.getItem("click");
+ click = parseInt(click);
+ auto_data = localStorage.getItem("auto_data");
+ auto_data = parseInt(auto_data);
+ infect_chance = localStorage.getItem("infect_chance");
+ infect_chance = parseInt(infect_chance);
+
+ upgrade1_cost = localStorage.getItem("upgrade1_cost");
+ upgrade1_cost = parseInt(upgrade1_cost);
+ upgrade2_cost = localStorage.getItem("upgrade2_cost");
+ upgrade2_cost = parseInt(upgrade2_cost);
+ upgrade2_offer = localStorage.getItem("upgrade2_offer");
+ upgrade2_offer = parseInt(upgrade2_offer);
+ upgrade3_cost = localStorage.getItem("upgrade3_cost");
+ upgrade3_cost = parseInt(upgrade3_cost);
+ upgrade3_offer = localStorage.getItem("upgrade3_offer");
+ upgrade3_offer = parseInt(upgrade3_offer);
+ update();
+}
+
 function update(){ //this function ensures all the text and values are up to date
   document.getElementById("Data").value = (data+" KB");
   document.getElementById("Scotland").value = (scot_pop);
