@@ -1,16 +1,16 @@
 var scot_pop = 0;
 var data = 0;
-var click = 1;
-var auto_data = 0;
-var infect_chance = 0.1;
+var click = 1; //when you click "infect", increases by this much
+var auto_data = 0; //how much data is mined per device per day
+var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrade1_cost = 10;
 var upgrade2_cost = 25;
-var upgrade2_offer = 0.1;
+var upgrade2_offer = 0.1; //"offer" refers to what the upgrade is offering, which will have to change after each purchase
 var upgrade3_cost = 100;
 var upgrade3_offer = 0.2;
 
-function update(){
+function update(){ //this function ensures all the text and values are up to date
   document.getElementById("Data").value = (data+" KB");
   document.getElementById("Scotland").value = (scot_pop);
   document.getElementById("Infection").value = (infect_chance);
@@ -24,12 +24,12 @@ function update(){
 
 function infect(){
 scot_pop += click;
-data += 1;
+data += 1; //without this, there is no way to get data to begin with
 update();
 }
 
 function random_infect(){
-if (Math.random() <= infect_chance){
+if (Math.random() <= infect_chance){ //Math.random() generates a number from 0 to 1
   infect();
 }
 }
@@ -37,9 +37,9 @@ if (Math.random() <= infect_chance){
 function upgrade(num){
   if (num == 1){
     if (data >= upgrade1_cost){
-      click += 1;
-      data -= upgrade1_cost;
-      upgrade1_cost *= 2;
+      click += 1; //gives the upgrade
+      data -= upgrade1_cost; //takes away the cost
+      upgrade1_cost *= 2; //increases the cost of the upgrade
       update();
     }
   }
@@ -48,7 +48,7 @@ function upgrade(num){
       auto_data = upgrade2_offer;
       data -= upgrade2_cost;
       upgrade2_cost *= 2;
-      upgrade2_offer += 0.1;
+      upgrade2_offer += 0.1; //the offer must change after each purchase
       update();
     }
   }
@@ -64,7 +64,7 @@ function upgrade(num){
 }
 
 function mine_data(){
-  data += Math.trunc(scot_pop*auto_data);
+  data += Math.trunc(scot_pop*auto_data); //once data mining is unlocked (upgrade2), multiplies current infected devices by the data mined per day and truncates it to look neat
 }
 
 setInterval(random_infect, 1000);
