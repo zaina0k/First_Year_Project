@@ -33,18 +33,18 @@ function load(){
  auto_data = localStorage.getItem("auto_data");
  auto_data = parseInt(auto_data);
  infect_chance = localStorage.getItem("infect_chance");
- infect_chance = parseInt(infect_chance);
+ infect_chance = parseFloat(infect_chance);
 
  upgrade1_cost = localStorage.getItem("upgrade1_cost");
  upgrade1_cost = parseInt(upgrade1_cost);
  upgrade2_cost = localStorage.getItem("upgrade2_cost");
  upgrade2_cost = parseInt(upgrade2_cost);
  upgrade2_offer = localStorage.getItem("upgrade2_offer");
- upgrade2_offer = parseInt(upgrade2_offer);
+ upgrade2_offer = parseFloat(upgrade2_offer);
  upgrade3_cost = localStorage.getItem("upgrade3_cost");
  upgrade3_cost = parseInt(upgrade3_cost);
  upgrade3_offer = localStorage.getItem("upgrade3_offer");
- upgrade3_offer = parseInt(upgrade3_offer);
+ upgrade3_offer = parseFloat(upgrade3_offer);
  update();
 }
 
