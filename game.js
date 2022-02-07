@@ -49,13 +49,15 @@ function load(){
 }
 
 function update(){ //this function ensures all the text and values are up to date
-  document.getElementById("Data").innerHTML = (data+" KB");
-  document.getElementById("Scotland").innerHTML = (scot_pop);
-  document.getElementById("Infection").innerHTML = (infect_chance);
+  document.getElementById("Data").value = (data+" KB");
+  document.getElementById("Scotland").value = (scot_pop);
+  document.getElementById("Infection").value = (infect_chance);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICES")
-  document.getElementById("upgrade1").innerHTML = ("<button onclick='upgrade(1)'><img src='images/more_click.png' title='Increases infects per click by 1&\#10;COST:"+upgrade1_cost+"' width='100' height='100'></button>");
-  document.getElementById("upgrade2").innerHTML = ("<button onclick='upgrade(2)'><img src='images/mining.png' title='Collects "+upgrade2_offer+"KB per device every day &\#10;COST:"+upgrade2_cost+"' width='100' height='100'></button>");
-  document.getElementById("upgrade3").innerHTML = ("<button onclick='upgrade(3)'><img src='images/random.jpg' title='Increases random chance of infection to "+upgrade3_offer+"&\#10;COST:"+upgrade3_cost+"' width='100' height='100'></button>");
+  document.getElementById("upgrade1").value = (upgrade1_cost);
+  document.getElementById("upgrade2_text").innerHTML = ("Collects "+upgrade2_offer+"KB per device every day <input disabled id='upgrade2'><button onclick='upgrade(2)'>BUY</button>")
+  document.getElementById("upgrade2").value = (upgrade2_cost);
+  document.getElementById("upgrade3_text").innerHTML = ("<div id='upgrade2_text'>Increases chance of random infection to "+upgrade3_offer+" <input disabled id='upgrade3'><button onclick='upgrade(3)'>BUY</button></div>")
+  document.getElementById("upgrade3").value = (upgrade3_cost);
 }
 
 function infect(){
