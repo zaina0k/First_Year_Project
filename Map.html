@@ -7,11 +7,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="main_game/game.js"></script>
   <style>
-  .display_boxes{
-    size: 5;
+  }
+  p{
+    border: 1px solid;
+    display: inline-block;
+    padding: 5px;
+  }
+  .upgrade_button{
+    float: left;
   }
   </style>
-  <!-- above styling doesn't actually work because it's overridden by the bootstrap link-->
 </head>
 
 <body>
@@ -47,9 +52,9 @@
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
         <h5 class="card-title">UPGRADES</h5>
-        <div id="upgrade1"><button onclick='upgrade(1)'><img src="images/more_click.png" width='100' height='100'></button></div>
-        <div id="upgrade2"><button onclick='upgrade(2)'><img src="images/mining.png" width='100' height='100'></button></div>
-        <div id="upgrade3"><button onclick='upgrade(3)'><img src="images/random.jpg" width='100' height='100'></button></div>
+        <div class="upgrade_button" id="upgrade1"><button onclick='upgrade(1)'><img src="images/more_click.png" width='50' height='50'></button></div>
+        <div class="upgrade_button" id="upgrade2"><button onclick='upgrade(2)'><img src="images/mining.png" width='50' height='50'></button></div>
+        <div class="upgrade_button" id="upgrade3"><button onclick='upgrade(3)'><img src="images/random.jpg" width='50' height='50'></button></div>
       </div>
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">

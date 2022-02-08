@@ -82,7 +82,7 @@ function upgrade(num){
       click += 1; //gives the upgrade
       data -= upgrade1_cost; //takes away the cost
       upgrade1_cost *= 2; //increases the cost of the upgrade
-      document.getElementById("upgrade1").innerHTML = ("<button onclick='upgrade(1)'><img src='images/more_click.png' title='Increases infects per click by 1&\#10;COST:"+upgrade1_cost+"' width='100' height='100'></button>");
+      document.getElementById("upgrade1").innerHTML = ("<button onclick='upgrade(1)'><img src='images/more_click.png' title='Increases infects per click by 1&\#10;COST:"+upgrade1_cost+"' width='50' height='50'></button>");
     }
   }
   if (num == 2){
@@ -91,7 +91,7 @@ function upgrade(num){
       data -= upgrade2_cost;
       upgrade2_cost *= 2;
       upgrade2_offer += 0.1; //the offer must change after each purchase
-      document.getElementById("upgrade2").innerHTML = ("<button onclick='upgrade(2)'><img src='images/mining.png' title='Collects "+upgrade2_offer+"KB per device every day &\#10;COST:"+upgrade2_cost+"' width='100' height='100'></button>");
+      document.getElementById("upgrade2").innerHTML = ("<button onclick='upgrade(2)'><img src='images/mining.png' title='Collects "+upgrade2_offer+"KB per device every day &\#10;COST:"+upgrade2_cost+"' width='50' height='50'></button>");
     }
   }
   if (num == 3){
@@ -100,7 +100,7 @@ function upgrade(num){
       data -= upgrade3_cost;
       upgrade3_cost *= 2;
       upgrade3_offer += 0.1;
-      document.getElementById("upgrade3").innerHTML = ("<button onclick='upgrade(3)'><img src='images/random.jpg' title='Increases random chance of infection to "+upgrade3_offer+"&\#10;COST:"+upgrade3_cost+"' width='100' height='100'></button>");
+      document.getElementById("upgrade3").innerHTML = ("<button onclick='upgrade(3)'><img src='images/random.jpg' title='Increases random chance of infection to "+upgrade3_offer+"&\#10;COST:"+upgrade3_cost+"' width='50' height='50'></button>");
     }
   }
 }
