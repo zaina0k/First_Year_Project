@@ -9,6 +9,9 @@
       display: inline-block;
       padding: 5px;
     }
+    .upgrade_button{
+      float: left;
+    }
     </style>
     <title>PROJECT IMAP</title>
   </head>
@@ -22,11 +25,11 @@
     <div>Infection Chance <p id="Infection">0</p></div>
     <br>
     <div>UPGRADES</div>
-    <div id="upgrade1"><button onclick='upgrade(1)'><img src="images/more_click.png" width='100' height='100'></button></div>
-    <div id="upgrade2"><button onclick='upgrade(2)'><img src="images/mining.png" width='100' height='100'></button></div>
-    <div id="upgrade3"><button onclick='upgrade(3)'><img src="images/random.jpg" width='100' height='100'></button></div>
+    <div class="upgrade_button" id="upgrade1"><button onclick='upgrade(1)'><img src="images/more_click.png" width='100' height='100'></button></div>
+    <div class="upgrade_button" id="upgrade2"><button onclick='upgrade(2)'><img src="images/mining.png" width='100' height='100'></button></div>
+    <div class="upgrade_button" id="upgrade3"><button onclick='upgrade(3)'><img src="images/random.jpg" width='100' height='100'></button></div>
     <br>
-    <button onclick="save()"> Save </button>
-    <button onclick="load()"> Load </button>
+    <div><button onclick="save()"> Save </button></div>
+    <div><button onclick="load()"> Load </button></div>
   </body>
 </html>
