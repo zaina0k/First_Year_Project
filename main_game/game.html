@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="game.js" type="text/javascript"></script>
+    <style>
+    p{
+      border: 1px solid;
+      display: inline-block;
+      padding: 5px;
+    }
+
+    .upgrade_button{
+      float: left;
+    }
+    </style>
+    <title>PROJECT IMAP</title>
+  </head>
+  <body>
+    <button id='infect_button' onclick='infect()'>INFECT 1 DEVICES</button>
+    <button onclick="current_stats(0)">SCOTLAND</button>
+    <button onclick="current_stats(1)">ENGLAND</button>
+    <button onclick="current_stats(2)">WALES</button>
+    <div>Data <p id="Data">0</p></div>
+    <div id="Region">Scotland <p>0</p></div>
+    <div>Infection Chance <p id="Infection">0</p></div>
+    <br>
+    <div>UPGRADES</div>
+    <div class="upgrade_button" id="upgrade1"><button onclick='upgrade(1)'><img src="images/more_click.png" title='Increases infects per click by 1&#10;COST:10' width='50' height='50'></button></div>
+    <div class="upgrade_button" id="upgrade2"><button onclick='upgrade(2)'><img src="images/mining.png" title='Collects 0.1KB per device every day &#10;COST:25' width='50' height='50'></button></div>
+    <div class="upgrade_button" id="upgrade3"><button onclick='upgrade(3)'><img src="images/random.jpg" title='Increases random chance of infection to 0.2&#10;COST:100' width='50' height='50'></button></div>
+    <br>
+    <div><button onclick="save()"> Save </button></div>
+    <div><button onclick="load()"> Load </button></div>
+  </body>
+</html>
