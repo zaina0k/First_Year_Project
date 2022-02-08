@@ -1,4 +1,7 @@
-var scot_pop = 0;
+var regions_array = ["Scotland","England","Wales"];
+var populations_array = [0,0,0]; //for example, array[0] = population of scotland
+var current_region_index = 0; //the current region we're looking at. starts off as scotland
+
 var data = 0;
 var click = 1; //when you click "infect", increases by this much
 var auto_data = 0; //how much data is mined per device per day
@@ -10,8 +13,12 @@ var upgrade2_offer = 0.1; //"offer" refers to what the upgrade is offering, whic
 var upgrade3_cost = 100;
 var upgrade3_offer = 0.2;
 
+function current_stats(num){
+  current_region_index = num;
+}
+
 function save(){
-  localStorage.setItem("scot_pop", scot_pop);
+  localStorage.setItem("populations_array", JSON.stringify(populations_array));
   localStorage.setItem("data", data);
   localStorage.setItem("click", click);
   localStorage.setItem("auto_data", auto_data);
@@ -24,8 +31,8 @@ function save(){
 }
 
 function load(){
- scot_pop = localStorage.getItem("scot_pop");
- scot_pop = parseInt(scot_pop);
+ populations_array = localStorage.getItem("populations_array");
+ populations_array = JSON.parse(populations_array);
  data = localStorage.getItem("data");
  data = parseInt(data);
  click = localStorage.getItem("click");
@@ -50,23 +57,22 @@ function load(){
 
 function update(){ //this function ensures all the text and values are up to date
   document.getElementById("Data").innerHTML = (data+" KB");
-  document.getElementById("Scotland").innerHTML = (scot_pop);
+  document.getElementById("Region").innerHTML = ("<div id='Region'>"+regions_array[current_region_index]+" <p>"+populations_array[current_region_index]+"</p></div>");
   document.getElementById("Infection").innerHTML = (infect_chance);
-  document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICES")
-  document.getElementById("upgrade1").innerHTML = ("<button onclick='upgrade(1)'><img src='images/more_click.png' title='Increases infects per click by 1&\#10;COST:"+upgrade1_cost+"' width='100' height='100'></button>");
-  document.getElementById("upgrade2").innerHTML = ("<button onclick='upgrade(2)'><img src='images/mining.png' title='Collects "+upgrade2_offer+"KB per device every day &\#10;COST:"+upgrade2_cost+"' width='100' height='100'></button>");
-  document.getElementById("upgrade3").innerHTML = ("<button onclick='upgrade(3)'><img src='images/random.jpg' title='Increases random chance of infection to "+upgrade3_offer+"&\#10;COST:"+upgrade3_cost+"' width='100' height='100'></button>");
+  document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICES");
 }
 
 function infect(){
-scot_pop += click;
+populations_array[current_region_index] += click;
 data += 1; //without this, there is no way to get data to begin with
 update();
 }
 
 function random_infect(){
 if (Math.random() <= infect_chance){ //Math.random() generates a number from 0 to 1
-  infect();
+  var random = Math.floor(Math.random() * (populations_array.length)); //choose a random region from the array
+  populations_array[random] += click; //infect it
+  data += 1;
 }
 }
 
@@ -76,7 +82,7 @@ function upgrade(num){
       click += 1; //gives the upgrade
       data -= upgrade1_cost; //takes away the cost
       upgrade1_cost *= 2; //increases the cost of the upgrade
-      update();
+      document.getElementById("upgrade1").innerHTML = ("<button onclick='upgrade(1)'><img src='images/more_click.png' title='Increases infects per click by 1&\#10;COST:"+upgrade1_cost+"' width='100' height='100'></button>");
     }
   }
   if (num == 2){
@@ -85,7 +91,7 @@ function upgrade(num){
       data -= upgrade2_cost;
       upgrade2_cost *= 2;
       upgrade2_offer += 0.1; //the offer must change after each purchase
-      update();
+      document.getElementById("upgrade2").innerHTML = ("<button onclick='upgrade(2)'><img src='images/mining.png' title='Collects "+upgrade2_offer+"KB per device every day &\#10;COST:"+upgrade2_cost+"' width='100' height='100'></button>");
     }
   }
   if (num == 3){
@@ -94,15 +100,17 @@ function upgrade(num){
       data -= upgrade3_cost;
       upgrade3_cost *= 2;
       upgrade3_offer += 0.1;
-      update();
+      document.getElementById("upgrade3").innerHTML = ("<button onclick='upgrade(3)'><img src='images/random.jpg' title='Increases random chance of infection to "+upgrade3_offer+"&\#10;COST:"+upgrade3_cost+"' width='100' height='100'></button>");
     }
   }
 }
 
 function mine_data(){
-  data += Math.trunc(scot_pop*auto_data); //once data mining is unlocked (upgrade2), multiplies current infected devices by the data mined per day and truncates it to look neat
+  for (var i = 0; i != (populations_array.length); i++){
+    data += Math.trunc(populations_array[i]*auto_data); //mines data every day per device for each region
+  }
 }
 
 setInterval(random_infect, 1000);
 setInterval(mine_data, 1000);
-setInterval(update, 1000);
+setInterval(update, 1000/60);
