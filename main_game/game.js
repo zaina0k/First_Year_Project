@@ -114,3 +114,14 @@ function mine_data(){
 setInterval(random_infect, 1000);
 setInterval(mine_data, 1000);
 setInterval(update, 1000/60);
+
+
+function expand(id){
+  var span = id + "-span"
+  document.getElementById(span).style.maxWidth = "100px";
+}
+
+function shrink(id){
+  var span = id + "-span"
+  document.getElementById(span).style.maxWidth = "0px";
+}

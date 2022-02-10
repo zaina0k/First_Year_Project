@@ -5,18 +5,8 @@
   <meta charset="utf-8">
   <title>Project IMAP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="main_game/game.js"></script>
-  <link rel="stylesheet" href="stylesheet.css">
-  <style>
-  p{
-    border: 1px solid;
-    display: inline-block;
-    padding: 5px;
-  }
-  .upgrade_button{
-    float: left;
-  }
-  </style>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script type="text/javascript" src="javascript.js"></script>
 </head>
 
 <body>
@@ -53,62 +43,61 @@
       <div class = "card-body">
         <h5 class="card-title">UPGRADES</h5>
         <div class="upgrade-div">
-          <input type="image" src="images/fake_cables.png" name="Fake Charging Cables" class="upgrade-button" onclick='upgrade(1)' onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade1"/>
-          <span id="upgrade1-span">
-            <div><h1>Fake Charging Cables</h1> Cost: *10bytes* Virus hijacks devices through fake cables </div>
+          <input type="image" src="upgrade_icons/fake_cables.png" name="Fake Charging Cables" class="upgrade-button" id="fake-cables"/> 
+          <span> 
+            <div><h1>Fake Charging Cables</h1> Cost: *10bytes* Virus hijacks devices through fake cables </div> 
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/infected_USBs.png" name="Infected USBs" class="upgrade-button" onclick="upgrade(2)" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade2"/>
-          <span id="upgrade2-span">
-            <div><h1>Infected USBs</h1> Cost: *1kb* Virus hijacks larger devices through infected USBs</div>
+          <input type="image" src="upgrade_icons/infected_USBs.png" name="Infected USBs" class="upgrade-button" id="infected-USBs"/> 
+          <span> 
+            <div><h1>Infected USBs</h1> Cost: *1kb* Virus hijacks larger devices through infected USBs</div> 
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/trojan_horse.png" name="Trojan Horse" class="upgrade-button" onclick="upgrade(3)" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade3"/>
-          <span id="upgrade3-span">
+          <input type="image" src="upgrade_icons/trojan_horse.png" name="Trojan Horse" class="upgrade-button" id="trojan-horse"/> 
+          <span> 
             <div><h1>Trojan Horse</h1>Cost: *100kb* Virus hides in files and waits to infect</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/faster_deployment.png" name="Faster Deployment" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade4"/>
-          <span id="upgrade4-span">
+          <input type="image" src="upgrade_icons/faster_deployment.png" name="Faster Deployment" class="upgrade-button" id="faster-deployment"/> 
+          <span> 
             <div><h1>Faster Deployment</h1> Cost: *1mb* Virus has better file detection </div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/faster_data_extraction.png" name="Faster Data Extraction" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade5"/>
-          <span id="upgrade5-span">
+          <input type="image" src="upgrade_icons/faster_data_extraction.png" name="Faster Data Extraction" class="upgrade-button" id="fast-data"/> 
+          <span> 
             <div><h1>Faster Data Extraction</h1> Cost: *10mb* Virus obtains data faster in all devices</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/round_the_clock.png" name="Round The Clock" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade6"/>
-          <span id="upgrade6-span">
-            <div><h1>Round The Clock</h1> Cost: *100mb* Virus can capture data even when device is powered off</div>
+          <input type="image" src="upgrade_icons/round_the_clock.png" name="Round The Clock" class="upgrade-button" id="round-the-clock"/>
+          <span> 
+            <div><h1>Round The Clock</h1> Cost: *100mb* Virus can capture data even when device is powered off</div> 
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/exodia.png" name="Exodia" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade7" />
-          <span id="upgrade7-span">
-           <div><h1>Exodia</h1> Cost: *1gb* Collect all 5 to disable all infected devices</div>
+          <input type="image" src="upgrade_icons/exodia.png" name="Exodia" class="upgrade-button" id="exodia" title="Exodia" /> 
+          <span>
+           <div><h1>Exodia</h1> Cost: *1gb* Collect all 5 to disable all infected devices</div> 
          </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/incognito_mode.png" name="Incognito Mode" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade8"/>
-          <span id="upgrade8-span">
-            <div><h1>Incognito Mode</h1> Cost: *1gb* Virus hides itself from the antivirus </div>
+          <input type="image" src="upgrade_icons/incognito_mode.png" name="Incognito Mode" class="upgrade-button" id="incognito-mode"/> <span> 
+            <div><h1>Incognito Mode</h1> Cost: *1gb* Virus hides itself from the antivirus </div> 
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/dark_web.png" name="Into The Dark Web" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade9" />
-          <span id="upgrade9-span">
+          <input type="image" src="upgrade_icons/dark_web.png" name="Into The Dark Web" class="upgrade-button" id="dark-web" /> 
+          <span> 
             <div><h1>Into The Dark Web</h1> Cost: *10gb* Virus uses the dark web to hide</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/wolverine.png" name="Wolverine" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade10" />
-          <span id="upgrade10-span">
+          <input type="image" src="upgrade_icons/wolverine.png" name="Wolverine" class="upgrade-button" id="wolverine" /> 
+          <span> 
             <div><h1>Wolverine</h1> Cost: *100gb* Virus mutates and regenerates cured devices</div>
           </span>
         </div>
@@ -117,12 +106,6 @@
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
         <h5 class="card-title">STATS</h5>
-        <button onclick="current_stats(0)">SCOTLAND</button>
-        <button onclick="current_stats(1)">ENGLAND</button>
-        <button onclick="current_stats(2)">WALES</button>
-        <div>Data <p id="Data">0</p></div>
-        <div id="Region">Scotland <p>0</p></div>
-        <div>Infection Chance <p id="Infection">0</p></div>
       </div>
     </div>
   </div>
@@ -130,10 +113,7 @@
       <div class="card text-center" style="width: 62em; height: 40em;">
       <div class = "card-body">
         <h5 class="card-title">MAP</h5>
-        <button id='infect_button' onclick='infect()'>INFECT 1 DEVICES</button>
-        <br><br>
-        <button onclick="save()"> Save </button>
-        <button onclick="load()"> Load </button>
+        <canvas id="map" style="border: 1px solid black;"></canvas>
       </div>
     </div>
   </div>
