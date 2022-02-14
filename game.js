@@ -2,7 +2,10 @@ var regions_array = ["Scotland","England","Wales"];
 var populations_array = [0,0,0]; //for example, array[0] = population of scotland
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
 
-var data = 0;
+var data = 0; //in bytes
+var data_in_units = 0;
+var data_display = "B";
+
 var click = 1; //when you click "infect", increases by this much
 var auto_data = 0; //how much data is mined per device per day
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
@@ -60,8 +63,53 @@ function load(){
  update();
 }
 
+function which_byte(){
+  if (data<(2**10)){
+    data_display = "B";
+    data_in_units = data;
+  }
+  if (data>=(2**10) && data<(2**20)){
+    data_display = "KB";
+    data_in_units = data/(2**10);
+  }
+
+  if (data>=(2**20) && data<(2**30)){
+    data_display = "MB";
+    data_in_units = data/(2**20);
+  }
+
+  if (data>=(2**30) && data<(2**40)){
+    data_display = "GB";
+    data_in_units = data/(2**30);
+  }
+
+  if (data>=(2**40) && data<(2**50)){
+    data_display = "TB";
+    data_in_units = data/(2**40);
+  }
+
+  if (data>=(2**50) && data<(2**60)){
+    data_display = "PB";
+    data_in_units = data/(2**50);
+  }
+
+  if (data>=(2**60) && data<(2**70)){
+    data_display = "EB";
+    data_in_units = data/(2**60);
+  }
+
+  if (data>(2**70)){
+    data_display = "ZB";
+    data_in_units = data/(2**70);
+  }
+  if (data_display != "B"){
+    data_in_units = data_in_units.toFixed(2);
+  }
+}
+
 function update(){ //this function ensures all the text and values are up to date
-  document.getElementById("Data").innerHTML = (data+" KB");
+  which_byte();
+  document.getElementById("Data").innerHTML = (data_in_units+" "+data_display);
   document.getElementById("Region").innerHTML = ("<div id='Region'>"+regions_array[current_region_index]+" <p>"+populations_array[current_region_index]+"</p></div>");
   document.getElementById("Infection").innerHTML = (infect_chance);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICES");
