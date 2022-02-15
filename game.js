@@ -162,7 +162,7 @@ function mine_data(){
 setInterval(random_infect, 1000);
 setInterval(mine_data, 1000);
 setInterval(update, 1000/60);
-setInterval(save, 1000);
+setInterval(save, 1000/60);
 if (localStorage.getItem("data") != null){
   load();
 }
