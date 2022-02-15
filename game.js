@@ -16,11 +16,6 @@ var upgrade2_offer = 0.1; //"offer" refers to what the upgrade is offering, whic
 var upgrade3_cost = 100;
 var upgrade3_offer = 0.2;
 
-function mouse(event){
-  console.log(event.clientX+","+event.clientY);
-}
-document.addEventListener("click",mouse);
-
 function current_stats(num){
   current_region_index = num;
 }
@@ -167,3 +162,14 @@ function mine_data(){
 setInterval(random_infect, 1000);
 setInterval(mine_data, 1000);
 setInterval(update, 1000/60);
+
+
+function expand(id){
+  var span = id + "-span"
+  document.getElementById(span).style.maxWidth = "100px";
+}
+
+function shrink(id){
+  var span = id + "-span"
+  document.getElementById(span).style.maxWidth = "0px";
+}
