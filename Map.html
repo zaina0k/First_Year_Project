@@ -55,61 +55,61 @@
         <div class="upgrade-div">
           <input type="image" src="images/fake_cables.png" name="Fake Charging Cables" class="upgrade-button" onclick='upgrade(1)' onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade1"/>
           <span id="upgrade1-span">
-            <div><h1>Fake Charging Cables</h1> Cost: *10bytes* Virus hijacks devices through fake cables </div>
+            <div id="upgrade1_text"><h1>Fake Charging Cables</h1> Cost: *10 Bytes* Virus hijacks devices through fake cables (+0.1 B per device per day)</div>
           </span>
         </div>
         <div class="upgrade-div">
           <input type="image" src="images/infected_USBs.png" name="Infected USBs" class="upgrade-button" onclick="upgrade(2)" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade2"/>
           <span id="upgrade2-span">
-            <div><h1>Infected USBs</h1> Cost: *1kb* Virus hijacks larger devices through infected USBs</div>
+            <div id="upgrade2_text"><h1>Infected USBs</h1> Cost: *50 Bytes* Virus hijacks larger devices through infected USBs (+1 infection per day)</div>
           </span>
         </div>
         <div class="upgrade-div">
           <input type="image" src="images/trojan_horse.png" name="Trojan Horse" class="upgrade-button" onclick="upgrade(3)" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade3"/>
           <span id="upgrade3-span">
-            <div><h1>Trojan Horse</h1>Cost: *100kb* Virus hides in files and waits to infect</div>
+            <div id="upgrade3_text"><h1>Trojan Horse</h1>Cost: *100kb* Virus hides in files and waits to infect</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/faster_deployment.png" name="Faster Deployment" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade4"/>
+          <input type="image" src="images/faster_deployment.png" name="Faster Deployment" class="upgrade-button" onclick='upgrade(4)' onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade4"/>
           <span id="upgrade4-span">
-            <div><h1>Faster Deployment</h1> Cost: *1mb* Virus has better file detection </div>
+            <div id="upgrade4_text"><h1>Faster Deployment</h1> Cost: *1mb* Virus has better file detection </div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/faster_data_extraction.png" name="Faster Data Extraction" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade5"/>
+          <input type="image" src="images/faster_data_extraction.png" name="Faster Data Extraction" class="upgrade-button" onclick='upgrade(5)' onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade5"/>
           <span id="upgrade5-span">
-            <div><h1>Faster Data Extraction</h1> Cost: *10mb* Virus obtains data faster in all devices</div>
+            <div id="upgrade5_text"><h1>Faster Data Extraction</h1> Cost: *10mb* Virus obtains data faster in all devices</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/round_the_clock.png" name="Round The Clock" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade6"/>
+          <input type="image" src="images/round_the_clock.png" name="Round The Clock" class="upgrade-button" onclick='upgrade(6)' onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade6"/>
           <span id="upgrade6-span">
-            <div><h1>Round The Clock</h1> Cost: *100mb* Virus can capture data even when device is powered off</div>
+            <div id="upgrade6_text"><h1>Round The Clock</h1> Cost: *100mb* Virus can capture data even when device is powered off</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/exodia.png" name="Exodia" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade7" />
+          <input type="image" src="images/exodia.png" name="Exodia" class="upgrade-button" onmouseover="expand(this.id)" onclick='upgrade(7)' onmouseout="shrink(this.id)" id="upgrade7" />
           <span id="upgrade7-span">
-           <div><h1>Exodia</h1> Cost: *1gb* Collect all 5 to disable all infected devices</div>
+           <div id="upgrade7_text"><h1>Exodia</h1> Cost: *1gb* Collect all 5 to disable all infected devices</div>
          </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/incognito_mode.png" name="Incognito Mode" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade8"/>
+          <input type="image" src="images/incognito_mode.png" name="Incognito Mode" class="upgrade-button" onmouseover="expand(this.id)" onclick='upgrade(8)' onmouseout="shrink(this.id)" id="upgrade8"/>
           <span id="upgrade8-span">
-            <div><h1>Incognito Mode</h1> Cost: *1gb* Virus hides itself from the antivirus </div>
+            <div id="upgrade8_text"><h1>Incognito Mode</h1> Cost: *1gb* Virus hides itself from the antivirus </div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/dark_web.png" name="Into The Dark Web" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade9" />
+          <input type="image" src="images/dark_web.png" name="Into The Dark Web" class="upgrade-button" onmouseover="expand(this.id)" onclick='upgrade(9)' onmouseout="shrink(this.id)" id="upgrade9" />
           <span id="upgrade9-span">
-            <div><h1>Into The Dark Web</h1> Cost: *10gb* Virus uses the dark web to hide</div>
+            <div id="upgrade9_text"><h1>Into The Dark Web</h1> Cost: *10gb* Virus uses the dark web to hide</div>
           </span>
         </div>
         <div class="upgrade-div">
-          <input type="image" src="images/wolverine.png" name="Wolverine" class="upgrade-button" onmouseover="expand(this.id)" onmouseout="shrink(this.id)" id="upgrade10" />
+          <input type="image" src="images/wolverine.png" name="Wolverine" class="upgrade-button" onmouseover="expand(this.id)" onclick='upgrade(10)' onmouseout="shrink(this.id)" id="upgrade10" />
           <span id="upgrade10-span">
-            <div><h1>Wolverine</h1> Cost: *100gb* Virus mutates and regenerates cured devices</div>
+            <div id="upgrade10_text"><h1>Wolverine</h1> Cost: *100gb* Virus mutates and regenerates cured devices</div>
           </span>
         </div>
       </div>
@@ -120,8 +120,9 @@
         <button onclick="current_stats(0)">SCOTLAND</button>
         <button onclick="current_stats(1)">ENGLAND</button>
         <button onclick="current_stats(2)">WALES</button>
-        <div>Data <p id="Data">0</p></div>
-        <div id="Region">Scotland <p>0</p></div>
+        <div id="Data">Data <p>0</p><div>0</div></div>
+        <div id="Total_pop">Total Devices <p>0</p></div>
+        <div id="Region">Scotland <p>0</p><div>0</div></div>
         <div>Infection Chance <p id="Infection">0</p></div>
       </div>
     </div>
@@ -130,7 +131,8 @@
       <div class="card text-center" style="width: 62em; height: 40em;">
       <div class = "card-body">
         <h5 class="card-title">MAP</h5>
-        <button id='infect_button' onclick='infect()'>INFECT 1 DEVICES</button>
+        <div>DAY: <p id="Day">0</p></div>
+        <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
         <br>
         <img src="images/regions.png" width="410" height="500" usemap="#regions_map">
         <br>
