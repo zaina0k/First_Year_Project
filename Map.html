@@ -59,9 +59,9 @@
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
         <h5 class="card-title">STATS</h5>
-        <button onclick="current_stats(0)">SCOTLAND</button>
-        <button onclick="current_stats(1)">ENGLAND</button>
-        <button onclick="current_stats(2)">WALES</button>
+        <button type="button" class="btn btn-dark" onclick="current_stats(0)">SCOTLAND</button>
+        <button type="button" class="btn btn-dark" onclick="current_stats(1)">ENGLAND</button>
+        <button type="button" class="btn btn-dark" onclick="current_stats(2)">WALES</button>
         <div>Data <p id="Data">0</p></div>
         <div id="Region">Scotland <p>0</p></div>
         <div>Infection Chance <p id="Infection">0</p></div>
@@ -72,10 +72,10 @@
       <div class="card text-center" style="width: 62em; height: 40em;">
       <div class = "card-body">
         <h5 class="card-title">MAP</h5>
-        <button id='infect_button' onclick='infect()'>INFECT 1 DEVICES</button>
+        <button type="button" class="btn btn-dark" id='infect_button' onclick='infect()'>INFECT 1 DEVICES</button>
         <br><br>
-        <button onclick="save()"> Save </button>
-        <button onclick="load()"> Load </button>
+        <button type="button" class="btn btn-dark" onclick="save()"> Save </button>
+        <button type="button" class="btn btn-dark" onclick="load()"> Load </button>
       </div>
     </div>
   </div>
