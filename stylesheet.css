@@ -4,8 +4,9 @@
 }
 
 .upgrade-button {
-	width: 50px;
-	height: 50px;
+	width: 110px;
+	height: 110px;
+	margin-top: -7px;
 }
 
 .upgrade-div span {
@@ -17,21 +18,26 @@
   white-space: nowrap;
   overflow: hidden;
   position: absolute;
-  background-color: grey;
+  background-image: url("images/background.png");
+	background-size: 110px;
+	margin-top: -7px;
+	margin-left: -110px;
+	cursor: pointer;
 }
 
 .upgrade-div:hover {
-	max-width: 100px;
-	max-height: 100px;
+	max-width: 110px;
+	max-height: 110px;
 }
 
 .upgrade-div span div {
-	width: 100px;
-	height: 100px;
-	border: 3px solid black;
+	width: 110px;
+	height: 110px;
+	padding: 5px;
 	overflow-wrap: normal;
 	white-space: normal;
 	font-size: 10px;
+	color: green;
 }
 
 .upgrade-div span div h1 {
