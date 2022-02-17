@@ -48,13 +48,13 @@
 	background-color: #909090;
 }
 
-@media screen and (max-width: 1919px){
+/* @media screen and (max-width: 1919px){
 	#upgrades-card{
 		width: 320px;
 		height: 270px;
 	}
 	#map-card{
-		width: 320px;
+		width: 640px;
 		height: 270px;
 	}
 	#stats-card{
@@ -76,12 +76,7 @@
 		width: 630px;
 		height: 370px;
 	}
-	#map-canvas {
-		width: 1270px;
-		height: 740;
-		margin: 0;
-	}
-}
+} */
 
 .map-part {
 	cursor: pointer;
