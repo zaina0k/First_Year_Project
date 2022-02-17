@@ -41,3 +41,7 @@
 .card-body {
 	background-color: #909090;
 }
+
+.map-part {
+	cursor: pointer;
+}
