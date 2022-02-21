@@ -1,5 +1,5 @@
-var regions_array = ["Scotland","England","Wales"];
-var populations_array = [0,0,0]; //for example, array[0] = population of scotland
+var regions_array = ["Scotland","North East","North West","Yorkshire","West Midlands","East Midlands","Wales","East of England","South East","South West","London"];
+var populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
 
 var day = 0;
@@ -13,6 +13,25 @@ var auto_infection = 0; //how many devices are infected every day i.e. how fast 
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0];
+
+function reset(){
+  localStorage.clear();
+  globalThis.populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
+  globalThis.current_region_index = 0; //the current region we're looking at. starts off as scotland
+
+  globalThis.day = 0;
+  globalThis.data = 0; //in bytes
+  globalThis.data_in_units = 0;
+  globalThis.data_display = "B";
+
+  globalThis.click = 1; //when you click "infect", increases by this much
+  globalThis.auto_data = 0; //how much data is mined per device per day
+  globalThis.auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
+  globalThis.infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
+
+  globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0];
+  save();
+}
 
 function current_stats(num){
   current_region_index = num;
