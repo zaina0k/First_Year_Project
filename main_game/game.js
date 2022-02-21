@@ -185,6 +185,6 @@ function expand(id){
 }
 
 function shrink(id){
-  var span = id
+  var span = id + "-span"
   document.getElementById(span).style.maxWidth = "0px";
 }

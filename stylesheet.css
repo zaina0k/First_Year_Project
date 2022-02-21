@@ -25,11 +25,6 @@
 	cursor: pointer;
 }
 
-.upgrade-div:hover {
-	max-width: 110px;
-	max-height: 110px;
-}
-
 .upgrade-div span div {
 	width: 110px;
 	height: 110px;
@@ -50,4 +45,12 @@
 
 .map-part {
 	cursor: pointer;
+}
+
+.map-part:hover{
+	fill: green;
+}
+
+.svgmap {
+	display: inline-block;
 }
