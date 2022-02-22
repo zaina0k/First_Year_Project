@@ -198,11 +198,12 @@ if (localStorage.getItem("data") != null){
 }
 
 function expand(id){
-  var span = id + "-span"
-  document.getElementById(span).style.maxWidth = "100px";
+  var span = id + "-span";
+  document.getElementById(span).style.maxWidth = "110px";
+  setTimeout(shrink, 5000, span);
 }
 
 function shrink(id){
-  var span = id + "-span"
+  var span = id;
   document.getElementById(span).style.maxWidth = "0px";
 }

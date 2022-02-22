@@ -51,8 +51,18 @@
 	fill: green;
 }
 
-.svgmap {
-	display: inline-block;
+.svg-div {
+	position: relative;
+	width: 0;
+	height: 0;
+}
+
+.map-svg {
+	position: relative;
+}
+
+.reset-button {
+	position: relative;
 }
 
 p{
