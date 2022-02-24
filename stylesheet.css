@@ -66,6 +66,10 @@
 	position: relative;
 }
 
+.buttons-section {
+	margin-left: 50px;
+}
+
 .dropdown {
 	position:relative;
 	display: inline-block;
