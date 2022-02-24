@@ -81,7 +81,7 @@
 	z-index: 1;
 	text-align: center;
   }
-  
+
   .dropdown:hover .dropdown-content {
 	display: block;
 	min-width: 50px;
@@ -104,7 +104,7 @@ p{
 	margin-top: 7px;
 	width: 50px;
 	height: 50px;
-	text-align: center; 
+	text-align: center;
 }
 
 .darkmode{

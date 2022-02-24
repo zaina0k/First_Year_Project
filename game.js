@@ -14,6 +14,27 @@ var infect_chance = 0.1; //the chance every day that a new device is randomly in
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0];
 
+function change_theme(theme){
+  if (theme=="light"){
+
+  }
+  if (theme=="black"){
+
+  }
+  if (theme=="navy"){
+
+  }
+  if (theme=="cyber"){
+
+  }
+  if (theme=="multi"){
+
+  }
+  if (theme=="night_mode"){
+
+  }
+}
+
 function reset(){
   localStorage.clear();
   globalThis.populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
