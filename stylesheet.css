@@ -58,11 +58,16 @@
 }
 
 .map-svg {
-	position: relative;
+	position: absolute;
 }
+
 
 .reset-button {
 	position: relative;
+}
+
+.buttons-section {
+	margin-left: 50px;
 }
 
 .dropdown {
