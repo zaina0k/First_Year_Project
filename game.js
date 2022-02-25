@@ -14,6 +14,12 @@ var infect_chance = 0.1; //the chance every day that a new device is randomly in
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0];
 
+function display_info(num){
+  if (num==0){
+    document.getElementById("achievement1").src = "images/img2.png";
+  }
+}
+
 function change_theme(theme){
   if (theme=="light"){
 
