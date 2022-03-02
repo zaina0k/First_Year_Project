@@ -22,13 +22,13 @@
             <li class="nav-item">
             <a class="nav-link">Themes</a>
             <div class="dropdown-content">
-              <input class="theme_botton" type="image" src=images/white.jpeg name="light"  alt="Light"/>
-              <input class="theme_botton" type="image" src=images/black.jpeg name="dark"  alt="Dark"/>
-              <input class="theme_botton" type="image" src=images/Navy.jpeg name="navy"  alt="navy"/>
-              <input class="theme_botton" type="image" src="images/matrix.jpeg" name="matrix"  alt="Matrix">
-              <input class="theme_botton" type="image" src="images/rainbow.jpg" name="rainbow"  alt="rainbow">
+              <input class="theme_botton" type="image" src=images/white.jpeg name="light"  alt="Light" onclick='upgrade("white")'/>
+              <input class="theme_botton" type="image" src=images/black.jpeg name="dark"  alt="Dark" onclick='upgrade("black")'/>
+              <input class="theme_botton" type="image" src=images/Navy.jpeg name="navy"  alt="navy" onclick='upgrade("navy")'/>
+              <input class="theme_botton" type="image" src="images/matrix.jpeg" name="matrix"  alt="Matrix" onclick='upgrade("cyber")'>
+              <input class="theme_botton" type="image" src="images/rainbow.jpg" name="rainbow"  alt="rainbow" onclick='upgrade("multi")'>
               <hr>
-              <input class="darkmode" type="image" src="images/night-mode.jpg" name="darkmode"  alt="darkmode">
+              <input class="darkmode" type="image" src="images/night-mode.jpg" name="darkmode"  alt="darkmode" onclick='upgrade("night_mode")'>
             </div>
             </li>
           </div>
@@ -60,6 +60,7 @@
         <div class="buttons-section">
           <div class="upgrade-div">
             <input type="image" src="images/fake_cables.png" name="Fake Charging Cables" class="upgrade-button" onmouseover="expand(this.id)" id="upgrade1"/>
+            <script>buttondisable();</script>
             <span id="upgrade1-span" onmouseout="shrink(this.id)" onclick='upgrade(1)'>
               <div id="upgrade1_text"><h1>Fake Charging Cables</h1> Cost: *10bytes* Virus hijacks devices through fake cables </div>
             </span>
