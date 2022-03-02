@@ -149,6 +149,7 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
   document.getElementById("Infection").innerHTML = (infect_chance);
+  document.getElementById("RAW_DATA").innerHTML = (day);
 }
 
 function infect(){
