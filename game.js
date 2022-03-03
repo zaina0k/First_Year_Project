@@ -21,77 +21,23 @@ function display_info(num){
 }
 
 function change_theme(theme){
-  var styleEl = document.createElement("style");
-  document.head.appendChild(styleEl);
-  var stylesheet = styleEl.sheet;
+  if (theme=="light"){
 
-  if (theme==0){
-    stylesheet.insertRule(".card-body{background-color: white;}");
-    stylesheet.insertRule("p{color: black;}");
-    stylesheet.insertRule(".card-title{color: black;}");
-    stylesheet.insertRule("#Data{color: black;}");
-    stylesheet.insertRule("#Total_pop{color: black;}");
-    stylesheet.insertRule("#Region{color: black;}");
-    stylesheet.insertRule("#Infection_chance{color: black;}");
-    stylesheet.insertRule("#Day_display{color: black;}");
   }
-  if (theme==1){
-    stylesheet.insertRule(".card-body{background-color: #131413;}");
-    stylesheet.insertRule("p{color: white;}");
-    stylesheet.insertRule(".card-title{color: white;}");
-    stylesheet.insertRule("#Data{color: white;}");
-    stylesheet.insertRule("#Total_pop{color: white;}");
-    stylesheet.insertRule("#Region{color: white;}");
-    stylesheet.insertRule("#Infection_chance{color: white;}");
-    stylesheet.insertRule("#Day_display{color: white;}");
+  if (theme=="black"){
+
   }
-  if (theme==2){
-    stylesheet.insertRule(".card-body{background-color: navy;}");
-    stylesheet.insertRule("p{color: white;}");
-    stylesheet.insertRule(".card-title{color: white;}");
-    stylesheet.insertRule("#Data{color: white;}");
-    stylesheet.insertRule("#Total_pop{color: white;}");
-    stylesheet.insertRule("#Region{color: white;}");
-    stylesheet.insertRule("#Infection_chance{color: white;}");
-    stylesheet.insertRule("#Day_display{color: white;}");
+  if (theme=="navy"){
+
   }
-  if (theme==3){
-    stylesheet.insertRule(".card-body{background-color: #46be14;}");
-    stylesheet.insertRule("p{color: black;}");
-    stylesheet.insertRule(".card-title{color: black;}");
-    stylesheet.insertRule("#Data{color: black;}");
-    stylesheet.insertRule("#Total_pop{color: black;}");
-    stylesheet.insertRule("#Region{color: black;}");
-    stylesheet.insertRule("#Infection_chance{color: black;}");
-    stylesheet.insertRule("#Day_display{color: black;}");
+  if (theme=="cyber"){
+
   }
-  if (theme==4){
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule(".card-body{background-color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("p{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule(".card-title{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Data{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Total_pop{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Region{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Infection_chance{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Day_display{color: #"+random_color+";}");
+  if (theme=="multi"){
+
   }
-  if (theme==5){
-    stylesheet.insertRule(".card-body{background-color: #2a2b2b;}");
-    stylesheet.insertRule("p{color: #755f5e;}");
-    stylesheet.insertRule(".card-title{color: #755f5e;}");
-    stylesheet.insertRule("#Data{color: #755f5e;}");
-    stylesheet.insertRule("#Total_pop{color: #755f5e;}");
-    stylesheet.insertRule("#Region{color: #755f5e;}");
-    stylesheet.insertRule("#Infection_chance{color: #755f5e;}");
-    stylesheet.insertRule("#Day_display{color: #755f5e;}");
+  if (theme=="night_mode"){
+
   }
 }
 
@@ -239,6 +185,7 @@ function upgrade(num){
     if (data >= 100000 && upgrades_array[2] == 0){
       data -= 100000;
       upgrades_array[2] = 1;
+      infect_chance += 0.2;
       var button3 = document.getElementById('upgrade3');
       button3.parentNode.removeChild(button3);
       return false;
@@ -247,6 +194,7 @@ function upgrade(num){
   if (num == 4){
     if (data >= 1000000 && upgrades_array[3] == 0){
       data -= 1000000;
+      auto_infection += 10;
       upgrades_array[3] = 1;
       var button4 = document.getElementById('upgrade4');
       button4.parentNode.removeChild(button4);
@@ -257,6 +205,7 @@ function upgrade(num){
     if (data >= 10000000 && upgrades_array[4] == 0){
       data -= 10000000;
       upgrades_array[4] = 1;
+      auto_data += 100;
       var button5 = document.getElementById('upgrade5');
       button5.parentNode.removeChild(button5);
       return false;
@@ -266,6 +215,7 @@ function upgrade(num){
     if (data >= 100000000 && upgrades_array[5] == 0){
       data -= 100000000;
       upgrades_array[5] = 1;
+      auto_data = auto_data*2;
       var button6 = document.getElementById('upgrade6');
       button6.parentNode.removeChild(button6);
       return false;
@@ -347,82 +297,3 @@ function shrink(id){
   document.getElementById(span).style.maxWidth = "0px";
 }
 
-function buttondisable1(){
-  if (upgrades_array[0] == 1){
-    var button1 = document.getElementById('upgrade1');
-    button1.parentNode.removeChild(button1);
-    return false;
-  }
-}
-
-function buttondisable2(){
-  if (upgrades_array[1] == 1){
-    var button2 = document.getElementById('upgrade2');
-    button2.parentNode.removeChild(button2);
-    return false;
-  }
-}
-
-function buttondisable3(){
-  if (upgrades_array[2] == 1){
-    var button3 = document.getElementById('upgrade3');
-    button3.parentNode.removeChild(button3);
-    return false;
-  }
-}
-
-function buttondisable4(){
-  if (upgrades_array[3] == 1){
-    var button4 = document.getElementById('upgrade4');
-    button4.parentNode.removeChild(button4);
-    return false;
-  }
-}
-
-function buttondisable5(){
-  if (upgrades_array[4] == 1){
-    var button5 = document.getElementById('upgrade5');
-    button5.parentNode.removeChild(button5);
-    return false;
-  }
-}
-
-function buttondisable6(){
-  if (upgrades_array[5] == 1){
-    var button6 = document.getElementById('upgrade6');
-    button6.parentNode.removeChild(button6);
-    return false;
-  }
-}
-
-function buttondisable7(){
-  if (upgrades_array[6] == 1){
-    var button7 = document.getElementById('upgrade7');
-    button7.parentNode.removeChild(button7);
-    return false;
-  }
-}
-
-function buttondisable8(){
-  if (upgrades_array[7] == 1){
-    var button8 = document.getElementById('upgrade8');
-    button8.parentNode.removeChild(button8);
-    return false;
-  }
-}
-
-function buttondisable9(){
-  if (upgrades_array[8] == 1){
-    var button9 = document.getElementById('upgrade9');
-    button9.parentNode.removeChild(button9);
-    return false;
-  }
-}
-
-function buttondisable10(){
-  if (upgrades_array[9] == 1){
-    var button10 = document.getElementById('upgrade10');
-    button10.parentNode.removeChild(button10);
-    return false;
-  }
-}
