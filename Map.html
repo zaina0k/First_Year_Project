@@ -22,13 +22,13 @@
             <li class="nav-item">
             <a class="nav-link">Themes</a>
             <div class="dropdown-content">
-              <input class="theme_botton" type="image" src=images/white.jpeg name="light"  alt="Light"/>
-              <input class="theme_botton" type="image" src=images/black.jpeg name="dark"  alt="Dark"/>
-              <input class="theme_botton" type="image" src=images/Navy.jpeg name="navy"  alt="navy"/>
-              <input class="theme_botton" type="image" src="images/matrix.jpeg" name="matrix"  alt="Matrix">
-              <input class="theme_botton" type="image" src="images/rainbow.jpg" name="rainbow"  alt="rainbow">
+              <input class="theme_botton" onclick="change_theme(0)" type="image" src=images/white.jpeg name="light"  alt="Light"/>
+              <input class="theme_botton" onclick="change_theme(1)" type="image" src=images/black.jpeg name="dark"  alt="Dark"/>
+              <input class="theme_botton" onclick="change_theme(2)" type="image" src=images/Navy.jpeg name="navy"  alt="navy"/>
+              <input class="theme_botton" onclick="change_theme(3)" type="image" src="images/matrix.jpeg" name="matrix"  alt="Matrix">
+              <input class="theme_botton" onclick="change_theme(4)" type="image" src="images/rainbow.jpg" name="rainbow"  alt="rainbow">
               <hr>
-              <input class="darkmode" type="image" src="images/night-mode.jpg" name="darkmode"  alt="darkmode">
+              <input class="darkmode" onclick="change_theme(5)" type="image" src="images/night-mode.jpg" name="darkmode"  alt="darkmode">
             </div>
             </li>
           </div>
@@ -130,14 +130,14 @@
         <div id="Data">Data <p>0</p><div>0</div></div>
         <div id="Total_pop">Total Devices <p>0</p></div>
         <div id="Region">Scotland <p>0</p><div>0</div></div>
-        <div>Infection Chance <p id="Infection">0</p></div>
+        <div id="Infection_chance">Infection Chance <p id="Infection">0</p></div>
       </div>
     </div>
   </div>
   <div class="card-columns" style="display: inline-block; float: left;">
       <div class="card text-center" style="width: 62em; height: 40em;">
       <div class = "card-body">
-        <div>DAY: <p id="Day">0</p></div>
+        <div id="Day_display">DAY: <p id="Day">0</p></div>
         <div class="map-buttons">
           <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
           <button class="reset-button" onclick="reset()"> RESET </button>

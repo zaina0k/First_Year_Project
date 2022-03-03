@@ -21,23 +21,77 @@ function display_info(num){
 }
 
 function change_theme(theme){
-  if (theme=="light"){
+  var styleEl = document.createElement("style");
+  document.head.appendChild(styleEl);
+  var stylesheet = styleEl.sheet;
 
+  if (theme==0){
+    stylesheet.insertRule(".card-body{background-color: white;}");
+    stylesheet.insertRule("p{color: black;}");
+    stylesheet.insertRule(".card-title{color: black;}");
+    stylesheet.insertRule("#Data{color: black;}");
+    stylesheet.insertRule("#Total_pop{color: black;}");
+    stylesheet.insertRule("#Region{color: black;}");
+    stylesheet.insertRule("#Infection_chance{color: black;}");
+    stylesheet.insertRule("#Day_display{color: black;}");
   }
-  if (theme=="black"){
-
+  if (theme==1){
+    stylesheet.insertRule(".card-body{background-color: #131413;}");
+    stylesheet.insertRule("p{color: white;}");
+    stylesheet.insertRule(".card-title{color: white;}");
+    stylesheet.insertRule("#Data{color: white;}");
+    stylesheet.insertRule("#Total_pop{color: white;}");
+    stylesheet.insertRule("#Region{color: white;}");
+    stylesheet.insertRule("#Infection_chance{color: white;}");
+    stylesheet.insertRule("#Day_display{color: white;}");
   }
-  if (theme=="navy"){
-
+  if (theme==2){
+    stylesheet.insertRule(".card-body{background-color: navy;}");
+    stylesheet.insertRule("p{color: white;}");
+    stylesheet.insertRule(".card-title{color: white;}");
+    stylesheet.insertRule("#Data{color: white;}");
+    stylesheet.insertRule("#Total_pop{color: white;}");
+    stylesheet.insertRule("#Region{color: white;}");
+    stylesheet.insertRule("#Infection_chance{color: white;}");
+    stylesheet.insertRule("#Day_display{color: white;}");
   }
-  if (theme=="cyber"){
-
+  if (theme==3){
+    stylesheet.insertRule(".card-body{background-color: #46be14;}");
+    stylesheet.insertRule("p{color: black;}");
+    stylesheet.insertRule(".card-title{color: black;}");
+    stylesheet.insertRule("#Data{color: black;}");
+    stylesheet.insertRule("#Total_pop{color: black;}");
+    stylesheet.insertRule("#Region{color: black;}");
+    stylesheet.insertRule("#Infection_chance{color: black;}");
+    stylesheet.insertRule("#Day_display{color: black;}");
   }
-  if (theme=="multi"){
-
+  if (theme==4){
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule(".card-body{background-color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("p{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule(".card-title{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Data{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Total_pop{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Region{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Infection_chance{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Day_display{color: #"+random_color+";}");
   }
-  if (theme=="night_mode"){
-
+  if (theme==5){
+    stylesheet.insertRule(".card-body{background-color: #2a2b2b;}");
+    stylesheet.insertRule("p{color: #755f5e;}");
+    stylesheet.insertRule(".card-title{color: #755f5e;}");
+    stylesheet.insertRule("#Data{color: #755f5e;}");
+    stylesheet.insertRule("#Total_pop{color: #755f5e;}");
+    stylesheet.insertRule("#Region{color: #755f5e;}");
+    stylesheet.insertRule("#Infection_chance{color: #755f5e;}");
+    stylesheet.insertRule("#Day_display{color: #755f5e;}");
   }
 }
 
