@@ -21,23 +21,77 @@ function display_info(num){
 }
 
 function change_theme(theme){
-  if (theme=="light"){
+  var styleEl = document.createElement("style");
+  document.head.appendChild(styleEl);
+  var stylesheet = styleEl.sheet;
 
+  if (theme==0){
+    stylesheet.insertRule(".card-body{background-color: white;}");
+    stylesheet.insertRule("p{color: black;}");
+    stylesheet.insertRule(".card-title{color: black;}");
+    stylesheet.insertRule("#Data{color: black;}");
+    stylesheet.insertRule("#Total_pop{color: black;}");
+    stylesheet.insertRule("#Region{color: black;}");
+    stylesheet.insertRule("#Infection_chance{color: black;}");
+    stylesheet.insertRule("#Day_display{color: black;}");
   }
-  if (theme=="black"){
-
+  if (theme==1){
+    stylesheet.insertRule(".card-body{background-color: #131413;}");
+    stylesheet.insertRule("p{color: white;}");
+    stylesheet.insertRule(".card-title{color: white;}");
+    stylesheet.insertRule("#Data{color: white;}");
+    stylesheet.insertRule("#Total_pop{color: white;}");
+    stylesheet.insertRule("#Region{color: white;}");
+    stylesheet.insertRule("#Infection_chance{color: white;}");
+    stylesheet.insertRule("#Day_display{color: white;}");
   }
-  if (theme=="navy"){
-
+  if (theme==2){
+    stylesheet.insertRule(".card-body{background-color: navy;}");
+    stylesheet.insertRule("p{color: white;}");
+    stylesheet.insertRule(".card-title{color: white;}");
+    stylesheet.insertRule("#Data{color: white;}");
+    stylesheet.insertRule("#Total_pop{color: white;}");
+    stylesheet.insertRule("#Region{color: white;}");
+    stylesheet.insertRule("#Infection_chance{color: white;}");
+    stylesheet.insertRule("#Day_display{color: white;}");
   }
-  if (theme=="cyber"){
-
+  if (theme==3){
+    stylesheet.insertRule(".card-body{background-color: #46be14;}");
+    stylesheet.insertRule("p{color: black;}");
+    stylesheet.insertRule(".card-title{color: black;}");
+    stylesheet.insertRule("#Data{color: black;}");
+    stylesheet.insertRule("#Total_pop{color: black;}");
+    stylesheet.insertRule("#Region{color: black;}");
+    stylesheet.insertRule("#Infection_chance{color: black;}");
+    stylesheet.insertRule("#Day_display{color: black;}");
   }
-  if (theme=="multi"){
-
+  if (theme==4){
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule(".card-body{background-color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("p{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule(".card-title{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Data{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Total_pop{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Region{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Infection_chance{color: #"+random_color+";}");
+    random_color = Math.floor(Math.random()*16777215).toString(16);
+    stylesheet.insertRule("#Day_display{color: #"+random_color+";}");
   }
-  if (theme=="night_mode"){
-
+  if (theme==5){
+    stylesheet.insertRule(".card-body{background-color: #2a2b2b;}");
+    stylesheet.insertRule("p{color: #755f5e;}");
+    stylesheet.insertRule(".card-title{color: #755f5e;}");
+    stylesheet.insertRule("#Data{color: #755f5e;}");
+    stylesheet.insertRule("#Total_pop{color: #755f5e;}");
+    stylesheet.insertRule("#Region{color: #755f5e;}");
+    stylesheet.insertRule("#Infection_chance{color: #755f5e;}");
+    stylesheet.insertRule("#Day_display{color: #755f5e;}");
   }
 }
 
@@ -157,6 +211,104 @@ function infect(){
 populations_array[current_region_index] += click;
 data += 1; //without this, there is no way to get data to begin with
 update();
+}
+
+function upgrade(num){
+  if (num == 1){
+    if (data >= 10 && upgrades_array[0] == 0){
+      data -= 10;
+      upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
+      auto_data += 0.1;
+      var button1 = document.getElementById('upgrade1');
+      button1.parentNode.removeChild(button1);
+      return false;
+      //replace this line with something that makes buttons unavailable since it's been purchased
+    }
+  }
+  if (num == 2){
+    if (data >= 50 && upgrades_array[1] == 0){
+      data -= 50;
+      upgrades_array[1] = 1;
+      auto_infection += 1;
+      var button2 = document.getElementById('upgrade2');
+      button2.parentNode.removeChild(button2);
+      return false;
+    }
+  }
+  if (num == 3){
+    if (data >= 100000 && upgrades_array[2] == 0){
+      data -= 100000;
+      upgrades_array[2] = 1;
+      var button3 = document.getElementById('upgrade3');
+      button3.parentNode.removeChild(button3);
+      return false;
+    }
+  }
+  if (num == 4){
+    if (data >= 1000000 && upgrades_array[3] == 0){
+      data -= 1000000;
+      upgrades_array[3] = 1;
+      var button4 = document.getElementById('upgrade4');
+      button4.parentNode.removeChild(button4);
+      return false;
+    }
+  }
+  if (num == 5){
+    if (data >= 10000000 && upgrades_array[4] == 0){
+      data -= 10000000;
+      upgrades_array[4] = 1;
+      var button5 = document.getElementById('upgrade5');
+      button5.parentNode.removeChild(button5);
+      return false;
+    }
+  }
+  if (num == 6){
+    if (data >= 100000000 && upgrades_array[5] == 0){
+      data -= 100000000;
+      upgrades_array[5] = 1;
+      var button6 = document.getElementById('upgrade6');
+      button6.parentNode.removeChild(button6);
+      return false;
+    }
+  }
+  if (num == 7){
+    if (data >= 1000000000 && upgrades_array[6] == 0){
+      data -= 1000000000;
+      upgrades_array[6] = 1;
+      var button7 = document.getElementById('upgrade7');
+      button7.parentNode.removeChild(button7);
+      return false;
+    }
+  }
+  if (num == 8){
+    if (data >= 1000000000 && upgrades_array[7] == 0){
+      data -= 1000000000;
+      upgrades_array[7] = 1;
+
+      var button8 = document.getElementById('upgrade8');
+      button8.parentNode.removeChild(button8);
+      return false;
+    }
+  }
+  if (num == 9){
+    if (data >= 10000000000 && upgrades_array[8] == 0){
+      data -= 10000000000;
+      upgrades_array[8] = 1;
+
+      var button9 = document.getElementById('upgrade9');
+      button9.parentNode.removeChild(button9);
+      return false;
+    }
+  }
+  if (num == 10){
+    if (data >= 100000000000 && upgrades_array[9] == 0){
+      data -= 100000000000;
+      upgrades_array[9] = 1;
+      var button10 = document.getElementById('upgrade10');
+      button10.parentNode.removeChild(button10);
+      return false;
+    }
+  }
 }
 
 function upgrade(num){
