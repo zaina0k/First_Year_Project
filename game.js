@@ -351,3 +351,82 @@ function shrink(id){
   document.getElementById(span).style.maxWidth = "0px";
 }
 
+function buttondisable1(){
+  if (upgrades_array[0] == 1){
+    var button1 = document.getElementById('upgrade1');
+    button1.parentNode.removeChild(button1);
+    return false;
+  }
+}
+
+function buttondisable2(){
+  if (upgrades_array[1] == 1){
+    var button2 = document.getElementById('upgrade2');
+    button2.parentNode.removeChild(button2);
+    return false;
+  }
+}
+
+function buttondisable3(){
+  if (upgrades_array[2] == 1){
+    var button3 = document.getElementById('upgrade3');
+    button3.parentNode.removeChild(button3);
+    return false;
+  }
+}
+
+function buttondisable4(){
+  if (upgrades_array[3] == 1){
+    var button4 = document.getElementById('upgrade4');
+    button4.parentNode.removeChild(button4);
+    return false;
+  }
+}
+
+function buttondisable5(){
+  if (upgrades_array[4] == 1){
+    var button5 = document.getElementById('upgrade5');
+    button5.parentNode.removeChild(button5);
+    return false;
+  }
+}
+
+function buttondisable6(){
+  if (upgrades_array[5] == 1){
+    var button6 = document.getElementById('upgrade6');
+    button6.parentNode.removeChild(button6);
+    return false;
+  }
+}
+
+function buttondisable7(){
+  if (upgrades_array[6] == 1){
+    var button7 = document.getElementById('upgrade7');
+    button7.parentNode.removeChild(button7);
+    return false;
+  }
+}
+
+function buttondisable8(){
+  if (upgrades_array[7] == 1){
+    var button8 = document.getElementById('upgrade8');
+    button8.parentNode.removeChild(button8);
+    return false;
+  }
+}
+
+function buttondisable9(){
+  if (upgrades_array[8] == 1){
+    var button9 = document.getElementById('upgrade9');
+    button9.parentNode.removeChild(button9);
+    return false;
+  }
+}
+
+function buttondisable10(){
+  if (upgrades_array[9] == 1){
+    var button10 = document.getElementById('upgrade10');
+    button10.parentNode.removeChild(button10);
+    return false;
+  }
+}
