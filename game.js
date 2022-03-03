@@ -1,6 +1,7 @@
 var regions_array = ["Scotland","North East","North West","Yorkshire","West Midlands","East Midlands","Wales","East of England","South East","South West","London"];
 var populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
-var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488]; //total is 65185724
+var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488];
+var placement_count_array = [0,0,0,0,0,0,0,0,0,0,0];
 var completion_percentage = 0;
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
 
@@ -461,3 +462,161 @@ function buttondisable10(){
     return false;
   }
 }
+
+function infectRegionGraphic(){ //function for updating the map with the infection status
+  for (var i = 0; i < regions_array.length; i++) { //iterates through each region
+    var path_name = "path-" + regions_array[i];
+    var path = document.getElementById(path_name.toLowerCase().replace(" ", "-")); //gets region id from regions array and initiates a path object
+    var newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); //creates a new path element in the html
+
+
+
+    var box = returnBox(path); //function for returning the bounding box of a region and its multiplier
+    var randX, randY;
+
+    var size = ((max_populations_array[i]*box.multi)*(populations_array[i]/max_populations_array[i])); //number of coords tried **if this is 1, 1 coord will be tried every run through**
+    for (var n = 0; n <= size; n++) { //tries coords **size** times
+
+      randX = Math.floor(Math.random() * (box.xMax - box.xMin) + box.xMin); //random x from within the region's bounding box
+      randY = Math.floor(Math.random() * (box.yMax - box.yMin) + box.yMin); //random y from within the region's bounding box
+
+      if ((path.isPointInFill(new DOMPoint(randX, randY)) == true) && (placement_count_array[i] < ((max_populations_array[i]*box.multi)*(populations_array[i]/max_populations_array[i])))) {
+//checks if the random coord is withing the region **i.e overlapping with the actual svg element itself** then checks that we haven't placed anymore circles in the region than we need to
+//this is determined by a ratio of the current number of devices and the max number of devices for the region
+        currentPath = newPath.getAttribute("d"); //return the d attribute **path attribute** of the new path we created before
+
+        if (typeof currentPath == "string") { //checks against the initial null value of the d attribute inside current path
+          if (currentPath.substring(0, 4) == "null"){ //removes the null string from the beginning of the path **this is needed as we should only have coordinates inside a path attribute**
+            currentPath = currentPath.substring(4);
+          }
+        }
+        else {
+          currentPath = "";
+        }
+
+        newPath.setAttribute("d", currentPath + 'M '+randX+' '+randY+' m -'+0.5+', 0 a '+0.5+','+0.5+' 0 1,0 '+(0.5*2)+',0 a '+0.5+','+0.5+' 0 1,0 -'+(0.5*2)+',0 ');
+//this is the svg path for a circle where every instance of 0.5 is the radius, places the center of the circle at the random coords generated previously
+        newPath.setAttribute("class", "node"); //sets the paths class so we can perform css on it
+
+
+        document.getElementById("svg").appendChild(newPath); //appends the path to the svg
+        placement_count_array[i] += 1; //adds 1 to the placement counter
+      }
+    }
+  }
+
+  function returnBox(path){ //returns a region's bounding box and multiplier
+
+    switch (path) { //switch for the value that path takes **can take values of different regions**
+      case document.getElementById('path-south-west'):
+      return {
+        xMax: 490,
+        yMax: 471,
+        xMin: 383,
+        yMin: 382,
+        multi: 0.000353 //multiplier is the ratio used to determine the number of circles that should be placed in a specific region
+//for example the best number of circles for scotland is 10,000 (visually) its max population is 5466000 and so we need a multiplier of 10000/5466000 for scotland or 0.00183
+      };
+        break;
+      case document.getElementById('path-south-east'):
+      return {
+        xMax: 563,
+        yMax: 440,
+        xMin: 480,
+        yMin: 376,
+        multi: 0.000325
+      };
+        break;
+      case document.getElementById('path-london'):
+      return {
+        xMax: 533,
+        yMax: 418,
+        xMin: 513,
+        yMin: 398,
+        multi: 0.0000333
+      };
+        break;
+      case document.getElementById('path-east-of-england'):
+      return {
+        xMax: 573,
+        yMax: 410,
+        xMin: 508,
+        yMin: 343,
+        multi: 0.0004
+      };
+        break;
+      case document.getElementById('path-west-midlands'):
+      return {
+        xMax: 497,
+        yMax: 392,
+        xMin: 443,
+        yMin: 330,
+        multi: 0.000335
+      };
+        break;
+      case document.getElementById('path-east-midlands'):
+      return {
+        xMax: 535,
+        yMax: 386,
+        xMin: 475,
+        yMin: 316,
+        multi: 0.000411
+      };
+        break;
+      case document.getElementById('path-yorkshire'):
+      return {
+        xMax: 530,
+        yMax: 329,
+        xMin: 460,
+        yMin: 275,
+        multi: 0.00041
+      };
+        break;
+      case document.getElementById('path-north-west'):
+      return {
+        xMax: 479,
+        yMax: 345,
+        xMin: 434,
+        yMin: 248,
+        multi: 0.00027
+      };
+        break;
+      case document.getElementById('path-north-east'):
+      return {
+        xMax: 500,
+        yMax: 280,
+        xMin: 455,
+        yMin: 220,
+        multi: 0.00075
+      };
+        break;
+      case document.getElementById('path-wales'):
+      return {
+        xMax: 462,
+        yMax: 411,
+        xMin: 394,
+        yMin: 327,
+        multi: 0.0008
+      };
+        break;
+      case document.getElementById('path-scotland'):
+      return {
+        xMax: 482,
+        yMax: 271,
+        xMin: 330,
+        yMin: 98,
+        multi: 0.00183
+      };
+        break;
+      default:
+      return {
+        x: 0,
+        y: 0
+      };
+
+    }
+  }
+
+}
+
+setInterval(infectRegionGraphic, 2000); //set map update interval
