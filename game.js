@@ -112,6 +112,7 @@ function reset(){
 
   globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0];
   save();
+  window.location.reload();
 }
 
 function current_stats(num){
@@ -218,6 +219,9 @@ function upgrade(num){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
       auto_data += 0.1;
+      var button1 = document.getElementById('upgrade1');
+      button1.parentNode.removeChild(button1);
+      return false;
       //replace this line with something that makes buttons unavailable since it's been purchased
     }
   }
@@ -226,31 +230,84 @@ function upgrade(num){
       data -= 50;
       upgrades_array[1] = 1;
       auto_infection += 1;
+      var button2 = document.getElementById('upgrade2');
+      button2.parentNode.removeChild(button2);
+      return false;
     }
   }
   if (num == 3){
-
+    if (data >= 100000 && upgrades_array[2] == 0){
+      data -= 100000;
+      upgrades_array[2] = 1;
+      var button3 = document.getElementById('upgrade3');
+      button3.parentNode.removeChild(button3);
+      return false;
+    }
   }
   if (num == 4){
-
+    if (data >= 1000000 && upgrades_array[3] == 0){
+      data -= 1000000;
+      upgrades_array[3] = 1;
+      var button4 = document.getElementById('upgrade4');
+      button4.parentNode.removeChild(button4);
+      return false;
+    }
   }
   if (num == 5){
-
+    if (data >= 10000000 && upgrades_array[4] == 0){
+      data -= 10000000;
+      upgrades_array[4] = 1;
+      var button5 = document.getElementById('upgrade5');
+      button5.parentNode.removeChild(button5);
+      return false;
+    }
   }
   if (num == 6){
-
+    if (data >= 100000000 && upgrades_array[5] == 0){
+      data -= 100000000;
+      upgrades_array[5] = 1;
+      var button6 = document.getElementById('upgrade6');
+      button6.parentNode.removeChild(button6);
+      return false;
+    }
   }
   if (num == 7){
-
+    if (data >= 1000000000 && upgrades_array[6] == 0){
+      data -= 1000000000;
+      upgrades_array[6] = 1;
+      var button7 = document.getElementById('upgrade7');
+      button7.parentNode.removeChild(button7);
+      return false;
+    }
   }
   if (num == 8){
+    if (data >= 1000000000 && upgrades_array[7] == 0){
+      data -= 1000000000;
+      upgrades_array[7] = 1;
 
+      var button8 = document.getElementById('upgrade8');
+      button8.parentNode.removeChild(button8);
+      return false;
+    }
   }
   if (num == 9){
+    if (data >= 10000000000 && upgrades_array[8] == 0){
+      data -= 10000000000;
+      upgrades_array[8] = 1;
 
+      var button9 = document.getElementById('upgrade9');
+      button9.parentNode.removeChild(button9);
+      return false;
+    }
   }
   if (num == 10){
-
+    if (data >= 100000000000 && upgrades_array[9] == 0){
+      data -= 100000000000;
+      upgrades_array[9] = 1;
+      var button10 = document.getElementById('upgrade10');
+      button10.parentNode.removeChild(button10);
+      return false;
+    }
   }
 }
 
@@ -288,4 +345,57 @@ function expand(id){
 function shrink(id){
   var span = id;
   document.getElementById(span).style.maxWidth = "0px";
+}
+
+function buttondisable(){
+  if (upgrades_array[0] == 1){
+    var button1 = document.getElementById('upgrade1');
+    button1.parentNode.removeChild(button1);
+    return false;
+  }
+  if (upgrades_array[1] == 1){
+    var button2 = document.getElementById('upgrade2');
+    button2.parentNode.removeChild(button2);
+    return false;
+  }
+  if (upgrades_array[2] == 1){
+    var button3 = document.getElementById('upgrade3');
+    button3.parentNode.removeChild(button3);
+    return false;
+  }
+  if (upgrades_array[3] == 1){
+    var button4 = document.getElementById('upgrade4');
+    button4.parentNode.removeChild(button4);
+    return false;
+  }
+  if (upgrades_array[4] == 1){
+    var button5 = document.getElementById('upgrade5');
+    button5.parentNode.removeChild(button5);
+    return false;
+  }
+  if (upgrades_array[5] == 1){
+    var button6 = document.getElementById('upgrade6');
+    button6.parentNode.removeChild(button6);
+    return false;
+  }
+  if (upgrades_array[6] == 1){
+    var button7 = document.getElementById('upgrade7');
+    button7.parentNode.removeChild(button7);
+    return false;
+  }
+  if (upgrades_array[7] == 1){
+    var button8 = document.getElementById('upgrade8');
+    button8.parentNode.removeChild(button8);
+    return false;
+  }
+  if (upgrades_array[8] == 1){
+    var button9 = document.getElementById('upgrade9');
+    button9.parentNode.removeChild(button9);
+    return false;
+  }
+  if (upgrades_array[9] == 1){
+    var button10 = document.getElementById('upgrade10');
+    button10.parentNode.removeChild(button10);
+    return false;
+  }
 }
