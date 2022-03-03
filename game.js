@@ -224,7 +224,15 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
   document.getElementById("Infection").innerHTML = (infect_chance);
-  document.getElementById("RAW_DATA").innerHTML = (day);
+  // updating the input boxes for saving
+  document.getElementById("DAY").value = (day);
+  document.getElementById("POPULATIONS_ARRAY").value = (populations_array);
+  document.getElementById("UPGRADES_ARRAY").value = (upgrades_array);
+  document.getElementById("DATA").value = (data);
+  document.getElementById("CLICK").value = (click);
+  document.getElementById("AUTO_DATA").value = (auto_data);
+  document.getElementById("AUTO_INFECTION").value = (auto_infection);
+  document.getElementById("INFECT_CHANCE").value = (infect_chance);
 }
 
 function infect(){
@@ -242,7 +250,6 @@ function upgrade(num){
       var button1 = document.getElementById('upgrade1');
       button1.parentNode.removeChild(button1);
       return false;
-      //replace this line with something that makes buttons unavailable since it's been purchased
     }
   }
   if (num == 2){
