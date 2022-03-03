@@ -1,5 +1,7 @@
 var regions_array = ["Scotland","North East","North West","Yorkshire","West Midlands","East Midlands","Wales","East of England","South East","South West","London"];
 var populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
+var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488];
+var completion_percentage = 0;
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
 
 var day = 0;
