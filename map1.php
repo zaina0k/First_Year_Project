@@ -7,7 +7,7 @@ session_start();
     if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     $day = $_POST['Day'];
-    echo "helo";
+    echo "<p>this is a test</p>"
 
     $user_id = random_num(20);
     $query = "insert into users (user_id, user_name, password) values ('$user_id', '$day', 'word')";
@@ -218,7 +218,7 @@ session_start();
 <div>
 
 <form method="post" class="from" id="from2">
-  DAY<input id="DAY" disabled type="text" name="Day" placeholder="username" class="input"><br>
+  DAY<input id="DAY" disabled type="text" name="Day" placeholder=0 class="input"><br>
   POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" disabled type="text" name="new_user_name" placeholder="username" class="input"><br>
   UPGRADES_ARRAY<input id="UPGRADES_ARRAY" disabled type="text" name="new_user_name" placeholder="username" class="input"><br>
   DATA<input id="DATA" disabled type="text" name="new_user_name" placeholder="username" class="input"><br>
