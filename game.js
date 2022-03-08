@@ -17,6 +17,35 @@ var infect_chance = 0.1; //the chance every day that a new device is randomly in
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0];
 
+function set_pop(){
+  var entered = parseInt(document.getElementById("enter_pop").value);
+  for (var i = 0; i < regions_array.length; i++){
+    populations_array[i] = entered;
+  }
+}
+
+function check_win(){
+  if (
+    (populations_array[0] > max_populations_array[0]) &&
+    (populations_array[1] > max_populations_array[1]) &&
+    (populations_array[2] > max_populations_array[2]) &&
+    (populations_array[3] > max_populations_array[3]) &&
+    (populations_array[4] > max_populations_array[4]) &&
+    (populations_array[5] > max_populations_array[5]) &&
+    (populations_array[6] > max_populations_array[6]) &&
+    (populations_array[7] > max_populations_array[7]) &&
+    (populations_array[8] > max_populations_array[8]) &&
+    (populations_array[9] > max_populations_array[9]) &&
+    (populations_array[10] > max_populations_array[10])
+     ){
+       console.log("YOU WON!"); //replace this with a message + ability to save to leaderboard
+       clearInterval(daily);
+       clearInterval(update);
+       clearInterval(save);
+       clearInterval(cool_dotz);
+     }
+}
+
 function changeImage1(){
   var image1 = document.getElementById('achievement1');
   if (image1.src.match("new_img1")) {
@@ -218,13 +247,13 @@ function which_byte(){
 }
 
 function update(){ //this function ensures all the text and values are up to date
+  check_win();
   which_byte();
   document.getElementById("Day").innerHTML = (day);
   document.getElementById("Data").innerHTML = ("Data <p>"+data_in_units+" "+data_display+"</p> (+"+auto_data+" B per device per day)");
   var total = 0;
   for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
   document.getElementById("Completion_percentage").value = ((total/65185724)*100);
-  console.log((total/65185724)*100);
   document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> (+"+auto_infection+" per day)");
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
@@ -365,9 +394,9 @@ function daily(){
   populations_array[random] += auto_infection; //this should be weighted because right now all daily infection go to ONE region
 }
 
-setInterval(daily, 1000);
-setInterval(update, 1000/60);
-setInterval(save, 1000/60);
+var daily = setInterval(daily, 1000);
+var update = setInterval(update, 1000/60);
+var save = setInterval(save, 1000/60);
 if (localStorage.getItem("data") != null){
   load();
 }
@@ -619,4 +648,4 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
 
 }
 
-setInterval(infectRegionGraphic, 2000); //set map update interval
+var cool_dotz = setInterval(infectRegionGraphic, 2000); //set map update interval
