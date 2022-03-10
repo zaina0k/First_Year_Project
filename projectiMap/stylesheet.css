@@ -1,0 +1,46 @@
+.upgrade-div {
+	display: inline-block;
+	float: left;
+}
+
+.upgrade-button {
+	width: 50px;
+	height: 50px;
+}
+
+.upgrade-div span {
+  max-width: 0;
+  -webkit-transition: max-width 1s;
+  transition: max-width 1s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  background-color: grey;
+}
+
+.upgrade-div:hover span {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.upgrade-div span div {
+	width: 100px;
+	height: 100px;
+	border: 3px solid black;
+	overflow-wrap: normal;
+	white-space: normal;
+	font-size: 10px;
+}
+
+.upgrade-div span div h1 {
+	font-size: 10px;
+}
+
+.card-body {
+	background-color: #909090;
+}
+
+
+

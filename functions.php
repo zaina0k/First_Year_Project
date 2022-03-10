@@ -19,7 +19,11 @@ function check_login($con)
 	}
 
 	//redirect to login
+
 	header("Location: signuplogin.php");
+
+
+
 	die;
 
 }
