@@ -15,7 +15,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $query = "insert into data (day, infect_rate, data) values('$day', '$infect_rate', '$data')";
     mysqli_query($con, $query);
+
 }
+
+
+
+    include("connection.php");
+    include("functions.php");
+
+    $user_data = check_login($con);
+
+    $date = $user_data['date' ];
+    $id = $_SESSION['user_id'];
+    $query = "select * from stats where user_id ='$id' limit 1";
+            
+    $result = mysqli_query($con, $query);
+    if($result && mysqli_num_rows($result) > 0)
+    {
+
+        $stats_data = mysqli_fetch_assoc($result);
+
+    }
+ 
+
 
 
 ?>
@@ -86,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             <a class="nav-link" href="Profile.html">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Settings.html">Settings</a>
+            <a class="nav-link" href="Settings.php">Settings</a>
           </li>
 
         </ul>
@@ -163,7 +185,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <h5 class="card-title">STATS</h5>
+        <!-- <h5 class="card-title">STATS</h5> -->
+        <h5 class="card-title"><?php echo $user_data['user_name' ]; ?></h5>
         <button onclick="current_stats(0)">SCOTLAND</button>
         <button onclick="current_stats(1)">ENGLAND</button>
         <button onclick="current_stats(2)">WALES</button>

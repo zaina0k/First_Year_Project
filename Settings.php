@@ -1,34 +1,23 @@
-<?php 
+<?php
 session_start();
 
-	include("connection.php");
-	include("functions.php");
+    include("connection.php");
+    include("functions.php");
 
+    $user_data = check_login($con);
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		//something was posted
-		$user_name = $_POST['user_name'];
-		$password = $_POST['password'];
+    $date = $user_data['date' ];
+    $id = $_SESSION['user_id'];
+    $query = "select * from stats where user_id ='$id' limit 1";
+            
+    $result = mysqli_query($con, $query);
+    if($result && mysqli_num_rows($result) > 0)
+    {
 
-		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-		{
+        $stats_data = mysqli_fetch_assoc($result);
 
-			//save to database
-			$user_id = random_num(20);
-			$query = "insert into users (user_id,user_name,password) values ('$user_id','$user_name','$password')";
-
-			mysqli_query($con, $query) or die(mysqli_error($con));
-
-			header("Location: login.php");
-			die;
-		}else
-		{
-			echo "Please enter some valid information!";
-		}
-	}
-?>
-
+    }
+?>  
 
 
 <!DOCTYPE html>
@@ -72,11 +61,14 @@ session_start();
   <div class="card-columns" style="display: inline-block; float: left;">
     <div class="card text-center" style="width: 92em; height: 40em;">
       <div class = "card-body">
-        <h5 class="card-title">PROFILE</h5>
+        <h5 class="card-title">SETTINGS</h5>
+        <p>Hello <?php echo $user_data['user_name' ]; ?></p>
       </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
