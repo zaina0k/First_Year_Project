@@ -495,7 +495,7 @@ function buttondisable10(){
 function infectRegionGraphic(){ //function for updating the map with the infection status
   for (var i = 0; i < regions_array.length; i++) { //iterates through each region
     var path_name = "path-" + regions_array[i];
-    var path = document.getElementById(path_name.toLowerCase().replace(" ", "-")); //gets region id from regions array and initiates a path object
+    var path = document.getElementById(path_name.toLowerCase().replace(" ", "-").replace(" ", "-")); //gets region id from regions array and initiates a path object
     var newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); //creates a new path element in the html
 
 
