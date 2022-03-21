@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8" width="device-width" user-scalable="no">
   <title>Project IMAP</title>
@@ -162,15 +161,15 @@
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <h5 class="card-title">STATS</h5>
         <button onclick="showUpgrades(0)">infections</button>
         <button onclick="showUpgrades(1)">lethality</button>
         <button onclick="showUpgrades(2)">anti-anti-virus</button>
+        <h5 class="card-title">STATS</h5>
         <div id="Data">Data <p>0</p><div>0</div></div>
         <div id="Total_pop">Total Devices <p>0</p></div>
         <div id="Region">Scotland <p>0</p><div>0</div></div>
         <div id="Infection_chance">Infection Chance <p id="Infection">0</p></div>
-        <div>COMPLETION:<progress id="Completion_percentage" value="0" max="100"></progress></div>
+        <div>COMPLETION:<progress id="Completion_percentage" value="0" max="100"></progress><p id="Completion_percentage_number"></p></div>
       </div>
     </div>
   </div>

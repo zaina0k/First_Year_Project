@@ -258,11 +258,12 @@ function update(){ //this function ensures all the text and values are up to dat
   check_win();
   which_byte();
   document.getElementById("Day").innerHTML = (day);
-  document.getElementById("Data").innerHTML = ("Data <p>"+data_in_units+" "+data_display+"</p> (+"+auto_data+" B per device per day)");
+  document.getElementById("Data").innerHTML = ("Data <p>"+data_in_units+" "+data_display+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_data+" B per device per day)</p>");
   var total = 0;
   for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
   document.getElementById("Completion_percentage").value = ((total/65185724)*100);
-  document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> (+"+auto_infection+" per day)");
+  document.getElementById("Completion_percentage_number").innerHTML = (Math.trunc(((total/65185724)*100)*100)/100+"%");
+  document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
   document.getElementById("Infection").innerHTML = (infect_chance);
