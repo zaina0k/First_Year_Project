@@ -13,8 +13,8 @@ var data_display = "B";
 
 var click = 1; //when you click "infect", increases by this much
 var auto_data = 0; //how much data is mined per device per day
-var auto_infection = 10; //how many devices are infected every day i.e. how fast it's spreading
-var infect_chance = 1; //the chance every day that a new device is randomly infected (starts at 10%)
+var auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
+var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -44,6 +44,10 @@ function check_win(){
        clearInterval(update);
        clearInterval(save);
        clearInterval(cool_dotz);
+       document.body.innerHTML = '';
+       document.write("<p style='font-size:30px'>YOU WON!</p><br><img src='images/celebrate.gif'><br><br>Your score has been added to the leaderboard!<br><br>Thank you for playing Project IMAP!");
+       document.write("<br><button style='font-size:25px' onclick='reset()'>RESET</button>")
+
      }
 }
 
@@ -418,6 +422,7 @@ function upgrade(num){
 function daily(){
   day += 1;
 
+  //check if a region has reached its max population
   for (var i = 0; i < regions_array.length; i++){
     if (populations_array[i] >= max_populations_array[i]){
       is_population_hit_max[i] = 1;
