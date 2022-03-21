@@ -120,7 +120,64 @@ p{
 .node{
 	fill: red;
 	pointer-events: none;
+	fill-opacity: 0.3;
+	fill-rule: nonzero;
 }
+
+.upgrade {
+  fill: white;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.locked {
+  fill: white;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.upgrade:hover {
+  cursor: pointer;
+  fill: grey;
+}
+
+.connector {
+  fill: white;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.lock {
+  fill: black;
+}
+
+.buttons-section {
+	margin-left: -15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+.svgupgrades {
+  background-color: grey;
+}
+
+.upgrade-icon {
+	pointer-events: none;
+	width: 75px;
+}
+
+.shade {
+	fill-opacity: 0.3;
+	color: black;
+}
+
 
 #Data{
 

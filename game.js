@@ -15,7 +15,7 @@ var auto_data = 0; //how much data is mined per device per day
 var auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
-var upgrades_array=[0,0,0,0,0,0,0,0,0,0];
+var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
 
 function set_pop(){
   var entered = parseInt(document.getElementById("enter_pop").value);
@@ -162,7 +162,7 @@ function reset(){
   globalThis.auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
   globalThis.infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
-  globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0];
+  globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
   save();
   window.location.reload();
 }
@@ -281,8 +281,18 @@ function upgrade(num){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
       auto_data += 0.1;
-      var button1 = document.getElementById('upgrade1');
-      button1.parentNode.removeChild(button1);
+      document.getElementById("upgrade2-lock").style.display = "none";
+      document.getElementById("upgrade2").setAttribute("onclick", "upgrade(2)");
+      document.getElementById("upgrade2").setAttribute("class", "upgrade");
+      document.getElementById("shade2").style.display = "none";
+      document.getElementById("upgrade6-lock").style.display = "none";
+      document.getElementById("upgrade6").setAttribute("onclick", "upgrade(6)");
+      document.getElementById("upgrade6").setAttribute("class", "upgrade");
+      document.getElementById("shade6").style.display="none";
+      document.getElementById("upgrade10-lock").style.display = "none";
+      document.getElementById("upgrade10").setAttribute("onclick", "upgrade(10)");
+      document.getElementById("upgrade10").setAttribute("class", "upgrade");
+      document.getElementById("shade10").style.display="none";
       return false;
     }
   }
@@ -291,8 +301,10 @@ function upgrade(num){
       data -= 50;
       upgrades_array[1] = 1;
       auto_infection += 1;
-      var button2 = document.getElementById('upgrade2');
-      button2.parentNode.removeChild(button2);
+      document.getElementById("upgrade3-lock").style.display="none";
+      document.getElementById("upgrade3").setAttribute("onclick", "upgrade(3)");
+      document.getElementById("upgrade3").setAttribute("class", "upgrade");
+      document.getElementById("shade3").style.display="none";
       return false;
     }
   }
@@ -301,8 +313,14 @@ function upgrade(num){
       data -= 100000;
       upgrades_array[2] = 1;
       infect_chance += 0.2;
-      var button3 = document.getElementById('upgrade3');
-      button3.parentNode.removeChild(button3);
+      document.getElementById("upgrade4-lock").style.display="none";
+      document.getElementById("upgrade4").setAttribute("onclick", "upgrade(4)");
+      document.getElementById("upgrade4").setAttribute("class", "upgrade");
+      document.getElementById("shade4").style.display="none";
+      document.getElementById("upgrade5-lock").style.display="none";
+      document.getElementById("upgrade5").setAttribute("onclick", "upgrade(5)");
+      document.getElementById("upgrade5").setAttribute("class", "upgrade");
+      document.getElementById("shade5").style.display="none";
       return false;
     }
   }
@@ -311,8 +329,6 @@ function upgrade(num){
       data -= 1000000;
       auto_infection += 10;
       upgrades_array[3] = 1;
-      var button4 = document.getElementById('upgrade4');
-      button4.parentNode.removeChild(button4);
       return false;
     }
   }
@@ -321,8 +337,6 @@ function upgrade(num){
       data -= 10000000;
       upgrades_array[4] = 1;
       auto_data += 100;
-      var button5 = document.getElementById('upgrade5');
-      button5.parentNode.removeChild(button5);
       return false;
     }
   }
@@ -331,8 +345,14 @@ function upgrade(num){
       data -= 100000000;
       upgrades_array[5] = 1;
       auto_data = auto_data*2;
-      var button6 = document.getElementById('upgrade6');
-      button6.parentNode.removeChild(button6);
+      document.getElementById("upgrade7-lock").style.display="none";
+      document.getElementById("upgrade7").setAttribute("onclick", "upgrade(7)");
+      document.getElementById("upgrade7").setAttribute("class", "upgrade");
+      document.getElementById("shade7").style.display="none";
+      document.getElementById("upgrade9-lock").style.display="none";
+      document.getElementById("upgrade9").setAttribute("onclick", "upgrade(9)");
+      document.getElementById("upgrade9").setAttribute("class", "upgrade");
+      document.getElementById("shade9").style.display="none";
       return false;
     }
   }
@@ -340,8 +360,10 @@ function upgrade(num){
     if (data >= 1000000000 && upgrades_array[6] == 0){
       data -= 1000000000;
       upgrades_array[6] = 1;
-      var button7 = document.getElementById('upgrade7');
-      button7.parentNode.removeChild(button7);
+      document.getElementById("upgrade8-lock").style.display="none";
+      document.getElementById("upgrade8").setAttribute("onclick", "upgrade(8)");
+      document.getElementById("upgrade8").setAttribute("class", "upgrade");
+      document.getElementById("shade8").style.display="none";
       return false;
     }
   }
@@ -349,9 +371,6 @@ function upgrade(num){
     if (data >= 1000000000 && upgrades_array[7] == 0){
       data -= 1000000000;
       upgrades_array[7] = 1;
-
-      var button8 = document.getElementById('upgrade8');
-      button8.parentNode.removeChild(button8);
       return false;
     }
   }
@@ -359,9 +378,6 @@ function upgrade(num){
     if (data >= 10000000000 && upgrades_array[8] == 0){
       data -= 10000000000;
       upgrades_array[8] = 1;
-
-      var button9 = document.getElementById('upgrade9');
-      button9.parentNode.removeChild(button9);
       return false;
     }
   }
@@ -369,8 +385,28 @@ function upgrade(num){
     if (data >= 100000000000 && upgrades_array[9] == 0){
       data -= 100000000000;
       upgrades_array[9] = 1;
-      var button10 = document.getElementById('upgrade10');
-      button10.parentNode.removeChild(button10);
+      document.getElementById("upgrade11-lock").style.display="none";
+      document.getElementById("upgrade11").setAttribute("onclick", "upgrade(11)");
+      document.getElementById("upgrade11").setAttribute("class", "upgrade");
+      document.getElementById("shade11").style.display="none";
+      return false;
+    }
+  }
+  if (num == 11){
+    if (data >= 1000000000000 && upgrades_array[10] == 0){
+      data -= 1000000000000;
+      upgrades_array[10] = 1;
+      document.getElementById("upgrade12-lock").style.display="none";
+      document.getElementById("upgrade12").setAttribute("onclick", "upgrade(12)");
+      document.getElementById("upgrade12").setAttribute("class", "upgrade");
+      document.getElementById("shade12").style.display="none";
+      return false;
+    }
+  }
+  if (num == 12){
+    if (data >= 1000000000000 && upgrades_array[11] == 0){
+      data -= 1000000000000;
+      upgrades_array[11] = 1;
       return false;
     }
   }
@@ -492,19 +528,27 @@ function buttondisable10(){
   }
 }
 
+var opacity_array = ["-1", "-2", "-3", "-4"];
+
 function infectRegionGraphic(){ //function for updating the map with the infection status
   for (var i = 0; i < regions_array.length; i++) { //iterates through each region
     var path_name = "path-" + regions_array[i];
     var path = document.getElementById(path_name.toLowerCase().replace(" ", "-").replace(" ", "-")); //gets region id from regions array and initiates a path object
-    var newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); //creates a new path element in the html
 
+    var infect_path = ("infect-" + regions_array[i]).toLowerCase().replace(" ", "-").replace(" ", "-");
 
+    var r = 2.5;
 
     var box = returnBox(path); //function for returning the bounding box of a region and its multiplier
     var randX, randY;
 
     var size = ((max_populations_array[i]*box.multi)*(populations_array[i]/max_populations_array[i])); //number of coords tried **if this is 1, 1 coord will be tried every run through**
     for (var n = 0; n <= size; n++) { //tries coords **size** times
+
+      var randOpacity = opacity_array[Math.floor(Math.random() * opacity_array.length)];
+
+      var newPath = document.getElementById(infect_path + randOpacity);
+
 
       randX = Math.floor(Math.random() * (box.xMax - box.xMin) + box.xMin); //random x from within the region's bounding box
       randY = Math.floor(Math.random() * (box.yMax - box.yMin) + box.yMin); //random y from within the region's bounding box
@@ -523,10 +567,10 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
           currentPath = "";
         }
 
-        newPath.setAttribute("d", currentPath + 'M '+randX+' '+randY+' m -'+0.5+', 0 a '+0.5+','+0.5+' 0 1,0 '+(0.5*2)+',0 a '+0.5+','+0.5+' 0 1,0 -'+(0.5*2)+',0 ');
-//this is the svg path for a circle where every instance of 0.5 is the radius, places the center of the circle at the random coords generated previously
-        newPath.setAttribute("class", "node"); //sets the paths class so we can perform css on it
 
+        newPath.setAttribute("d", currentPath + 'M '+randX+' '+randY+' m -'+r+', 0 a '+r+','+r+' 0 1,0 '+(r*2)+',0 a '+r+','+r+' 0 1,0 -'+(r*2)+',0 ');
+//this is the svg path for a circle r is the radius, places the center of the circle at the random coords generated previously
+        newPath.setAttribute("class", "node"); //sets the paths class so we can perform css on it
 
         document.getElementById("svg").appendChild(newPath); //appends the path to the svg
         placement_count_array[i] += 1; //adds 1 to the placement counter
@@ -543,7 +587,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 471,
         xMin: 383,
         yMin: 382,
-        multi: 0.000353 //multiplier is the ratio used to determine the number of circles that should be placed in a specific region
+        multi: 0.000353/40 //multiplier is the ratio used to determine the number of circles that should be placed in a specific region
 //for example the best number of circles for scotland is 10,000 (visually) its max population is 5466000 and so we need a multiplier of 10000/5466000 for scotland or 0.00183
       };
         break;
@@ -553,7 +597,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 440,
         xMin: 480,
         yMin: 376,
-        multi: 0.000325
+        multi: 0.000325/40
       };
         break;
       case document.getElementById('path-london'):
@@ -562,7 +606,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 418,
         xMin: 513,
         yMin: 398,
-        multi: 0.0000333
+        multi: 0.0000333/40
       };
         break;
       case document.getElementById('path-east-of-england'):
@@ -571,7 +615,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 410,
         xMin: 508,
         yMin: 343,
-        multi: 0.0004
+        multi: 0.0004/40
       };
         break;
       case document.getElementById('path-west-midlands'):
@@ -580,7 +624,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 392,
         xMin: 443,
         yMin: 330,
-        multi: 0.000335
+        multi: 0.000335/40
       };
         break;
       case document.getElementById('path-east-midlands'):
@@ -589,7 +633,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 386,
         xMin: 475,
         yMin: 316,
-        multi: 0.000411
+        multi: 0.000411/40
       };
         break;
       case document.getElementById('path-yorkshire'):
@@ -598,7 +642,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 329,
         xMin: 460,
         yMin: 275,
-        multi: 0.00041
+        multi: 0.00041/40
       };
         break;
       case document.getElementById('path-north-west'):
@@ -607,7 +651,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 345,
         xMin: 434,
         yMin: 248,
-        multi: 0.00027
+        multi: 0.00027/40
       };
         break;
       case document.getElementById('path-north-east'):
@@ -616,7 +660,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 280,
         xMin: 455,
         yMin: 220,
-        multi: 0.00075
+        multi: 0.00045/40
       };
         break;
       case document.getElementById('path-wales'):
@@ -625,7 +669,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 411,
         xMin: 394,
         yMin: 327,
-        multi: 0.0008
+        multi: 0.0006/40
       };
         break;
       case document.getElementById('path-scotland'):
@@ -634,7 +678,7 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
         yMax: 271,
         xMin: 330,
         yMin: 98,
-        multi: 0.00183
+        multi: 0.00183/40
       };
         break;
       default:
@@ -649,3 +693,112 @@ function infectRegionGraphic(){ //function for updating the map with the infecti
 }
 
 var cool_dotz = setInterval(infectRegionGraphic, 2000); //set map update interval
+
+function makeDraggable(evt){
+  loadSvg();
+
+  var svg = evt.target;
+  var selectedElement = false;
+  var offset;
+
+  svg.addEventListener('mousedown', startDrag);
+  svg.addEventListener('mousemove', drag);
+  svg.addEventListener('mouseup', endDrag);
+  svg.addEventListener('mouseleave', endDrag);
+
+  function getMousePosition(evt){
+    return {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+  }
+
+  function startDrag(evt){
+    offset = getMousePosition(evt);
+    selectedElement = true;
+  }
+  function drag(evt){
+    if (selectedElement) {
+      evt.preventDefault();
+      var coord = getMousePosition(evt);
+      document.getElementById("svgcard").scrollBy((offset.x - coord.x)/20, (offset.y - coord.y)/10);
+    }
+  }
+  function endDrag(){
+    selectedElement = false;
+  }
+}
+
+function setCard(){
+  document.getElementById("svgcard").scrollTo(450, 350);
+}
+
+function loadSvg(){
+  for (var i = 0; i < upgrades_array.length; i++) {
+    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5){
+      document.getElementById("upgrade"+ (i + 2) +"-lock").style.display="none";
+      document.getElementById("upgrade"+ (i + 2)).setAttribute("onclick", "upgrade("+ (i + 2) +")");
+      document.getElementById("upgrade"+ (i + 2)).setAttribute("class", "upgrade");
+      document.getElementById("shade"+ (i + 2)).style.display="none";
+    }
+    else if (upgrades_array[i] != 0 && i == 0) {
+      document.getElementById("upgrade2-lock").style.display="none";
+      document.getElementById("upgrade2").setAttribute("onclick", "upgrade(2)");
+      document.getElementById("upgrade2").setAttribute("class", "upgrade");
+      document.getElementById("shade2").style.display="none";
+      document.getElementById("upgrade6-lock").style.display="none";
+      document.getElementById("upgrade6").setAttribute("onclick", "upgrade(6)");
+      document.getElementById("upgrade6").setAttribute("class", "upgrade");
+      document.getElementById("shade6").style.display="none";
+      document.getElementById("upgrade10-lock").style.display="none";
+      document.getElementById("upgrade10").setAttribute("onclick", "upgrade(10)");
+      document.getElementById("upgrade10").setAttribute("class", "upgrade");
+      document.getElementById("shade10").style.display="none";
+    }
+    else if (upgrades_array[i] != 0 && i == 2) {
+      document.getElementById("upgrade4-lock").style.display="none";
+      document.getElementById("upgrade4").setAttribute("onclick", "upgrade(4)");
+      document.getElementById("upgrade4").setAttribute("class", "upgrade");
+      document.getElementById("shade4").style.display="none";
+      document.getElementById("upgrade5-lock").style.display="none";
+      document.getElementById("upgrade5").setAttribute("onclick", "upgrade(5)");
+      document.getElementById("upgrade5").setAttribute("class", "upgrade");
+      document.getElementById("shade5").style.display="none";
+    }
+    else if (upgrades_array[i] != 0 && i == 5) {
+      document.getElementById("upgrade7-lock").style.display="none";
+      document.getElementById("upgrade7").setAttribute("onclick", "upgrade(7)");
+      document.getElementById("upgrade7").setAttribute("class", "upgrade");
+      document.getElementById("shade7").style.display="none";
+      document.getElementById("upgrade9-lock").style.display="none";
+      document.getElementById("upgrade9").setAttribute("onclick", "upgrade(9)");
+      document.getElementById("upgrade9").setAttribute("class", "upgrade");
+      document.getElementById("shade9").style.display="none";
+    }
+  }
+}
+
+function showUpgrades(num){
+  switch (num) {
+    case 0:
+      document.getElementById("infections").style.display="";
+      document.getElementById("lethality").style.display="none";
+      document.getElementById("anti-anti-virus").style.display="none";
+      setCard();
+      break;
+    case 1:
+      document.getElementById("infections").style.display="none";
+      document.getElementById("lethality").style.display="";
+      document.getElementById("anti-anti-virus").style.display="none";
+      setCard();
+      break;
+    case 2:
+      document.getElementById("infections").style.display="none";
+      document.getElementById("lethality").style.display="none";
+      document.getElementById("anti-anti-virus").style.display="";
+      setCard();
+      break;
+    default:
+
+  }
+}
