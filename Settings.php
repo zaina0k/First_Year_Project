@@ -62,7 +62,10 @@ session_start();
     <div class="card text-center" style="width: 92em; height: 40em;">
       <div class = "card-body">
         <h5 class="card-title">SETTINGS</h5>
-        <p>Hello <?php echo $user_data['user_name' ]; ?></p>
+        <div style="float:left">
+          <p>Hello, <?php echo $user_data['user_name' ]; ?></p>
+        </div>
+        <p>hello world this is another test</p>
       </div>
     </div>
   </div>
