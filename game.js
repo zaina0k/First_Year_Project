@@ -17,7 +17,7 @@ var auto_data = 0; //how much data is mined per device per day
 var auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
-var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
+var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 function set_pop(){
   var entered = parseInt(document.getElementById("enter_pop").value);
@@ -152,7 +152,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Day_display{color: #755f5e;}");
   }
 }
-
 function reset(){
   localStorage.clear();
   globalThis.populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
@@ -169,7 +168,7 @@ function reset(){
   globalThis.auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
   globalThis.infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
-  globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
+  globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   window.location.reload();
 }
 
@@ -287,18 +286,20 @@ data += 1; //without this, there is no way to get data to begin with
 function upgrade(num){
   var isPurchased = false;
   var isTooExpensive = false;
+  // infection upgrades - these should increase the rate of infection and the click amount (the trojan horse line should increase click amount)
+  // fake cable upgrade direction could increase rate by an integer
+  // and possibly the top route increases the infection chance
   if (num == 1){ //FAKE-CHARGING-CABLES
     if (data >= 10 && upgrades_array[0] == 0){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
-      auto_data += 0.1;
       loadSvg();
       return false;
     }
-    else if (data < 10 && upgrades_array[0] == 0) {
+    else if (data < 10 && upgrades_array[0] == 0) { //not enough data and the upgrade is not yet bought
       isTooExpensive = true;
     }
-    else {
+    else { //upgrade already bought
       isPurchased = true;
     }
   }
@@ -325,7 +326,7 @@ function upgrade(num){
       loadSvg();
       return false;
     }
-    else if (data < 10000 && upgrades_array[2] == 0) {
+    else if (data < 100000 && upgrades_array[2] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -340,6 +341,9 @@ function upgrade(num){
       loadSvg();
       return false;
     }
+    else if (data < 1000000 && upgrades_array[3] == 0) {
+      isTooExpensive = true;
+    }
     else {
       isPurchased = true;
     }
@@ -351,6 +355,9 @@ function upgrade(num){
       auto_data += 100;
       loadSvg();
       return false;
+    }
+    else if (data < 10000000 && upgrades_array[4] == 0) {
+      isTooExpensive = true;
     }
     else {
       isPurchased = true;
@@ -364,6 +371,9 @@ function upgrade(num){
       loadSvg();
       return false;
     }
+    else if (data < 100000000 & upgrades_array[5] == 0) {
+      isTooExpensive = true;
+    }
     else {
       isPurchased = true;
     }
@@ -374,6 +384,9 @@ function upgrade(num){
       upgrades_array[6] = 1;
       loadSvg();
       return false;
+    }
+    else if (data < 1000000000 && upgrades_array[6] == 0) {
+      isTooExpensive = true;
     }
     else {
       isPurchased = true;
@@ -386,6 +399,9 @@ function upgrade(num){
       loadSvg();
       return false;
     }
+    else if (data < 1000000000 && upgrades_array[7] == 0) {
+      isTooExpensive = true;
+    }
     else {
       isPurchased = true;
     }
@@ -396,6 +412,9 @@ function upgrade(num){
       upgrades_array[8] = 1;
       loadSvg();
       return false;
+    }
+    else if (data < 10000000000 && upgrades_array[8] == 0) {
+      isTooExpensive = true;
     }
     else {
       isPurchased = true;
@@ -409,6 +428,9 @@ function upgrade(num){
       loadSvg();
       return false;
     }
+    else if (data < 1000 && upgrades_array[9] == 0) {
+      isTooExpensive = true;
+    }
     else {
       isPurchased = true;
     }
@@ -419,6 +441,9 @@ function upgrade(num){
       upgrades_array[10] = 1;
       loadSvg();
       return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[10] == 0) {
+      isTooExpensive = true;
     }
     else {
       isPurchased = true;
@@ -431,26 +456,200 @@ function upgrade(num){
       loadSvg();
       return false;
     }
+    else if (data < 1000000000000 && upgrades_array[11] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  // start of lethality upgrades i.e increase data rate and other similar things
+  if (num == 13){ //BITCOIN-MINER
+    if (data >= 100 && upgrades_array[12] == 0){
+      data -= 100;
+      auto_data = auto_data + 0.1;
+      upgrades_array[12] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 100 && upgrades_array[12] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 14){ //FASTER-DATA-EXTRACTION
+    if (data >= 1000 && upgrades_array[13] == 0){
+      data -= 1000;
+      auto_data = auto_data + 0.5;
+      upgrades_array[13] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000 && upgrades_array[13] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 15){ //ROUND-THE-CLOCK
+    if (data >= 1000000000000 && upgrades_array[14] == 0){
+      data -= 1000000000000;
+      upgrades_array[14] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[14] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 16){ //EXODIA
+    if (data >= 1000000000000 && upgrades_array[15] == 0){
+      data -= 1000000000000;
+      upgrades_array[15] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[15] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 17){ //NERD-GOGGLES
+    if (data >= 1000000000000 && upgrades_array[16] == 0){
+      data -= 1000000000000;
+      upgrades_array[16] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[16] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 18){ //DARK-ARMY
+    if (data >= 1000000000000 && upgrades_array[17] == 0){
+      data -= 1000000000000;
+      upgrades_array[17] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[17] == 0)  {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 19){ //ACTUAL-NFT
+    if (data >= 1000000000000 && upgrades_array[18] == 0){
+      data -= 1000000000000;
+      upgrades_array[18] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[18] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  // Immunity upgrades - these should reduce the effects of the anti-virus somewhat or entirely
+  if (num == 20){ //INCOGNITO
+    if (data >= 100000 && upgrades_array[19] == 0){
+      data -= 100000;
+      upgrades_array[19] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 100000 && upgrades_array[19] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 21){ //DARK-WEB
+    if (data >= 1000000000000 && upgrades_array[20] == 0){
+      data -= 1000000000000;
+      upgrades_array[20] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[20] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 22){ //NOT-THE-CURE
+    if (data >= 1000000000000 && upgrades_array[21] == 0){
+      data -= 1000000000000;
+      upgrades_array[21] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[21] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (num == 23){ //WOLVERINE
+    if (data >= 1000000000000 && upgrades_array[22] == 0){
+      data -= 1000000000000;
+      upgrades_array[22] = 1;
+      loadSvg();
+      return false;
+    }
+    else if (data < 1000000000000 && upgrades_array[22] == 0) {
+      isTooExpensive = true;
+    }
     else {
       isPurchased = true;
     }
   }
   if (isTooExpensive) {
-    document.getElementById("distort").style.display = "block";
-    setTimeout(distort, 100);
 
-    document.getElementById("funds").setAttribute("y", document.getElementById("svgcard").scrollTop);
-    document.getElementById("funds").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
-    document.getElementById("funds").style.display = "block";
+    document.getElementById("funds1").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("funds1").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("funds1").style.display = "block";
+
+    document.getElementById("funds2").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("funds2").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("funds2").style.display = "block";
+
+    document.getElementById("funds3").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("funds3").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("funds3").style.display = "block";
+
     setTimeout(funds, 2000);
   }
   else if (isPurchased) {
-    document.getElementById("distort").style.display = "block";
-    setTimeout(distort, 100);
 
-    document.getElementById("purchased").setAttribute("y", document.getElementById("svgcard").scrollTop);
-    document.getElementById("purchased").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
-    document.getElementById("purchased").style.display = "block";
+    document.getElementById("purchased1").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("purchased1").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("purchased1").style.display = "block";
+
+    document.getElementById("purchased2").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("purchased2").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("purchased2").style.display = "block";
+
+    document.getElementById("purchased3").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("purchased3").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("purchased3").style.display = "block";
 
     setTimeout(purchased, 2000);
   }
@@ -499,86 +698,6 @@ function expand(id){
 function shrink(id){
   var span = id;
   document.getElementById(span).style.maxWidth = "0px";
-}
-
-function buttondisable1(){
-  if (upgrades_array[0] == 1){
-    var button1 = document.getElementById('upgrade1');
-    button1.parentNode.removeChild(button1);
-    return false;
-  }
-}
-
-function buttondisable2(){
-  if (upgrades_array[1] == 1){
-    var button2 = document.getElementById('upgrade2');
-    button2.parentNode.removeChild(button2);
-    return false;
-  }
-}
-
-function buttondisable3(){
-  if (upgrades_array[2] == 1){
-    var button3 = document.getElementById('upgrade3');
-    button3.parentNode.removeChild(button3);
-    return false;
-  }
-}
-
-function buttondisable4(){
-  if (upgrades_array[3] == 1){
-    var button4 = document.getElementById('upgrade4');
-    button4.parentNode.removeChild(button4);
-    return false;
-  }
-}
-
-function buttondisable5(){
-  if (upgrades_array[4] == 1){
-    var button5 = document.getElementById('upgrade5');
-    button5.parentNode.removeChild(button5);
-    return false;
-  }
-}
-
-function buttondisable6(){
-  if (upgrades_array[5] == 1){
-    var button6 = document.getElementById('upgrade6');
-    button6.parentNode.removeChild(button6);
-    return false;
-  }
-}
-
-function buttondisable7(){
-  if (upgrades_array[6] == 1){
-    var button7 = document.getElementById('upgrade7');
-    button7.parentNode.removeChild(button7);
-    return false;
-  }
-}
-
-function buttondisable8(){
-  if (upgrades_array[7] == 1){
-    var button8 = document.getElementById('upgrade8');
-    button8.parentNode.removeChild(button8);
-    return false;
-  }
-}
-
-function buttondisable9(){
-  if (upgrades_array[8] == 1){
-    var button9 = document.getElementById('upgrade9');
-    button9.parentNode.removeChild(button9);
-    return false;
-  }
-}
-
-function buttondisable10(){
-  if (upgrades_array[9] == 1){
-    var button10 = document.getElementById('upgrade10');
-    button10.parentNode.removeChild(button10);
-    return false;
-  }
 }
 
 var opacity_array = ["-1", "-2", "-3", "-4"];
@@ -768,8 +887,12 @@ function makeDraggable(evt){
   }
 
   function startDrag(evt){
-    document.getElementById("funds").style.display= "none";
-    document.getElementById("purchased").style.display = "none";
+    document.getElementById("funds1").style.display= "none";
+    document.getElementById("purchased1").style.display = "none";
+    document.getElementById("funds2").style.display= "none";
+    document.getElementById("purchased2").style.display = "none";
+    document.getElementById("funds3").style.display= "none";
+    document.getElementById("purchased3").style.display = "none";
     svg.style.cursor = "grabbing";
     offset = getMousePosition(evt);
     selectedElement = true;
@@ -790,13 +913,13 @@ function makeDraggable(evt){
   }
 }
 
-function setCard(){
-  document.getElementById("svgcard").scrollTo(450, 350);
-}
-
 function loadSvg(){
+  if (day == 0) {
+    document.getElementById("lethality").style.display="none";
+    document.getElementById("anti-anti-virus").style.display="none";
+  }
   for (var i = 0; i < upgrades_array.length; i++) {
-    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5){
+    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12){
       document.getElementById("upgrade"+ (i + 2) +"-lock").style.display="none";
       document.getElementById("upgrade"+ (i + 2)).setAttribute("onclick", "upgrade("+ (i + 2) +")");
       document.getElementById("upgrade"+ (i + 2)).setAttribute("class", "upgrade");
@@ -836,8 +959,26 @@ function loadSvg(){
       document.getElementById("upgrade9").setAttribute("class", "upgrade");
       document.getElementById("shade9").style.display="none";
     }
-  }
-  for (var i = 0; i < upgrades_array.length; i++) {
+    else if (upgrades_array[i] != 0 && i == 12) {
+      document.getElementById("upgrade14-lock").style.display="none";
+      document.getElementById("upgrade14").setAttribute("onclick", "upgrade(14)");
+      document.getElementById("upgrade14").setAttribute("class", "upgrade");
+      document.getElementById("shade14").style.display="none";
+      document.getElementById("upgrade17-lock").style.display="none";
+      document.getElementById("upgrade17").setAttribute("onclick", "upgrade(17)");
+      document.getElementById("upgrade17").setAttribute("class", "upgrade");
+      document.getElementById("shade17").style.display="none";
+    }
+    else if (upgrades_array[i] != 0 && i == 19) {
+      document.getElementById("upgrade20-lock").style.display="none";
+      document.getElementById("upgrade20").setAttribute("onclick", "upgrade(20)");
+      document.getElementById("upgrade20").setAttribute("class", "upgrade");
+      document.getElementById("shade20").style.display="none";
+      document.getElementById("upgrade21-lock").style.display="none";
+      document.getElementById("upgrade21").setAttribute("onclick", "upgrade(21)");
+      document.getElementById("upgrade21").setAttribute("class", "upgrade");
+      document.getElementById("shade21").style.display="none";
+    }
     if (upgrades_array[i] != 0) {
       document.getElementById("upgrade" + (i + 1)).style.fill = "#cc3300";
     }
@@ -850,19 +991,19 @@ function showUpgrades(num){
       document.getElementById("infections").style.display="";
       document.getElementById("lethality").style.display="none";
       document.getElementById("anti-anti-virus").style.display="none";
-      setCard();
+      document.getElementById("svgcard").scrollTo(450, 350);
       break;
     case 1:
       document.getElementById("infections").style.display="none";
       document.getElementById("lethality").style.display="";
       document.getElementById("anti-anti-virus").style.display="none";
-      setCard();
+      document.getElementById("svgcard").scrollTo(450, 350);
       break;
     case 2:
       document.getElementById("infections").style.display="none";
       document.getElementById("lethality").style.display="none";
       document.getElementById("anti-anti-virus").style.display="";
-      setCard();
+      document.getElementById("svgcard").scrollTo(50, 150);
       break;
     default:
 
@@ -870,7 +1011,7 @@ function showUpgrades(num){
 }
 
 function showDesc(){
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < 18; i++) {
     document.getElementById("upgrade" + (i + 1)).addEventListener("mouseover", mouseOverEffect);
     document.getElementById("upgrade" + (i + 1)).param = i;
     document.getElementById("upgrade" + (i + 1)).addEventListener("mouseout", mouseOutEffect);
@@ -894,12 +1035,13 @@ function showDesc(){
   }
 }
 
-function distort(){
-  document.getElementById("distort").style.display = "none";
-}
 function funds(){
-  document.getElementById("funds").style.display = "none";
+  document.getElementById("funds1").style.display = "none";
+  document.getElementById("funds2").style.display = "none";
+  document.getElementById("funds3").style.display = "none";
 }
 function purchased(){
-  document.getElementById("purchased").style.display = "none";
+  document.getElementById("purchased1").style.display = "none";
+  document.getElementById("purchased2").style.display = "none";
+  document.getElementById("purchased3").style.display = "none";
 }

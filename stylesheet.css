@@ -201,19 +201,19 @@ p{
 	width: 75px;
 }
 
-#distort {
+.distort {
 	display: none;
 	width: 1200px;
 	pointer-events: none;
 	opacity: 0.5;
 }
 
-#funds {
+.funds {
 	display: none;
 	pointer-events: none;
 }
 
-#purchased {
+.purchased {
 	display: none;
 	pointer-events: none;
 }
