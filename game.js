@@ -276,139 +276,174 @@ update();
 }
 
 function upgrade(num){
-  if (num == 1){
+  var isPurchased = false;
+  var isTooExpensive = false;
+  if (num == 1){ //FAKE-CHARGING-CABLES
     if (data >= 10 && upgrades_array[0] == 0){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
       auto_data += 0.1;
-      document.getElementById("upgrade2-lock").style.display = "none";
-      document.getElementById("upgrade2").setAttribute("onclick", "upgrade(2)");
-      document.getElementById("upgrade2").setAttribute("class", "upgrade");
-      document.getElementById("shade2").style.display = "none";
-      document.getElementById("upgrade6-lock").style.display = "none";
-      document.getElementById("upgrade6").setAttribute("onclick", "upgrade(6)");
-      document.getElementById("upgrade6").setAttribute("class", "upgrade");
-      document.getElementById("shade6").style.display="none";
-      document.getElementById("upgrade10-lock").style.display = "none";
-      document.getElementById("upgrade10").setAttribute("onclick", "upgrade(10)");
-      document.getElementById("upgrade10").setAttribute("class", "upgrade");
-      document.getElementById("shade10").style.display="none";
+      loadSvg();
       return false;
     }
+    else if (data < 10 && upgrades_array[0] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 2){
+  if (num == 2){ //FASTER-DEPLOYMENT
     if (data >= 50 && upgrades_array[1] == 0){
       data -= 50;
       upgrades_array[1] = 1;
       auto_infection += 1;
-      document.getElementById("upgrade3-lock").style.display="none";
-      document.getElementById("upgrade3").setAttribute("onclick", "upgrade(3)");
-      document.getElementById("upgrade3").setAttribute("class", "upgrade");
-      document.getElementById("shade3").style.display="none";
+      loadSvg();
       return false;
     }
+    else if (data < 50 && upgrades_array[1] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 3){
+  if (num == 3){ //IMPROVED-CABLES
     if (data >= 100000 && upgrades_array[2] == 0){
       data -= 100000;
       upgrades_array[2] = 1;
       infect_chance += 0.2;
-      document.getElementById("upgrade4-lock").style.display="none";
-      document.getElementById("upgrade4").setAttribute("onclick", "upgrade(4)");
-      document.getElementById("upgrade4").setAttribute("class", "upgrade");
-      document.getElementById("shade4").style.display="none";
-      document.getElementById("upgrade5-lock").style.display="none";
-      document.getElementById("upgrade5").setAttribute("onclick", "upgrade(5)");
-      document.getElementById("upgrade5").setAttribute("class", "upgrade");
-      document.getElementById("shade5").style.display="none";
+      loadSvg();
       return false;
     }
+    else if (data < 10000 && upgrades_array[2] == 0) {
+      isTooExpensive = true;
+    }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 4){
+  if (num == 4){ //WANDERING-EYE
     if (data >= 1000000 && upgrades_array[3] == 0){
       data -= 1000000;
       auto_infection += 10;
       upgrades_array[3] = 1;
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 5){
+  if (num == 5){ //FASTER-DEPLOYMENT-II
     if (data >= 10000000 && upgrades_array[4] == 0){
       data -= 10000000;
       upgrades_array[4] = 1;
       auto_data += 100;
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 6){
+  if (num == 6){ //INFECTED-USBS
     if (data >= 100000000 && upgrades_array[5] == 0){
       data -= 100000000;
       upgrades_array[5] = 1;
       auto_data = auto_data*2;
-      document.getElementById("upgrade7-lock").style.display="none";
-      document.getElementById("upgrade7").setAttribute("onclick", "upgrade(7)");
-      document.getElementById("upgrade7").setAttribute("class", "upgrade");
-      document.getElementById("shade7").style.display="none";
-      document.getElementById("upgrade9-lock").style.display="none";
-      document.getElementById("upgrade9").setAttribute("onclick", "upgrade(9)");
-      document.getElementById("upgrade9").setAttribute("class", "upgrade");
-      document.getElementById("shade9").style.display="none";
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 7){
+  if (num == 7){ //INFECTED-HDDS
     if (data >= 1000000000 && upgrades_array[6] == 0){
       data -= 1000000000;
       upgrades_array[6] = 1;
-      document.getElementById("upgrade8-lock").style.display="none";
-      document.getElementById("upgrade8").setAttribute("onclick", "upgrade(8)");
-      document.getElementById("upgrade8").setAttribute("class", "upgrade");
-      document.getElementById("shade8").style.display="none";
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 8){
+  if (num == 8){ //INFECTED-CPUS
     if (data >= 1000000000 && upgrades_array[7] == 0){
       data -= 1000000000;
       upgrades_array[7] = 1;
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 9){
+  if (num == 9){ //GOLD-DUST
     if (data >= 10000000000 && upgrades_array[8] == 0){
       data -= 10000000000;
       upgrades_array[8] = 1;
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 10){
-    if (data >= 100000000000 && upgrades_array[9] == 0){
-      data -= 100000000000;
+  if (num == 10){ //TROJAN HORSE
+    if (data >= 1000 && upgrades_array[9] == 0){
+      data -= 1000;
+      click = click * 2;
       upgrades_array[9] = 1;
-      document.getElementById("upgrade11-lock").style.display="none";
-      document.getElementById("upgrade11").setAttribute("onclick", "upgrade(11)");
-      document.getElementById("upgrade11").setAttribute("class", "upgrade");
-      document.getElementById("shade11").style.display="none";
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 11){
+  if (num == 11){ //GRAVE-DIGGER
     if (data >= 1000000000000 && upgrades_array[10] == 0){
       data -= 1000000000000;
       upgrades_array[10] = 1;
-      document.getElementById("upgrade12-lock").style.display="none";
-      document.getElementById("upgrade12").setAttribute("onclick", "upgrade(12)");
-      document.getElementById("upgrade12").setAttribute("class", "upgrade");
-      document.getElementById("shade12").style.display="none";
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
   }
-  if (num == 12){
+  if (num == 12){ //GOD-HAND
     if (data >= 1000000000000 && upgrades_array[11] == 0){
       data -= 1000000000000;
       upgrades_array[11] = 1;
+      loadSvg();
       return false;
     }
+    else {
+      isPurchased = true;
+    }
+  }
+  if (isTooExpensive) {
+    document.getElementById("distort").style.display = "block";
+    setTimeout(distort, 100);
+
+    document.getElementById("funds").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("funds").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("funds").style.display = "block";
+    setTimeout(funds, 2000);
+  }
+  else if (isPurchased) {
+    document.getElementById("distort").style.display = "block";
+    setTimeout(distort, 100);
+
+    document.getElementById("purchased").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("purchased").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("purchased").style.display = "block";
+
+    setTimeout(purchased, 2000);
   }
 }
 
@@ -701,6 +736,7 @@ function makeDraggable(evt){
   var selectedElement = false;
   var offset;
 
+  svg.addEventListener('mouseover', start);
   svg.addEventListener('mousedown', startDrag);
   svg.addEventListener('mousemove', drag);
   svg.addEventListener('mouseup', endDrag);
@@ -714,6 +750,9 @@ function makeDraggable(evt){
   }
 
   function startDrag(evt){
+    document.getElementById("funds").style.display= "none";
+    document.getElementById("purchased").style.display = "none";
+    svg.style.cursor = "grabbing";
     offset = getMousePosition(evt);
     selectedElement = true;
   }
@@ -725,7 +764,11 @@ function makeDraggable(evt){
     }
   }
   function endDrag(){
+    svg.style.cursor = "grab";
     selectedElement = false;
+  }
+  function start(){
+    showDesc();
   }
 }
 
@@ -776,6 +819,11 @@ function loadSvg(){
       document.getElementById("shade9").style.display="none";
     }
   }
+  for (var i = 0; i < upgrades_array.length; i++) {
+    if (upgrades_array[i] != 0) {
+      document.getElementById("upgrade" + (i + 1)).style.fill = "#cc3300";
+    }
+  }
 }
 
 function showUpgrades(num){
@@ -801,4 +849,39 @@ function showUpgrades(num){
     default:
 
   }
+}
+
+function showDesc(){
+  for (var i = 0; i < 11; i++) {
+    document.getElementById("upgrade" + (i + 1)).addEventListener("mouseover", mouseOverEffect);
+    document.getElementById("upgrade" + (i + 1)).param = i;
+    document.getElementById("upgrade" + (i + 1)).addEventListener("mouseout", mouseOutEffect);
+  }
+
+  function mouseOverEffect(evt){
+    document.getElementById("description-base").style.display = "block";
+    document.getElementById("description-overlay").setAttribute("href", "images/upgrade-descriptions/desc"+evt.currentTarget.param+".png");
+    document.getElementById("description-overlay").style.display = "block";
+    document.getElementById("description-cost").setAttribute("href", "images/upgrade-descriptions/cost"+evt.currentTarget.param+".png");
+    document.getElementById("description-cost").style.display = "block";
+    document.getElementById("description-image").setAttribute("href", "images/upgrade-descriptions/image"+evt.currentTarget.param+".png");
+    document.getElementById("description-image").style.display = "block";
+  }
+
+  function mouseOutEffect(){
+    document.getElementById("description-base").style.display = "none";
+    document.getElementById("description-overlay").style.display = "none";
+    document.getElementById("description-cost").style.display = "none";
+    document.getElementById("description-image").style.display = "none";
+  }
+}
+
+function distort(){
+  document.getElementById("distort").style.display = "none";
+}
+function funds(){
+  document.getElementById("funds").style.display = "none";
+}
+function purchased(){
+  document.getElementById("purchased").style.display = "none";
 }

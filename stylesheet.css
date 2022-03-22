@@ -154,6 +154,7 @@ p{
 
 .lock {
   fill: black;
+	pointer-events: none;
 }
 
 .buttons-section {
@@ -176,8 +177,46 @@ p{
 .shade {
 	fill-opacity: 0.3;
 	color: black;
+	pointer-events: none;
 }
 
+.buttons-section {
+	cursor: grab;
+}
+
+#description-base {
+	display: none;
+}
+
+#description-overlay {
+	display: none;
+}
+
+#description-cost {
+	display: none;
+}
+
+#description-image {
+	display: none;
+	width: 75px;
+}
+
+#distort {
+	display: none;
+	width: 1200px;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+#funds {
+	display: none;
+	pointer-events: none;
+}
+
+#purchased {
+	display: none;
+	pointer-events: none;
+}
 
 #Data{
 
