@@ -914,7 +914,7 @@ function makeDraggable(evt){
 }
 
 function loadSvg(){
-  if (day == 0) {
+  if (document.getElementById("lethality").style.display!="none" || document.getElementById("anti-anti-virus").style.display!="none") {
     document.getElementById("lethality").style.display="none";
     document.getElementById("anti-anti-virus").style.display="none";
   }
@@ -1011,7 +1011,7 @@ function showUpgrades(num){
 }
 
 function showDesc(){
-  for (var i = 0; i < 18; i++) {
+  for (var i = 0; i < 23; i++) {
     document.getElementById("upgrade" + (i + 1)).addEventListener("mouseover", mouseOverEffect);
     document.getElementById("upgrade" + (i + 1)).param = i;
     document.getElementById("upgrade" + (i + 1)).addEventListener("mouseout", mouseOutEffect);
