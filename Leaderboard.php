@@ -4,7 +4,10 @@ session_start();
 	include("connection.php");
 	include("functions.php");
 
-  $sql = "SELECT stats.user_id, stats.day, stats.data, users.user_name FROM stats INNER JOIN users ON stats.user_id = users.user_id ORDER BY data DESC, day DESC";
+  $sql = "SELECT stats.user_id, stats.day, stats.data, stats.upg, users.user_name 
+            FROM stats 
+            INNER JOIN users ON stats.user_id = users.user_id 
+            WHERE stats.upg = '1,1,1,1,1,1,1,1,1,1,1,1' ORDER BY day DESC";
   $result = mysqli_query($con, $sql);
   $ldboard = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -44,7 +47,9 @@ session_start();
   #players {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   #players td, #players th {
@@ -64,6 +69,15 @@ session_start();
   #players td {
     background-color: #ffffff;
     opacity:0.95;
+  }
+
+  footer{
+    width:100%;
+    height:100%;;
+  }
+
+  body{
+    background-color: #121011;
   }
 </style>
 
@@ -104,8 +118,7 @@ session_start();
       <table id="players">
         <tr>
           <th>Ranking</th>
-          <th>User</th>
-          <th>Number of Data</th>
+          <th>Player</th>
           <th>Days</th>
         </tr>
 
@@ -115,15 +128,16 @@ session_start();
           <tr>
           <td><?php echo $x;?></td>
           <td><?php echo htmlspecialchars($player['user_name']); ?></td>
-          <td><?php echo htmlspecialchars($player['data']); ?></td>
           <td><?php echo htmlspecialchars($player['day']); ?></td>
         <?php
          $x++;}
          ?>
-
     </table>
     </div>
   </div>
+    <footer>
+      
+    </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
