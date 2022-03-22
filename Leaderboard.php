@@ -25,6 +25,22 @@ session_start();
 </head>
 
 <style>
+  .card_text-center{
+    background:url(imap.jpg);
+  }
+
+  .card-title{
+    font:bold 50px "Courier";
+    text-align:center;
+    color:white;
+    border:6px solid #ffffff;
+    text-shadow: -3px 3px 0 #000,
+    3px 3px 0 #000,
+    3px -3px 0 #000,
+    -3px -3px 0 #000;
+    padding-top:8px;
+  }
+
   #players {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -34,14 +50,21 @@ session_start();
   #players td, #players th {
     border:1px solid #ddd;
     padding:8px;
+    text-align:right;
+
   }
 
   #players th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #1a368a;
-  color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #1a368a;
+    color: white;
+  }
+
+  #players td {
+    background-color: #ffffff;
+    opacity:0.95;
+  }
 </style>
 
 <body>
@@ -74,7 +97,7 @@ session_start();
     </div>
   </nav>
   <div class="card-columns" style="display: inline-block; float: left;width:100%; height:100%;">
-    <div class="card text-center">
+    <div class="card_text-center">
       <div class = "card-body">
         <h5 class="card-title">Global Leaderboard</h5>
       </div>
@@ -85,6 +108,7 @@ session_start();
           <th>Number of Data</th>
           <th>Days</th>
         </tr>
+
         <?php 
         $x = 1;
         foreach($ldboard as $player){?>
@@ -93,7 +117,10 @@ session_start();
           <td><?php echo htmlspecialchars($player['user_name']); ?></td>
           <td><?php echo htmlspecialchars($player['data']); ?></td>
           <td><?php echo htmlspecialchars($player['day']); ?></td>
-        <?php $x++;}?>
+        <?php
+         $x++;}
+         ?>
+
     </table>
     </div>
   </div>
