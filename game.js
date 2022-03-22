@@ -1,6 +1,8 @@
 var regions_array = ["Scotland","North East","North West","Yorkshire","West Midlands","East Midlands","Wales","East of England","South East","South West","London"];
 var populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
+var is_population_hit_max = [0,0,0,0,0,0,0,0,0,0,0]; //if a value is 1, that means it will no longer go up
 var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488];
+var unlocked_regions = [1,0,0,0,0,0,0,0,0,0,0]; //if 1, is unlocked
 var placement_count_array = [0,0,0,0,0,0,0,0,0,0,0];
 var completion_percentage = 0;
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
@@ -43,6 +45,10 @@ function check_win(){
        clearInterval(update);
        clearInterval(save);
        clearInterval(cool_dotz);
+       document.body.innerHTML = '';
+       document.write("<p style='font-size:30px'>YOU WON!</p><br><img src='images/celebrate.gif'><br><br>Your score has been added to the leaderboard!<br><br>Thank you for playing Project IMAP!");
+       document.write("<br><button style='font-size:25px' onclick='reset()'>RESET</button>")
+
      }
 }
 
@@ -150,6 +156,7 @@ function change_theme(theme){
 function reset(){
   localStorage.clear();
   globalThis.populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
+  globalThis.is_population_hit_max = [0,0,0,0,0,0,0,0,0,0,0];
   globalThis.current_region_index = 0; //the current region we're looking at. starts off as scotland
 
   globalThis.day = 0;
@@ -163,7 +170,6 @@ function reset(){
   globalThis.infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
   globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
-  save();
   window.location.reload();
 }
 
@@ -180,6 +186,7 @@ function save(){
   localStorage.setItem("auto_data", auto_data);
   localStorage.setItem("auto_infection", auto_infection);
   localStorage.setItem("infect_chance", infect_chance);
+  localStorage.setItem("is_population_hit_max", JSON.stringify(is_population_hit_max));
 }
 
 function load(){
@@ -187,6 +194,8 @@ function load(){
  populations_array = JSON.parse(populations_array);
  upgrades_array = localStorage.getItem("upgrades_array");
  upgrades_array = JSON.parse(upgrades_array);
+ is_population_hit_max = localStorage.getItem("is_population_hit_max");
+ is_population_hit_max = JSON.parse(is_population_hit_max);
 
  day = localStorage.getItem("day");
  day = parseInt(day);
@@ -250,11 +259,12 @@ function update(){ //this function ensures all the text and values are up to dat
   check_win();
   which_byte();
   document.getElementById("Day").innerHTML = (day);
-  document.getElementById("Data").innerHTML = ("Data <p>"+data_in_units+" "+data_display+"</p> (+"+auto_data+" B per device per day)");
+  document.getElementById("Data").innerHTML = ("Data <p>"+data_in_units+" "+data_display+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_data+" B per device per day)</p>");
   var total = 0;
   for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
   document.getElementById("Completion_percentage").value = ((total/65185724)*100);
-  document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> (+"+auto_infection+" per day)");
+  document.getElementById("Completion_percentage_number").innerHTML = (Math.trunc(((total/65185724)*100)*100)/100+"%");
+  document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
   document.getElementById("Infection").innerHTML = (infect_chance);
@@ -272,7 +282,6 @@ function update(){ //this function ensures all the text and values are up to dat
 function infect(){
 populations_array[current_region_index] += click;
 data += 1; //without this, there is no way to get data to begin with
-update();
 }
 
 function upgrade(num){
@@ -449,10 +458,12 @@ function upgrade(num){
 
 function daily(){
   day += 1;
-  //random_infect
-  if (Math.random() <= infect_chance){ //Math.random() generates a number from 0 to 1
-    var random = Math.floor(Math.random() * (populations_array.length)); //choose a random region from the array
-    populations_array[random] += click; //infect it
+
+  //check if a region has reached its max population
+  for (var i = 0; i < regions_array.length; i++){
+    if (populations_array[i] >= max_populations_array[i]){
+      is_population_hit_max[i] = 1;
+    }
   }
 
   //mine_data
@@ -460,9 +471,16 @@ function daily(){
     data += Math.trunc(populations_array[i]*auto_data); //mines data every day per device for each region
   }
 
-  //infects_per_day
-  var random = Math.floor(Math.random() * (populations_array.length));
-  populations_array[random] += auto_infection; //this should be weighted because right now all daily infection go to ONE region
+  //random_infect
+  if (is_population_hit_max != [1,1,1,1,1,1,1,1,1,1,1]){
+    while (true){
+      var random = Math.floor(Math.random() * (populations_array.length));
+      if (is_population_hit_max[random]==0){
+        populations_array[random] += auto_infection;
+        break;
+      }
+  }
+}
 }
 
 var daily = setInterval(daily, 1000);
