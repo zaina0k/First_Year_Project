@@ -45,7 +45,7 @@ session_start();
             <a class="nav-link" href="Achievements.html">Achievements</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Leaderboard.html">Leaderboard</a>
+            <a class="nav-link" href="Leaderboard.php">Leaderboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Profile.html">Profile</a>
