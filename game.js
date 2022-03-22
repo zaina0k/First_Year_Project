@@ -19,13 +19,6 @@ var infect_chance = 0.1; //the chance every day that a new device is randomly in
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
 
-var determine_colour(){
-  if (unlocked_regions[0] == 1){
-    stylesheet.insertRule(".map-part:hover{fill: green;}");
-  }
-  
-}
-
 function set_pop(){
   var entered = parseInt(document.getElementById("enter_pop").value);
   for (var i = 0; i < regions_array.length; i++){
