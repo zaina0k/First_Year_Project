@@ -2,6 +2,7 @@ var regions_array = ["Scotland","North East","North West","Yorkshire","West Midl
 var populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
 var is_population_hit_max = [0,0,0,0,0,0,0,0,0,0,0]; //if a value is 1, that means it will no longer go up
 var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488];
+var unlocked_regions = [1,0,0,0,0,0,0,0,0,0,0]; //if 1, is unlocked
 var placement_count_array = [0,0,0,0,0,0,0,0,0,0,0];
 var completion_percentage = 0;
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
@@ -17,6 +18,13 @@ var auto_infection = 0; //how many devices are infected every day i.e. how fast 
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0];
+
+var determine_colour(){
+  if (unlocked_regions[0] == 1){
+    stylesheet.insertRule(".map-part:hover{fill: green;}");
+  }
+  
+}
 
 function set_pop(){
   var entered = parseInt(document.getElementById("enter_pop").value);
