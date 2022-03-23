@@ -25,28 +25,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
   // Only have three variable for testing
 
-  echo "hello";
 
     $upg = $_POST['upg'];
-    $x = array($upg);
 
-    echo $upg;
+    $pop = $_POST['population'];
+   
+
+
+    echo ("//////");
+    echo "<br>";
     $db_upg=$stats_data['upg'];
+    $idtest = $stats_data['day'];
+    echo ("this is the day ");
+    echo $idtest;
+    echo "<br>";
+    echo ("this is the unseriallsied data from the database this should be the updated arrays when the user log ins ");
     $un_upg = unserialize($db_upg);
+    echo $un_upg;
+    echo "<br>";
+
+
+    
+
+    echo ("this is  value of the upgardes as stored in the database");
 
     echo $db_upg;
 
-    echo $un_upg;
+    $upgrades_array = serialize($_POST['upg']);
+    $population_array = serialize($_POST['population']);
 
-    $xr = serialize($x);
-
-    echo $xr;
   
     $day = $_POST['day']; 
     $infect_rate = $_POST['infect_rate'];
     $data = $_POST['data'];
+    $click = $_POST['click'];
+    $auto_data = $_POST['auto_data'];
+    $auto_infection = $_POST['auto_infection'];
 
-    $query = "update stats set day='$day' , infect_rate= '$infect_rate', data= '$data' ,upg = '$xr' where user_id = '$id' ";
+
+
+
+
+    echo $infect_rate;
+
+
+
+
+    $query = "update stats set day='$day' , infect_chance= '$infect_rate', data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' where user_id = '$id' ";
     mysqli_query($con, $query);
 }
 
@@ -72,12 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
-      POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="new_user_name" placeholder="username" class="input"><br>
+      POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
       UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
       DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
-      CLICK<input id="CLICK" type="text" name="new_user_name" placeholder="username" class="input"><br>
-      AUTO_DATA<input id="AUTO_DATA"  type="text" name="new_user_name" placeholder="username" class="input"><br>
-      AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="new_user_name" placeholder="username" class="input"><br>
+      CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
+      AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
+      AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
       INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
       </div>
       <input type="submit" value="SEND TO DATABASE"><br><br>
@@ -196,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <h5 class="card-title">STATS</h5>
+        <h5 class="card-title">STATS <?php echo $un_upg?> </h5>
         <button onclick="current_stats(0)">SCOTLAND</button>
         <button onclick="current_stats(1)">ENGLAND</button>
         <button onclick="current_stats(2)">WALES</button>
