@@ -18,6 +18,7 @@ var auto_infection = 0; //how many devices are infected every day i.e. how fast 
 var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var anti_virus = 0;
 
 function set_pop(){
   var entered = parseInt(document.getElementById("enter_pop").value);
@@ -27,20 +28,7 @@ function set_pop(){
 }
 
 function check_win(){
-  if (
-    (populations_array[0] > max_populations_array[0]) &&
-    (populations_array[1] > max_populations_array[1]) &&
-    (populations_array[2] > max_populations_array[2]) &&
-    (populations_array[3] > max_populations_array[3]) &&
-    (populations_array[4] > max_populations_array[4]) &&
-    (populations_array[5] > max_populations_array[5]) &&
-    (populations_array[6] > max_populations_array[6]) &&
-    (populations_array[7] > max_populations_array[7]) &&
-    (populations_array[8] > max_populations_array[8]) &&
-    (populations_array[9] > max_populations_array[9]) &&
-    (populations_array[10] > max_populations_array[10])
-     ){
-       console.log("YOU WON!"); //replace this with a message + ability to save to leaderboard
+  if (upgrades_array[15] == 1){
        clearInterval(daily);
        clearInterval(update);
        clearInterval(save);
@@ -259,6 +247,8 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
+  document.getElementById("AV_percentage").value = (anti_virus);
+  document.getElementById("AV_percentage_number").innerHTML = (anti_virus+"%");
   // updating the input boxes for saving
   document.getElementById("DAY").value = (day);
   document.getElementById("POPULATIONS_ARRAY").value = (populations_array);
@@ -270,8 +260,10 @@ function update(){ //this function ensures all the text and values are up to dat
 }
 
 function infect(){
-populations_array[current_region_index] += click;
-data += 1; //without this, there is no way to get data to begin with
+  if (is_population_hit_max[current_region_index] != 1){
+    populations_array[current_region_index] += click;
+    data += 1;
+  }
 }
 
 function upgrade(num){
@@ -284,7 +276,7 @@ function upgrade(num){
     if (data >= 10 && upgrades_array[0] == 0){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
-      auto_data = 0.1;
+      auto_infection = 5;
       loadSvg();
       return false;
     }
@@ -299,7 +291,7 @@ function upgrade(num){
     if (data >= 50 && upgrades_array[1] == 0){
       data -= 50;
       upgrades_array[1] = 1;
-      auto_infection += 4;
+      auto_infection += 5;
       loadSvg();
       return false;
     }
@@ -314,7 +306,7 @@ function upgrade(num){
     if (data >= 500 && upgrades_array[2] == 0){
       data -= (500);
       upgrades_array[2] = 1;
-      auto_data += 0.3;
+      auto_infection += 40;
       loadSvg();
       return false;
     }
@@ -344,7 +336,7 @@ function upgrade(num){
     if (data >= 100*(2**10) && upgrades_array[4] == 0){
       data -= 100*(2**10);
       upgrades_array[4] = 1;
-      auto_infection = 100;
+      auto_infection += 450;
       loadSvg();
       return false;
     }
@@ -374,7 +366,7 @@ function upgrade(num){
     if (data >= 25*(2**10) && upgrades_array[6] == 0){
       data -= 25*(2**10);
       upgrades_array[6] = 1;
-      auto_data = (2**10);
+      click = 10000;
       loadSvg();
       return false;
     }
@@ -386,14 +378,14 @@ function upgrade(num){
     }
   }
   if (num == 8){ //INFECTED-CPUS
-    if (data >= 1.5*(2**30) && upgrades_array[7] == 0){
-      data -= 1.5*(2**30);
+    if (data >= 50*(2**30) && upgrades_array[7] == 0){
+      data -= 50*(2**30);
       upgrades_array[7] = 1;
       click = 100000;
       loadSvg();
       return false;
     }
-    else if (data < 1.5*(2**30) && upgrades_array[7] == 0) {
+    else if (data < 50*(2**30) && upgrades_array[7] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -417,13 +409,13 @@ function upgrade(num){
   }
   if (num == 10){ //TROJAN HORSE
     if (data >= 100*(2**20) && upgrades_array[9] == 0){
-      data -= 1000;
+      data -= 100*(2**20);
       auto_infection += 2500;
       upgrades_array[9] = 1;
       loadSvg();
       return false;
     }
-    else if (data < 1000 && upgrades_array[9] == 0) {
+    else if (data < 100*(2**20) && upgrades_array[9] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -431,14 +423,14 @@ function upgrade(num){
     }
   }
   if (num == 11){ //GRAVE-DIGGER
-    if (data >= 75*(2**30) && upgrades_array[10] == 0){
-      data -= 75*(2**30);
+    if (data >= (2**30) && upgrades_array[10] == 0){
+      data -= (2**30);
       upgrades_array[10] = 1;
       auto_infection += 10000;
       loadSvg();
       return false;
     }
-    else if (data < 75*(2**30) && upgrades_array[10] == 0) {
+    else if (data < (2**30) && upgrades_array[10] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -446,14 +438,14 @@ function upgrade(num){
     }
   }
   if (num == 12){ //GOD-HAND
-    if (data >= 10*(2**40) && upgrades_array[11] == 0){
-      data -= 10*(2**40);
+    if (data >= (2**40) && upgrades_array[11] == 0){
+      data -= (2**40);
       upgrades_array[11] = 1;
       auto_infection += 100000;
       loadSvg();
       return false;
     }
-    else if (data < 10*(2**40) && upgrades_array[11] == 0) {
+    else if (data < (2**40) && upgrades_array[11] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -462,14 +454,14 @@ function upgrade(num){
   }
   // start of lethality upgrades i.e increase data rate and other similar things
   if (num == 13){ //BITCOIN-MINER
-    if (data >= 100 && upgrades_array[12] == 0){
-      data -= 100;
-      auto_data = auto_data + 0.1;
+    if (data >= 25 && upgrades_array[12] == 0){
+      data -= 25;
+      auto_data += 0.1;
       upgrades_array[12] = 1;
       loadSvg();
       return false;
     }
-    else if (data < 100 && upgrades_array[12] == 0) {
+    else if (data < 25 && upgrades_array[12] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -477,14 +469,14 @@ function upgrade(num){
     }
   }
   if (num == 14){ //FASTER-DATA-EXTRACTION
-    if (data >= 1000 && upgrades_array[13] == 0){
-      data -= 1000;
-      auto_data = auto_data + 0.5;
+    if (data >= (2**10) && upgrades_array[13] == 0){
+      data -= (2**10);
+      auto_data += 0.9;
       upgrades_array[13] = 1;
       loadSvg();
       return false;
     }
-    else if (data < 1000 && upgrades_array[13] == 0) {
+    else if (data < (2**10) && upgrades_array[13] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -492,13 +484,14 @@ function upgrade(num){
     }
   }
   if (num == 15){ //ROUND-THE-CLOCK
-    if (data >= 1000000000000 && upgrades_array[14] == 0){
-      data -= 1000000000000;
+    if (data >= 25*(2**20) && upgrades_array[14] == 0){
+      data -= 25*(2**20);
       upgrades_array[14] = 1;
+      auto_data *= 2;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[14] == 0) {
+    else if (data < 25*(2**20) && upgrades_array[14] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -506,13 +499,13 @@ function upgrade(num){
     }
   }
   if (num == 16){ //EXODIA
-    if (data >= 1000000000000 && upgrades_array[15] == 0){
-      data -= 1000000000000;
+    if (is_population_hit_max == [1,1,1,1,1,1,1,1,1,1,1] && data >= 100*(2**40) && upgrades_array[15] == 0){
+      data -= 100*(2**40);
       upgrades_array[15] = 1;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[15] == 0) {
+    else if (data < 100*(2**40) && upgrades_array[15] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -520,13 +513,14 @@ function upgrade(num){
     }
   }
   if (num == 17){ //NERD-GOGGLES
-    if (data >= 1000000000000 && upgrades_array[16] == 0){
-      data -= 1000000000000;
+    if (data >= 25*(2**20) && upgrades_array[16] == 0){
+      data -= 25*(2**20);
       upgrades_array[16] = 1;
+      auto_data += 150;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[16] == 0) {
+    else if (data < 25*(2**20) && upgrades_array[16] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -534,13 +528,14 @@ function upgrade(num){
     }
   }
   if (num == 18){ //DARK-ARMY
-    if (data >= 1000000000000 && upgrades_array[17] == 0){
-      data -= 1000000000000;
+    if (data >= 3*(2**30) && upgrades_array[17] == 0){
+      data -= 3*(2**30);
       upgrades_array[17] = 1;
+      auto_data += 10000;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[17] == 0)  {
+    else if (data < 3*(2**30) && upgrades_array[17] == 0)  {
       isTooExpensive = true;
     }
     else {
@@ -548,14 +543,13 @@ function upgrade(num){
     }
   }
   if (num == 19){ //ACTUAL-NFT
-    if (data >= 1000000000000 && upgrades_array[18] == 0){
-      data -= 1000000000000;
+    if (upgrades_array[18] == 0){
+      var total = 0;
+      for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
+      data += total; //adds current total population to data, one time use (use wisely)
       upgrades_array[18] = 1;
       loadSvg();
       return false;
-    }
-    else if (data < 1000000000000 && upgrades_array[18] == 0) {
-      isTooExpensive = true;
     }
     else {
       isPurchased = true;
