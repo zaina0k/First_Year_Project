@@ -90,7 +90,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Data{color: black;}");
     stylesheet.insertRule("#Total_pop{color: black;}");
     stylesheet.insertRule("#Region{color: black;}");
-    stylesheet.insertRule("#Infection_chance{color: black;}");
     stylesheet.insertRule("#Day_display{color: black;}");
   }
   if (theme==1){
@@ -100,7 +99,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Data{color: white;}");
     stylesheet.insertRule("#Total_pop{color: white;}");
     stylesheet.insertRule("#Region{color: white;}");
-    stylesheet.insertRule("#Infection_chance{color: white;}");
     stylesheet.insertRule("#Day_display{color: white;}");
   }
   if (theme==2){
@@ -110,7 +108,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Data{color: white;}");
     stylesheet.insertRule("#Total_pop{color: white;}");
     stylesheet.insertRule("#Region{color: white;}");
-    stylesheet.insertRule("#Infection_chance{color: white;}");
     stylesheet.insertRule("#Day_display{color: white;}");
   }
   if (theme==3){
@@ -120,7 +117,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Data{color: black;}");
     stylesheet.insertRule("#Total_pop{color: black;}");
     stylesheet.insertRule("#Region{color: black;}");
-    stylesheet.insertRule("#Infection_chance{color: black;}");
     stylesheet.insertRule("#Day_display{color: black;}");
   }
   if (theme==4){
@@ -137,8 +133,6 @@ function change_theme(theme){
     random_color = Math.floor(Math.random()*16777215).toString(16);
     stylesheet.insertRule("#Region{color: #"+random_color+";}");
     random_color = Math.floor(Math.random()*16777215).toString(16);
-    stylesheet.insertRule("#Infection_chance{color: #"+random_color+";}");
-    random_color = Math.floor(Math.random()*16777215).toString(16);
     stylesheet.insertRule("#Day_display{color: #"+random_color+";}");
   }
   if (theme==5){
@@ -148,7 +142,6 @@ function change_theme(theme){
     stylesheet.insertRule("#Data{color: #755f5e;}");
     stylesheet.insertRule("#Total_pop{color: #755f5e;}");
     stylesheet.insertRule("#Region{color: #755f5e;}");
-    stylesheet.insertRule("#Infection_chance{color: #755f5e;}");
     stylesheet.insertRule("#Day_display{color: #755f5e;}");
   }
 }
@@ -266,7 +259,6 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
   document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
-  document.getElementById("Infection").innerHTML = (infect_chance);
   // updating the input boxes for saving
   document.getElementById("DAY").value = (day);
   document.getElementById("POPULATIONS_ARRAY").value = (populations_array);
@@ -274,7 +266,6 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("DATA").value = (data);
   document.getElementById("CLICK").value = (click);
   document.getElementById("AUTO_DATA").value = (auto_data);
-  document.getElementById("AUTO_INFECTION").value = (auto_infection);
   document.getElementById("INFECT_CHANCE").value = (infect_chance);
 }
 
@@ -293,6 +284,7 @@ function upgrade(num){
     if (data >= 10 && upgrades_array[0] == 0){
       data -= 10;
       upgrades_array[0] = 1; //upgrade1 is present, can't be bought anymore
+      auto_data = 0.1;
       loadSvg();
       return false;
     }
@@ -307,7 +299,7 @@ function upgrade(num){
     if (data >= 50 && upgrades_array[1] == 0){
       data -= 50;
       upgrades_array[1] = 1;
-      auto_infection += 1;
+      auto_infection += 4;
       loadSvg();
       return false;
     }
@@ -319,14 +311,14 @@ function upgrade(num){
     }
   }
   if (num == 3){ //IMPROVED-CABLES
-    if (data >= 100000 && upgrades_array[2] == 0){
-      data -= 100000;
+    if (data >= 500 && upgrades_array[2] == 0){
+      data -= (500);
       upgrades_array[2] = 1;
-      infect_chance += 0.2;
+      auto_data += 0.3;
       loadSvg();
       return false;
     }
-    else if (data < 100000 && upgrades_array[2] == 0) {
+    else if (data < 500 && upgrades_array[2] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -334,14 +326,14 @@ function upgrade(num){
     }
   }
   if (num == 4){ //WANDERING-EYE
-    if (data >= 1000000 && upgrades_array[3] == 0){
-      data -= 1000000;
-      auto_infection += 10;
+    if (data >= 3*(2**10) && upgrades_array[3] == 0){
+      data -= 3*(2**10);
+      populations_array[0] += 10000;
       upgrades_array[3] = 1;
       loadSvg();
       return false;
     }
-    else if (data < 1000000 && upgrades_array[3] == 0) {
+    else if (data < 3*(2**10) && upgrades_array[3] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -349,14 +341,14 @@ function upgrade(num){
     }
   }
   if (num == 5){ //FASTER-DEPLOYMENT-II
-    if (data >= 10000000 && upgrades_array[4] == 0){
-      data -= 10000000;
+    if (data >= 100*(2**10) && upgrades_array[4] == 0){
+      data -= 100*(2**10);
       upgrades_array[4] = 1;
-      auto_data += 100;
+      auto_infection = 100;
       loadSvg();
       return false;
     }
-    else if (data < 10000000 && upgrades_array[4] == 0) {
+    else if (data < 100*(2**10) && upgrades_array[4] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -364,14 +356,14 @@ function upgrade(num){
     }
   }
   if (num == 6){ //INFECTED-USBS
-    if (data >= 100000000 && upgrades_array[5] == 0){
-      data -= 100000000;
+    if (data >= 100 && upgrades_array[5] == 0){
+      data -= 100;
       upgrades_array[5] = 1;
-      auto_data = auto_data*2;
+      click = 100;
       loadSvg();
       return false;
     }
-    else if (data < 100000000 & upgrades_array[5] == 0) {
+    else if (data < 100 & upgrades_array[5] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -379,13 +371,14 @@ function upgrade(num){
     }
   }
   if (num == 7){ //INFECTED-HDDS
-    if (data >= 1000000000 && upgrades_array[6] == 0){
-      data -= 1000000000;
+    if (data >= 25*(2**10) && upgrades_array[6] == 0){
+      data -= 25*(2**10);
       upgrades_array[6] = 1;
+      auto_data = (2**10);
       loadSvg();
       return false;
     }
-    else if (data < 1000000000 && upgrades_array[6] == 0) {
+    else if (data < 25*(2**10) && upgrades_array[6] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -393,13 +386,14 @@ function upgrade(num){
     }
   }
   if (num == 8){ //INFECTED-CPUS
-    if (data >= 1000000000 && upgrades_array[7] == 0){
-      data -= 1000000000;
+    if (data >= 1.5*(2**30) && upgrades_array[7] == 0){
+      data -= 1.5*(2**30);
       upgrades_array[7] = 1;
+      click = 100000;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000 && upgrades_array[7] == 0) {
+    else if (data < 1.5*(2**30) && upgrades_array[7] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -407,13 +401,14 @@ function upgrade(num){
     }
   }
   if (num == 9){ //GOLD-DUST
-    if (data >= 10000000000 && upgrades_array[8] == 0){
-      data -= 10000000000;
+    if (data >= 500*(2**40) && upgrades_array[8] == 0){
+      data -= 500*(2**40);
       upgrades_array[8] = 1;
+      day -= Math.floor(day*0.5);
       loadSvg();
       return false;
     }
-    else if (data < 10000000000 && upgrades_array[8] == 0) {
+    else if (data < 500*(2**40) && upgrades_array[8] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -421,9 +416,9 @@ function upgrade(num){
     }
   }
   if (num == 10){ //TROJAN HORSE
-    if (data >= 1000 && upgrades_array[9] == 0){
+    if (data >= 100*(2**20) && upgrades_array[9] == 0){
       data -= 1000;
-      click = click * 2;
+      auto_infection += 2500;
       upgrades_array[9] = 1;
       loadSvg();
       return false;
@@ -436,13 +431,14 @@ function upgrade(num){
     }
   }
   if (num == 11){ //GRAVE-DIGGER
-    if (data >= 1000000000000 && upgrades_array[10] == 0){
-      data -= 1000000000000;
+    if (data >= 75*(2**30) && upgrades_array[10] == 0){
+      data -= 75*(2**30);
       upgrades_array[10] = 1;
+      auto_infection += 10000;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[10] == 0) {
+    else if (data < 75*(2**30) && upgrades_array[10] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -450,13 +446,14 @@ function upgrade(num){
     }
   }
   if (num == 12){ //GOD-HAND
-    if (data >= 1000000000000 && upgrades_array[11] == 0){
-      data -= 1000000000000;
+    if (data >= 10*(2**40) && upgrades_array[11] == 0){
+      data -= 10*(2**40);
       upgrades_array[11] = 1;
+      auto_infection += 100000;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[11] == 0) {
+    else if (data < 10*(2**40) && upgrades_array[11] == 0) {
       isTooExpensive = true;
     }
     else {
