@@ -247,7 +247,9 @@
         <div class="map-buttons">
           <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
           <button class="reset-button" onclick="reset()"> RESET </button><br>
-          <input id="enter_pop"><button onclick="set_pop()">Set Population in all regions</button>
+          <input id="enter_data"><button onclick="set_data(0)">Set Data</button><br>
+          <input id="enter_day"><button onclick="set_data(1)">Set Day</button><br>
+          <input id="enter_pop"><button onclick="set_data(2)">Set Population in current region</button>
         </div>
         <div class="svg-div">
           <svg class="map-svg" id="svg" width="1270" height="700">

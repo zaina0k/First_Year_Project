@@ -4,7 +4,6 @@ var is_population_hit_max = [0,0,0,0,0,0,0,0,0,0,0]; //if a value is 1, that mea
 var max_populations_array = [5466000,2680763,7367456,5526350,5961929,4865583,3169586,6269161,9217265,5659143,9002488];
 var unlocked_regions = [1,0,0,0,0,0,0,0,0,0,0]; //if 1, is unlocked
 var placement_count_array = [0,0,0,0,0,0,0,0,0,0,0];
-var completion_percentage = 0;
 var current_region_index = 0; //the current region we're looking at. starts off as scotland
 
 var day = 0;
@@ -15,15 +14,23 @@ var data_display = "B";
 var click = 1; //when you click "infect", increases by this much
 var auto_data = 0; //how much data is mined per device per day
 var auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
-var infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
 var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var anti_virus = 0;
+var anti_virus_ticks_left = 400; //treat this as the "maximum" of AV effectiveness. This means it's capped at 100% because 100/0.25 = 400
 
-function set_pop(){
-  var entered = parseInt(document.getElementById("enter_pop").value);
-  for (var i = 0; i < regions_array.length; i++){
-    populations_array[i] = entered;
+function set_data(x){
+  if (x == 0){
+    var entered = parseInt(document.getElementById("enter_data").value);
+    data = entered;
+  }
+  if (x == 1){
+    var entered = parseInt(document.getElementById("enter_day").value);
+    day = entered;
+  }
+  if (x == 2){
+    var entered = parseInt(document.getElementById("enter_pop").value);
+    populations_array[current_region_index] = entered;
   }
 }
 
@@ -147,9 +154,10 @@ function reset(){
   globalThis.click = 1; //when you click "infect", increases by this much
   globalThis.auto_data = 0; //how much data is mined per device per day
   globalThis.auto_infection = 0; //how many devices are infected every day i.e. how fast it's spreading
-  globalThis.infect_chance = 0.1; //the chance every day that a new device is randomly infected (starts at 10%)
 
   globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  globalThis.anti_virus = 0;
+  globalThis.anti_virus_ticks_left = 400;
   window.location.reload();
 }
 
@@ -161,12 +169,14 @@ function save(){
   localStorage.setItem("day", day);
   localStorage.setItem("populations_array", JSON.stringify(populations_array));
   localStorage.setItem("upgrades_array", JSON.stringify(upgrades_array));
+  localStorage.setItem("unlocked_regions",JSON.stringify(unlocked_regions));
   localStorage.setItem("data", data);
   localStorage.setItem("click", click);
   localStorage.setItem("auto_data", auto_data);
   localStorage.setItem("auto_infection", auto_infection);
-  localStorage.setItem("infect_chance", infect_chance);
   localStorage.setItem("is_population_hit_max", JSON.stringify(is_population_hit_max));
+  localStorage.setItem("anti_virus", anti_virus);
+  localStorage.setItem("anti_virus_ticks_left", anti_virus_ticks_left);
 }
 
 function load(){
@@ -187,8 +197,10 @@ function load(){
  auto_data = parseFloat(auto_data);
  auto_infection = localStorage.getItem("auto_infection");
  auto_infection = parseInt(auto_infection);
- infect_chance = localStorage.getItem("infect_chance");
- infect_chance = parseFloat(infect_chance);
+ anti_virus = localStorage.getItem("anti_virus");
+ anti_virus = parseFloat(anti_virus);
+ anti_virus_ticks_left = localStorage.getItem("anti_virus_ticks_left");
+ anti_virus_ticks_left = parseFloat(anti_virus_ticks_left);
 }
 
 function which_byte(){
@@ -256,7 +268,6 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("DATA").value = (data);
   document.getElementById("CLICK").value = (click);
   document.getElementById("AUTO_DATA").value = (auto_data);
-  document.getElementById("INFECT_CHANCE").value = (infect_chance);
 }
 
 function infect(){
@@ -557,13 +568,14 @@ function upgrade(num){
   }
   // Immunity upgrades - these should reduce the effects of the anti-virus somewhat or entirely
   if (num == 20){ //INCOGNITO
-    if (data >= 100000 && upgrades_array[19] == 0){
-      data -= 100000;
+    if (data >= 25*(2**10) && upgrades_array[19] == 0 && anti_virus >= 25){
+      data -= 25*(2**10);
       upgrades_array[19] = 1;
+      anti_virus -= 25;
       loadSvg();
       return false;
     }
-    else if (data < 100000 && upgrades_array[19] == 0) {
+    else if (data < 25*(2**10) && upgrades_array[19] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -571,13 +583,14 @@ function upgrade(num){
     }
   }
   if (num == 21){ //DARK-WEB
-    if (data >= 1000000000000 && upgrades_array[20] == 0){
-      data -= 1000000000000;
+    if (data >= 250*(2**10) && upgrades_array[20] == 0 && anti_virus >= 25){
+      data -= 250*(2**10);
       upgrades_array[20] = 1;
+      anti_virus -= 25;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[20] == 0) {
+    else if (data < 250*(2**10) && upgrades_array[20] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -585,13 +598,14 @@ function upgrade(num){
     }
   }
   if (num == 22){ //NOT-THE-CURE
-    if (data >= 1000000000000 && upgrades_array[21] == 0){
-      data -= 1000000000000;
+    if (data >= 250*(2**20) && upgrades_array[21] == 0 && anti_virus >= 25){
+      data -= 250*(2**20);
       upgrades_array[21] = 1;
+      anti_virus -= 25;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[21] == 0) {
+    else if (data < 250*(2**20) && upgrades_array[21] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -599,13 +613,14 @@ function upgrade(num){
     }
   }
   if (num == 23){ //WOLVERINE
-    if (data >= 1000000000000 && upgrades_array[22] == 0){
-      data -= 1000000000000;
+    if (data >= 75*(2**30) && upgrades_array[22] == 0 && anti_virus >= 25){
+      data -= 75*(2**30);
       upgrades_array[22] = 1;
+      anti_virus -= 25;
       loadSvg();
       return false;
     }
-    else if (data < 1000000000000 && upgrades_array[22] == 0) {
+    else if (data < 75*(2**30) && upgrades_array[22] == 0) {
       isTooExpensive = true;
     }
     else {
@@ -648,7 +663,6 @@ function upgrade(num){
 
 function daily(){
   day += 1;
-
   //check if a region has reached its max population
   for (var i = 0; i < regions_array.length; i++){
     if (populations_array[i] >= max_populations_array[i]){
@@ -658,7 +672,7 @@ function daily(){
 
   //mine_data
   for (var i = 0; i != (populations_array.length); i++){
-    data += Math.trunc(populations_array[i]*auto_data); //mines data every day per device for each region
+    data += Math.trunc((populations_array[i]*auto_data)-(auto_data*(0.4*(anti_virus/100)))); //mines data every day per device for each region
   }
 
   //random_infect
@@ -666,14 +680,27 @@ function daily(){
     while (true){
       var random = Math.floor(Math.random() * (populations_array.length));
       if (is_population_hit_max[random]==0){
-        populations_array[random] += auto_infection;
+        populations_array[random] += Math.floor(auto_infection-(auto_infection*(0.4*(anti_virus/100))));
         break;
       }
   }
 }
 }
 
+function anti_virus_tick(){
+  if (day >= 50 && anti_virus == 0 && upgrades_array[21] != 1 && upgrades_array[21] != 1){
+    alert("Your virus has been discovered! Anti-virus is being deployed ...")
+    anti_virus += 0.25;
+    anti_virus_ticks_left -= 1;
+  }
+  else if (day >= 50 && anti_virus_ticks_left > 0){
+    anti_virus += 0.25;
+    anti_virus_ticks_left -= 1;
+  }
+}
+
 var daily = setInterval(daily, 1000);
+var anti_virus_tick = setInterval(anti_virus_tick, 1000);
 var update = setInterval(update, 1000/60);
 var save = setInterval(save, 1000/60);
 if (localStorage.getItem("data") != null){
