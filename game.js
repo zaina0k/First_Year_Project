@@ -268,6 +268,11 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("DATA").value = (data);
   document.getElementById("CLICK").value = (click);
   document.getElementById("AUTO_DATA").value = (auto_data);
+  document.getElementById("AUTO_INFECTION").value = (auto_infection);
+  document.getElementById("IS_POPULATION_HIT_MAX").value = (is_population_hit_max);
+  document.getElementById("ANTI_VIRUS").value = (anti_virus);
+  document.getElementById("ANTI_VIRUS_TICKS_LEFT").value = (anti_virus_ticks_left);
+  document.getElementById("UNLOCKED_REGIONS").value = (unlocked_regions);
 }
 
 function infect(){
