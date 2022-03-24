@@ -1,34 +1,27 @@
-<?php 
+<?php
 session_start();
 
-	include("connection.php");
-	include("functions.php");
+    include("connection.php");
+    include("functions.php");
+    $counter = 0;
+    $counter = $counter +1;
+    $user_data = check_login($con);
 
+    $date = $user_data['date' ];
+    $id = $_SESSION['user_id'];
+    $query = "select * from stats where user_id ='$id' limit 1";
+            
+    $result = mysqli_query($con, $query);
+    if($result && mysqli_num_rows($result) > 0)
+    {
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		//something was posted
-		$user_name = $_POST['user_name'];
-		$password = $_POST['password'];
+        $stats_data = mysqli_fetch_assoc($result);
 
-		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-		{
-
-			//save to database
-			$user_id = random_num(20);
-			$query = "insert into users (user_id,user_name,password) values ('$user_id','$user_name','$password')";
-
-			mysqli_query($con, $query) or die(mysqli_error($con));
-
-			header("Location: login.php");
-			die;
-		}else
-		{
-			echo "Please enter some valid information!";
-		}
-	}
-?>
-
+    }
+    if ($counter >1){
+    echo "hello";
+  }
+?>  
 
 
 <!DOCTYPE html>
@@ -38,6 +31,7 @@ session_start();
   <meta charset="utf-8">
   <title>Project IMAP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="Settings.css">
 </head>
 
 <body>
@@ -72,11 +66,31 @@ session_start();
   <div class="card-columns" style="display: inline-block; float: left;">
     <div class="card text-center" style="width: 92em; height: 40em;">
       <div class = "card-body">
-        <h5 class="card-title">PROFILE</h5>
+        <h5 class="card-title">SETTINGS</h5>
+        <div style="float:centre">
+            <!-- <h2 id="testing">Hello, <?php echo $user_data['user_name' ]; ?></h2><br> -->
+      
+        <div> <br>
+
+            <div class="container_form container--change-password" style="float:left">
+              <form method="post" class="form" id="passwordform1">
+              <h2 class="form_title">Change Password</h2>
+
+              <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
+              <input type="text" name="new_password" placeholder="New Password" class="input"><br>
+              <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
+              <input type="submit" value="Change Passoword" class="btn"><br><br>
+            
+        </form>
+
+        </div>
+        
       </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="settings.js"></script>
+
 </body>
 
 </html>
