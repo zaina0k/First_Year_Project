@@ -43,13 +43,95 @@
 	background-color: #909090;
 }
 
-.map-part {
+.map-part-scotland {
 	cursor: pointer;
 }
 
-.map-part:hover{
+.map-part-scotland:hover{
+	fill: green;
+}
+
+.map-part-north-east {
+	cursor: pointer;
+}
+
+.map-part-north-east:hover{
 	fill: red;
 }
+
+.map-part-north-west {
+	cursor: pointer;
+}
+
+.map-part-north-west:hover{
+	fill: red;
+}
+
+.map-part-yorkshire {
+	cursor: pointer;
+}
+
+.map-part-yorkshire:hover{
+	fill: red;
+}
+
+.map-part-wales {
+	cursor: pointer;
+}
+
+.map-part-wales:hover{
+	fill: red;
+}
+
+.map-part-west-midlands {
+	cursor: pointer;
+}
+
+.map-part-west-midlands:hover{
+	fill: red;
+}
+
+.map-part-east-midlands {
+	cursor: pointer;
+}
+
+.map-part-east-midlands:hover{
+	fill: red;
+}
+
+.map-part-south-east {
+	cursor: pointer;
+}
+
+.map-part-south-east:hover{
+	fill: red;
+}
+
+.map-part-south-west {
+	cursor: pointer;
+}
+
+.map-part-south-west:hover{
+	fill: red;
+}
+
+.map-part-east-of-england {
+	cursor: pointer;
+}
+
+.map-part-east-of-england:hover{
+	fill: red;
+}
+
+.map-part-london {
+	cursor: pointer;
+}
+
+.map-part-london:hover{
+	fill: red;
+}
+
+
 
 .svg-div {
 	position: relative;

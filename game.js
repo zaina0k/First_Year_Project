@@ -19,6 +19,86 @@ var upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var anti_virus = 0;
 var anti_virus_ticks_left = 400; //treat this as the "maximum" of AV effectiveness. This means it's capped at 100% because 100/0.25 = 400
 
+var region_prices = ["0","10 KB","50 KB","250 KB","500 KB","1 MB","25 MB","100 MB","500 MB","10 GB","100 GB"];
+
+function purchase_region(x){
+  var styleEl = document.createElement("style");
+  document.head.appendChild(styleEl);
+  var stylesheet = styleEl.sheet;
+
+  //skip if x==0 because scotland is by default unlocked
+  if (x == 1){
+    if (data >= 10*(2**10)){
+      data -= 10*(2**10);
+      unlocked_regions[1] = 1;
+      stylesheet.insertRule(".map-part-north-east:hover{fill: green;}");
+    }
+  }
+  if (x == 2){
+    if (data >= 50*(2**10)){
+      data -= 50*(2**10);
+      unlocked_regions[2] = 1;
+      stylesheet.insertRule(".map-part-north-west:hover{fill: green;}");
+    }
+  }
+  if (x == 3){
+    if (data >= 250*(2**10)){
+      data -= 250*(2**10);
+      unlocked_regions[3] = 1;
+      stylesheet.insertRule(".map-part-yorkshire:hover{fill: green;}");
+    }
+  }
+  if (x == 4){
+    if (data >= 500*(2**10)){
+      data -= 500*(2**10);
+      unlocked_regions[4] = 1;
+      stylesheet.insertRule(".map-part-west-midlands:hover{fill: green;}");
+    }
+  }
+  if (x == 5){
+    if (data >= (2**20)){
+      data -= (2**20);
+      unlocked_regions[5] = 1;
+      stylesheet.insertRule(".map-part-east-midlands:hover{fill: green;}");
+    }
+  }
+  if (x == 6){
+    if (data >= 25*(2**20)){
+      data -= 25*(2**20);
+      unlocked_regions[6] = 1;
+      stylesheet.insertRule(".map-part-wales:hover{fill: green;}");
+    }
+  }
+  if (x == 7){
+    if (data >= 100*(2**20)){
+      data -= 100*(2**20);
+      unlocked_regions[7] = 1;
+      stylesheet.insertRule(".map-part-east-of-england:hover{fill: green;}");
+    }
+  }
+  if (x == 8){
+    if (data >= 500*(2**20)){
+      data -= 500*(2**20);
+      unlocked_regions[8] = 1;
+      stylesheet.insertRule(".map-part-south-east:hover{fill: green;}");
+    }
+  }
+  if (x == 9){
+    if (data >= 10*(2**30)){
+      data -= 10*(2**30);
+      unlocked_regions[9] = 1;
+      stylesheet.insertRule(".map-part-south-west:hover{fill: green;}");
+    }
+  }
+  if (x == 10){
+    if (data >= 100*(2**30)){
+      data -= 100*(2**30);
+      unlocked_regions[10] = 1;
+      stylesheet.insertRule(".map-part-london:hover{fill: green;}");
+    }
+  }
+}
+
 function set_data(x){
   if (x == 0){
     var entered = parseInt(document.getElementById("enter_data").value);
@@ -158,6 +238,7 @@ function reset(){
   globalThis.upgrades_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   globalThis.anti_virus = 0;
   globalThis.anti_virus_ticks_left = 400;
+  globalThis.unlocked_regions = [1,0,0,0,0,0,0,0,0,0,0];
   window.location.reload();
 }
 
@@ -186,6 +267,8 @@ function load(){
  upgrades_array = JSON.parse(upgrades_array);
  is_population_hit_max = localStorage.getItem("is_population_hit_max");
  is_population_hit_max = JSON.parse(is_population_hit_max);
+ unlocked_regions = localStorage.getItem("unlocked_regions");
+ unlocked_regions = JSON.parse(unlocked_regions);
 
  day = localStorage.getItem("day");
  day = parseInt(day);
@@ -201,6 +284,8 @@ function load(){
  anti_virus = parseFloat(anti_virus);
  anti_virus_ticks_left = localStorage.getItem("anti_virus_ticks_left");
  anti_virus_ticks_left = parseFloat(anti_virus_ticks_left);
+
+
 }
 
 function which_byte(){
@@ -257,7 +342,12 @@ function update(){ //this function ensures all the text and values are up to dat
   document.getElementById("Completion_percentage").value = ((total/65185724)*100);
   document.getElementById("Completion_percentage_number").innerHTML = (Math.trunc(((total/65185724)*100)*100)/100+"%");
   document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
-  document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
+  if (unlocked_regions[current_region_index] == 1){//if unlocked, show the region's population
+    document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
+  }
+  else {//offer to unlock the region for a price
+    document.getElementById("Region").innerHTML = ("<p style='color:#800505;'>REGION LOCKED!</p><button onmousedown='purchase_region("+current_region_index+")'>Purchase "+regions_array[current_region_index]+" - "+region_prices[current_region_index]+"</button>");
+  }
   document.getElementById("infect_button").innerHTML = ("INFECT "+click+" DEVICE");
   document.getElementById("AV_percentage").value = (anti_virus);
   document.getElementById("AV_percentage_number").innerHTML = (anti_virus+"%");
@@ -677,15 +767,15 @@ function daily(){
 
   //mine_data
   for (var i = 0; i != (populations_array.length); i++){
-    data += Math.trunc((populations_array[i]*auto_data)-(auto_data*(0.4*(anti_virus/100)))); //mines data every day per device for each region
+    data += Math.trunc((populations_array[i]*auto_data)-(auto_data*(0.5*(anti_virus/100)))); //mines data every day per device for each region
   }
 
-  //random_infect
+  //auto_infection
   if (is_population_hit_max != [1,1,1,1,1,1,1,1,1,1,1]){
     while (true){
       var random = Math.floor(Math.random() * (populations_array.length));
-      if (is_population_hit_max[random]==0){
-        populations_array[random] += Math.floor(auto_infection-(auto_infection*(0.4*(anti_virus/100))));
+      if (is_population_hit_max[random]==0 && unlocked_regions[random]==1){
+        populations_array[random] += Math.floor(auto_infection-(auto_infection*(0.5*(anti_virus/100))));
         break;
       }
   }
