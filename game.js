@@ -654,7 +654,7 @@ function upgrade(num){
       for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
       data += total; //adds current total population to data, one time use (use wisely)
       upgrades_array[18] = 1;
-      loadSvg();
+      document.getElementById("upgrade19").style.fill = "#cc3300";
       return false;
     }
     else {
@@ -1027,12 +1027,8 @@ function makeDraggable(evt){
 }
 
 function loadSvg(){
-  if (document.getElementById("lethality").style.display!="none" || document.getElementById("anti-anti-virus").style.display!="none") {
-    document.getElementById("lethality").style.display="none";
-    document.getElementById("anti-anti-virus").style.display="none";
-  }
   for (var i = 0; i < upgrades_array.length; i++) {
-    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12){
+    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12 && i != 17){
       document.getElementById("upgrade"+ (i + 2) +"-lock").style.display="none";
       document.getElementById("upgrade"+ (i + 2)).setAttribute("onclick", "upgrade("+ (i + 2) +")");
       document.getElementById("upgrade"+ (i + 2)).setAttribute("class", "upgrade");
