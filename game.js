@@ -548,7 +548,7 @@ function upgrade(num){
       data -= (2**40);
       upgrades_array[11] = 1;
       auto_infection += 100000;
-      loadSvg();
+      document.getElementById("upgrade12").style.fill = "#cc3300";
       return false;
     }
     else if (data < (2**40) && upgrades_array[11] == 0) {
@@ -608,7 +608,7 @@ function upgrade(num){
     if (is_population_hit_max == [1,1,1,1,1,1,1,1,1,1,1] && data >= 100*(2**40) && upgrades_array[15] == 0){
       data -= 100*(2**40);
       upgrades_array[15] = 1;
-      loadSvg();
+      document.getElementById("upgrade19").style.fill = "#cc3300";
       return false;
     }
     else if (data < 100*(2**40) && upgrades_array[15] == 0) {
@@ -712,7 +712,7 @@ function upgrade(num){
       data -= 75*(2**30);
       upgrades_array[22] = 1;
       anti_virus -= 25;
-      loadSvg();
+      document.getElementById("upgrade23").style.fill = "#cc3300";
       return false;
     }
     else if (data < 75*(2**30) && upgrades_array[22] == 0) {
