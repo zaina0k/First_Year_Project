@@ -20,6 +20,9 @@ session_start();
     }
     if ($counter >1){
     echo "hello";
+    function change_password(){
+      
+    }
   }
 ?>  
 
@@ -72,17 +75,21 @@ session_start();
       
         <div> <br>
 
-            <div class="container_form container--change-password" style="float:left">
-              <form method="post" class="form" id="passwordform1">
-              <h2 class="form_title">Change Password</h2>
+        <div class="container_form container--change-password" style="float:left">
+          <form method="post" class="form" id="passwordform1">
+            <h2 class="form_title">Change Password</h2>
 
-              <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
-              <input type="text" name="new_password" placeholder="New Password" class="input"><br>
-              <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
-              <input type="submit" value="Change Passoword" class="btn"><br><br>
-            
-        </form>
+            <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
+            <input type="text" name="new_password" placeholder="New Password" class="input"><br>
+            <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
+            <input type="submit" value="Change Passoword" class="btn"><br><br>
+          </form>
+        </div>
 
+        <div style="float:right">
+          <h2>Manual upload to database</h2>
+          <input type="submit" value="manual save1" class="btn"><br>
+          <button type="submit" class="btn">Manual Save2</button>
         </div>
         
       </div>
