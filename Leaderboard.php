@@ -4,16 +4,19 @@ session_start();
 	include("connection.php");
 	include("functions.php");
 
+
   $sql = "SELECT stats.user_id, stats.day, stats.data, stats.upg, users.user_name 
             FROM stats 
             INNER JOIN users ON stats.user_id = users.user_id 
-            WHERE stats.upg = '1,1,1,1,1,1,1,1,1,1,1,1' ORDER BY day DESC";
+            ORDER BY day ASC";
   $result = mysqli_query($con, $sql);
+
   $ldboard = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   mysqli_free_result($result);
 
   mysqli_close($con);
+  
 ?>
 
 
@@ -33,7 +36,7 @@ session_start();
   }
 
   .card-title{
-    font:bold 50px "Courier";
+    font:bold 50px "Arial";
     text-align:center;
     color:white;
     border:6px solid #ffffff;
@@ -120,18 +123,19 @@ session_start();
           <th>Ranking</th>
           <th>Player</th>
           <th>Days</th>
-        </tr>
+          </tr>
 
         <?php 
         $x = 1;
-        foreach($ldboard as $player){?>
+        foreach($ldboard as $player){
+          $i = unserialize($player['upg']);
+          $y = substr($i, 44, 1);
+          if ($y == '1'){?>
           <tr>
           <td><?php echo $x;?></td>
           <td><?php echo htmlspecialchars($player['user_name']); ?></td>
           <td><?php echo htmlspecialchars($player['day']); ?></td>
-        <?php
-         $x++;}
-         ?>
+          <?php $x++;}}?>
     </table>
     </div>
   </div>
