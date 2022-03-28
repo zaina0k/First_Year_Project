@@ -3,8 +3,6 @@ session_start();
 
     include("connection.php");
     include("functions.php");
-    $counter = 0;
-    $counter = $counter +1;
     $user_data = check_login($con);
 
     $date = $user_data['date' ];
@@ -18,12 +16,52 @@ session_start();
         $stats_data = mysqli_fetch_assoc($result);
 
     }
-    if ($counter >1){
-    echo "hello";
-    function change_password(){
+    
+    if(isset($_POST['p_change_btn'])){
+      // something was posted from the change password form
+      //getting all of the data needed
+      $id = $_SESSION['user_id'];
+      $user_name = $user_data['user_name' ];
+      $password = $user_data['password' ];
+      $old_password = $_POST['old_password'];
+      $new_password = $_POST['new_password'];
+      $new_password2 = $_POST['new_password2'];
       
+      //iff all of the fields contain something
+      if (!empty($old_password) && !empty($new_password) && !empty($new_password2)){
+        $query = "select * from users where user_name = '$user_name' limit 1";
+        $result = mysqli_query($con, $query);
+
+        if($result)
+        {
+            if($result && mysqli_num_rows($result) > 0)
+            {
+                $user_data = mysqli_fetch_assoc($result);
+                if(password_verify( $old_password, $user_data['password']))//if the old passwords are the same
+                {
+                    //if the new passwords are the same
+                    if($new_password == $new_password2){
+                      $new_hash_password = password_hash($new_password, PASSWORD_DEFAULT);//hash the new password
+                      // $sql = "UPDATE users SET password=$new_hash_password WHERE user_name=$user_name";//update query
+                      $sql = "UPDATE users SET user_name='zain' WHERE user_name='user_name'";
+
+                      if (mysqli_query($con, $sql)) {
+                        echo "Record updated successfully";
+                      } else {
+                        echo "Error updating record: " . mysqli_error($con);
+                      }
+                      die;
+                    }
+                    die;
+                }else{
+                  
+                }
+            }
+
+        }
+      }
     }
-  }
+mysqli_close($con); 
 ?>  
 
 
@@ -76,28 +114,31 @@ session_start();
         <div> <br>
 
         <div class="container_form container--change-password" style="float:left">
+
           <form method="post" class="form" id="passwordform1">
             <h2 class="form_title">Change Password</h2>
 
             <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
             <input type="text" name="new_password" placeholder="New Password" class="input"><br>
             <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
-            <input type="submit" value="Change Passoword" class="btn"><br><br>
+            <input type="submit" value="Change Passoword" class="btn" name="p_change_btn"><br><br>
           </form>
         </div>
 
         <div style="float:right">
           <h2>Manual upload to database</h2>
-          <input type="submit" value="manual save1" class="btn"><br>
-          <button type="submit" class="btn">Manual Save2</button>
+          <input type="submit" value="MANUAL SAVE" class="btn"><br>
         </div>
+
         
       </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="settings.js"></script>
-
+  <footer>
+            <h2>theres nothing here yet</h2>
+  </footer>
 </body>
 
 </html>
