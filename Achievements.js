@@ -17,6 +17,16 @@ function changeImage2(){
 }
 function changeImage3(){
   var image3 = document.getElementById('achievement3');
+  upgrades_array = localStorage.getItem("upgrades_array");
+  upgrades_array = JSON.parse(upgrades_array);
+  console.log(upgrades_array[0]);
+  console.log(image3.src);
+  if (upgrades_array[0] == 1){
+    alert("You have the achievement!");
+  }
+  else{
+    alert("You don't have this achievement");
+  }
   if (image3.src.match("new_img3")) {
     image3.src = "images/img3.png";
   } else {
