@@ -156,7 +156,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 
-
+<div class="panel">
+<!--  -->
+  <h2>To my Love XXXXXXX</h2>
+  <h1>Happy Valentine's Day</h1>
+  <h2>I Love You With All My Heart! Hello <?php echo $user_data['user_name' ]; ?></h2><br><br>
+  <h2>DAY <?php echo $stats_data['day']?> </h2>
+  <h2>populations <?php  echo unserialize($stats_data['population'])?> </h2>
+  <h2>upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
+  <h2>data  <?php echo $stats_data['data']?> </h2>
+  <h2>click  <?php echo $stats_data['click']?> </h2>
+  <h2>auto data  <?php echo $stats_data['Auto_data']?> </h2>
+  <h2>auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
+  <h2> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
+  <h2>anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
+  <h2>anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
+  <h2>UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
+  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
+</div>
 
 
 
