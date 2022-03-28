@@ -1,9 +1,11 @@
 <?php
+$counter = 0;
 session_start();
 
     include("connection.php");
     include("functions.php");
     $user_data = check_login($con);
+    
 
     $date = $user_data['date' ];
     $id = $_SESSION['user_id'];
@@ -18,6 +20,8 @@ session_start();
     }
     
     if(isset($_POST['p_change_btn'])){
+      $counter = $counter + 1;
+      echo $counter;
       // something was posted from the change password form
       //getting all of the data needed
       $id = $_SESSION['user_id'];
@@ -47,20 +51,46 @@ session_start();
 
                       if (mysqli_query($con, $sql)) {
                         echo "Record updated successfully";
+                        
                       } else {
                         echo "Error updating record: " . mysqli_error($con);
                       }
-                      die;
+                      
+                    }else{
+                      echo'new passwords do not match';
+                      echo'  <footer>
+                      <h2>new passwords do not match</h2>
+            </footer>';
                     }
-                    die;
+                    
                 }else{
+                  echo 'old passwords do not match';
+                  echo'  <footer>
+                          <h2>old passwords do not match</h2>
+                        </footer>';
+                  //old passwords dont match
                   
                 }
+            }else{
+              echo 'no data in user';
+              //no data in user
+              
             }
 
+        }else{
+          echo 'user doesnt exist';
+          //user doesnt exist
+          
         }
+      }else{
+        echo'not all inputs in boxes';
+        //not all inputs in boxes
+        
       }
+    
     }
+
+
 mysqli_close($con); 
 ?>  
 
@@ -109,7 +139,7 @@ mysqli_close($con);
       <div class = "card-body">
         <h5 class="card-title">SETTINGS</h5>
         <div style="float:centre">
-            <!-- <h2 id="testing">Hello, <?php echo $user_data['user_name' ]; ?></h2><br> -->
+            <h2 id="testing">Hello, <?php echo $user_data['user_name' ]; ?></h2><br>
       
         <div> <br>
 
@@ -121,7 +151,7 @@ mysqli_close($con);
             <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
             <input type="text" name="new_password" placeholder="New Password" class="input"><br>
             <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
-            <input type="submit" value="Change Passoword" class="btn" name="p_change_btn"><br><br>
+            <input type="submit" value="Update Password" class="btn" name="p_change_btn"><br><br>
           </form>
         </div>
 
@@ -136,9 +166,9 @@ mysqli_close($con);
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="settings.js"></script>
-  <footer>
+  <!-- <footer>
             <h2>theres nothing here yet</h2>
-  </footer>
+  </footer> -->
 </body>
 
 </html>
