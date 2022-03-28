@@ -43,7 +43,7 @@ session_start();
                     if($new_password == $new_password2){
                       $new_hash_password = password_hash($new_password, PASSWORD_DEFAULT);//hash the new password
                       // $sql = "UPDATE users SET password=$new_hash_password WHERE user_name=$user_name";//update query
-                      $sql = "UPDATE users SET user_name='zain' WHERE user_name='user_name'";
+                      $sql = "UPDATE users SET password='$new_hash_password' WHERE user_name='$user_name'";
 
                       if (mysqli_query($con, $sql)) {
                         echo "Record updated successfully";
