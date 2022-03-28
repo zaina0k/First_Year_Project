@@ -59,6 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $click = $_POST['click'];
     $auto_data = $_POST['auto_data'];
     $auto_infection = $_POST['auto_infection'];
+    $pop_max = serialize($_POST['pop_max']);
+    $anti_virus = $_POST['anti_virus'];
+    $anti_virus_ticks = $_POST['anit_virus_ticks'];
+    $unlocked_regions = serialize($_POST['unlocked_regions']);
+
+
+
 
 
 
@@ -69,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 
-    $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' where user_id = '$id' ";
+    $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
     mysqli_query($con, $query);
     echo("Error description: " . mysqli_error($con));
 }
@@ -171,7 +178,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
   AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
   INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
-  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="click" placeholder="username" class="input"><br>
+  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
+  ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
+  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
+  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
+
   <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
   </div>
   <input type="submit" value="SEND TO DATABASE"><br><br>
