@@ -522,7 +522,7 @@ function upgrade(num){
       data -= (2**40);
       upgrades_array[11] = 1;
       auto_infection += 100000;
-      loadSvg();
+      document.getElementById("upgrade12").style.fill = "#cc3300";
       return false;
     }
     else if (data < (2**40) && upgrades_array[11] == 0) {
@@ -582,7 +582,7 @@ function upgrade(num){
     if (is_population_hit_max == [1,1,1,1,1,1,1,1,1,1,1] && data >= 100*(2**40) && upgrades_array[15] == 0){
       data -= 100*(2**40);
       upgrades_array[15] = 1;
-      loadSvg();
+      document.getElementById("upgrade19").style.fill = "#cc3300";
       return false;
     }
     else if (data < 100*(2**40) && upgrades_array[15] == 0) {
@@ -628,7 +628,7 @@ function upgrade(num){
       for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
       data += total; //adds current total population to data, one time use (use wisely)
       upgrades_array[18] = 1;
-      loadSvg();
+      document.getElementById("upgrade19").style.fill = "#cc3300";
       return false;
     }
     else {
@@ -686,7 +686,7 @@ function upgrade(num){
       data -= 75*(2**30);
       upgrades_array[22] = 1;
       anti_virus -= 25;
-      loadSvg();
+      document.getElementById("upgrade23").style.fill = "#cc3300";
       return false;
     }
     else if (data < 75*(2**30) && upgrades_array[22] == 0) {
@@ -1001,12 +1001,8 @@ function makeDraggable(evt){
 }
 
 function loadSvg(){
-  if (document.getElementById("lethality").style.display!="none" || document.getElementById("anti-anti-virus").style.display!="none") {
-    document.getElementById("lethality").style.display="none";
-    document.getElementById("anti-anti-virus").style.display="none";
-  }
   for (var i = 0; i < upgrades_array.length; i++) {
-    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12){
+    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12 && i != 17){
       document.getElementById("upgrade"+ (i + 2) +"-lock").style.display="none";
       document.getElementById("upgrade"+ (i + 2)).setAttribute("onclick", "upgrade("+ (i + 2) +")");
       document.getElementById("upgrade"+ (i + 2)).setAttribute("class", "upgrade");

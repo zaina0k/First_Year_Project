@@ -1,3 +1,113 @@
+<?php // This is used to send data to the database
+
+session_start();
+
+    include("connection.php");
+    include("functions.php");
+
+    $user_data = check_login($con);
+
+    $date = $user_data['date' ];
+    $id = $_SESSION['user_id'];
+    $query = "select * from stats where user_id ='$id' limit 1";
+            
+    $result = mysqli_query($con, $query);
+    if($result && mysqli_num_rows($result) > 0)
+    {
+
+        $stats_data = mysqli_fetch_assoc($result);
+
+    }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+
+  // Only have three variable for testing
+
+
+    $upg = $_POST['upg'];
+
+    $pop = $_POST['population'];
+
+    echo $pop;
+   
+
+
+    $db_upg=$stats_data['upg'];
+    $idtest = $stats_data['day'];
+  
+    $un_upg = unserialize($db_upg);
+    echo $un_upg;
+    echo "<br>";
+
+
+    
+
+    echo ("this is  value of the upgardes as stored in the database");
+
+    echo $db_upg;
+
+    $upgrades_array = serialize($_POST['upg']);
+    $population_array = serialize($_POST['population']);
+
+    echo $population_array;
+  
+    $day = $_POST['day']; 
+    $infect_rate = $_POST['infect_rate'];
+    $data = $_POST['data'];
+    $click = $_POST['click'];
+    $auto_data = $_POST['auto_data'];
+    $auto_infection = $_POST['auto_infection'];
+    $pop_max = serialize($_POST['pop_max']);
+    $anti_virus = $_POST['anti_virus'];
+    $anti_virus_ticks = $_POST['anit_virus_ticks'];
+    $unlocked_regions = serialize($_POST['unlocked_regions']);
+
+
+
+
+
+
+
+
+    echo $infect_rate;
+
+
+
+
+    $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
+    mysqli_query($con, $query);
+    echo("Error description: " . mysqli_error($con));
+}
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -43,7 +153,72 @@
   </script>
 </head>
 
+
+
+
+<div class="panel">
+<!--  -->
+  <h2>To my Love XXXXXXX</h2>
+  <h1>Happy Valentine's Day</h1>
+  <h2>I Love You With All My Heart! Hello <?php echo $user_data['user_name' ]; ?></h2><br><br>
+  <h2>DAY <?php echo $stats_data['day']?> </h2>
+  <h2>populations <?php  echo unserialize($stats_data['population'])?> </h2>
+  <h2>upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
+  <h2>data  <?php echo $stats_data['data']?> </h2>
+  <h2>click  <?php echo $stats_data['click']?> </h2>
+  <h2>auto data  <?php echo $stats_data['Auto_data']?> </h2>
+  <h2>auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
+  <h2> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
+  <h2>anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
+  <h2>anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
+  <h2>UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
+  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
+</div>
+
+
+
 <body onload="setCard()">
+
+
+
+
+<!-- form used to displayed data waiting to be sent to the database -->
+
+<div aria-readonly="$_POST"> <!-- readonly input unchangeable, can be set to invisible later -->
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
+  POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
+  UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
+  DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
+  CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
+  AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
+  AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
+  INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
+  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
+  ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
+  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
+  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
+
+  <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
+  </div>
+  <input type="submit" value="SEND TO DATABASE"><br><br>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Project IMAP</a>
@@ -166,8 +341,10 @@
               <path class="shade" id="shade18" d="M 300 100 m -50, 0 a 50,50 0 1,0 100,0 a 50,50 0 1,0 -100,0"></path>
               <path class="lock" id="upgrade18-lock" d="M 315 122.5 C 305 122.5 295 122.5 285 122.5 C 285 120.5 285 116.184 285 113.3 C 285 106.434 285 99.566 285 92.7 C 285 91.5 285.238 89.608 285.6 88.5 C 286.515 85.696 288.439 82.702 290.6 81.1 C 292.213 79.904 294.276 78.926 296.4 78.3 C 300.618 77.057 305.251 78.63 307.8 80.3 C 310.813 82.274 313.184 84.769 314.4 88.5 C 315.456 91.739 315 96.468 315 100.5 C 315 107.966 315 115.434 315 122.5 Z M 288 92.9 C 295.999 92.9 304.001 92.9 312 92.9 C 311.97 90.067 310.791 88.341 309.6 86.7 C 303.536 78.345 288.126 81.544 288 92.9 Z M 298 114.1 C 299.333 114.1 300.667 114.1 302 114.1 C 302 111.767 302 109.433 302 107.1 C 302.497 105.925 302.971 106.052 303 103.9 C 302.326 103.207 301.693 102.575 301 101.9 C 300.333 101.9 299.667 101.9 299 101.9 C 298.307 102.574 297.675 103.207 297 103.9 C 297.003 106.048 297.51 105.939 298 107.1 C 298 109.433 298 111.767 298 114.1 Z"/>
 
-              <path class="upgrade" id="upgrade19" onclick="upgrade(19)" d="M 300 700 m -50, 0 a 50,50 0 1,0 100,0 a 50,50 0 1,0 -100,0"></path>
+              <path class="locked" id="upgrade19" d="M 300 700 m -50, 0 a 50,50 0 1,0 100,0 a 50,50 0 1,0 -100,0"></path>
               <image class="upgrade-icon" href="images/upgrade-icons/actual-nft.png" x="262" y="665"/>
+              <path class="shade" id="shade19" d="M 300 700 m -50, 0 a 50,50 0 1,0 100,0 a 50,50 0 1,0 -100,0"></path>
+              <path class="lock" id="upgrade19-lock" d="M 315 722.5 C 305 722.5 295 722.5 285 722.5 C 285 720.5 285 716.184 285 713.3 C 285 706.434 285 699.566 285 692.7 C 285 691.5 285.238 689.608 285.6 688.5 C 286.515 685.696 288.439 682.702 290.6 681.1 C 292.213 679.904 294.276 678.926 296.4 678.3 C 300.618 677.057 305.251 678.63 307.8 680.3 C 310.813 682.274 313.184 684.769 314.4 688.5 C 315.456 691.739 315 696.468 315 700.5 C 315 707.966 315 715.434 315 722.5 Z M 288 692.9 C 295.999 692.9 304.001 692.9 312 692.9 C 311.97 690.067 310.791 688.341 309.6 686.7 C 303.536 678.345 288.126 681.544 288 692.9 Z M 298 714.1 C 299.333 714.1 300.667 714.1 302 714.1 C 302 711.767 302 709.433 302 707.1 C 302.497 705.925 302.971 706.052 303 703.9 C 302.326 703.207 301.693 702.575 301 701.9 C 300.333 701.9 299.667 701.9 299 701.9 C 298.307 702.574 297.675 703.207 297 703.9 C 297.003 706.048 297.51 705.939 298 707.1 C 298 709.433 298 711.767 298 714.1 Z"/>
 
               <image class= "funds" id="funds2" href="images/invalid-funds.png" x="0" y="0"/>
               <image class="purchased" id="purchased2" href="images/already-purchased.png" x="0" y="0"/>
