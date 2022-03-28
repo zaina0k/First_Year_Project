@@ -10,7 +10,7 @@ session_start();
     $date = $user_data['date' ];
     $id = $_SESSION['user_id'];
     $query = "select * from stats where user_id ='$id' limit 1";
-            
+
     $result = mysqli_query($con, $query);
     if($result && mysqli_num_rows($result) > 0)
     {
@@ -20,7 +20,7 @@ session_start();
     }
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
+if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 
   // Only have three variable for testing
@@ -31,18 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $pop = $_POST['population'];
 
     echo $pop;
-   
+
 
 
     $db_upg=$stats_data['upg'];
     $idtest = $stats_data['day'];
-  
+
     $un_upg = unserialize($db_upg);
     echo $un_upg;
     echo "<br>";
 
 
-    
+
 
     echo ("this is  value of the upgardes as stored in the database");
 
@@ -52,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $population_array = serialize($_POST['population']);
 
     echo $population_array;
-  
-    $day = $_POST['day']; 
+
+    $day = $_POST['day'];
     $infect_rate = $_POST['infect_rate'];
     $data = $_POST['data'];
     $click = $_POST['click'];
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $anti_virus = $_POST['anti_virus'];
     $anti_virus_ticks = $_POST['anit_virus_ticks'];
     $unlocked_regions = serialize($_POST['unlocked_regions']);
-
+//values stored in database for current logged in user
 
 
 
@@ -158,20 +158,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <div class="panel">
 <!--  -->
-  <h2>To my Love XXXXXXX</h2>
-  <h1>Happy Valentine's Day</h1>
-  <h2>I Love You With All My Heart! Hello <?php echo $user_data['user_name' ]; ?></h2><br><br>
-  <h2>DAY <?php echo $stats_data['day']?> </h2>
-  <h2>populations <?php  echo unserialize($stats_data['population'])?> </h2>
-  <h2>upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
-  <h2>data  <?php echo $stats_data['data']?> </h2>
-  <h2>click  <?php echo $stats_data['click']?> </h2>
-  <h2>auto data  <?php echo $stats_data['Auto_data']?> </h2>
-  <h2>auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
-  <h2> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
-  <h2>anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
-  <h2>anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
-  <h2>UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
+  <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
+  <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
+  <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
+  <h2 id="db_UPGRADES">upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
+  <h2 id="db_DATA">data  <?php echo $stats_data['data']?> </h2>
+  <h2 id="db_CLICK">click  <?php echo $stats_data['click']?> </h2>
+  <h2 id="db_AUTO_DATA">auto data  <?php echo $stats_data['Auto_data']?> </h2>
+  <h2 id="db_AUTO_INFECTION">auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
+  <h2 id="db_POP_MAX"> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
+  <h2 id="db_ANTI_VIRUS">anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
+  <h2 id="db_ANTI_VIRUS_TICKS_LEFT" id="db_DAY">anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
+  <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
   <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
 </div>
 
@@ -204,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   </div>
   <input type="submit" value="SEND TO DATABASE"><br><br>
 </form>
-
+<input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()">
 
 
 
@@ -542,18 +540,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-<div>
-  DAY<input id="DAY" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  UPGRADES_ARRAY<input id="UPGRADES_ARRAY" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  DATA<input id="DATA" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  CLICK<input id="CLICK" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  AUTO_DATA<input id="AUTO_DATA" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  AUTO_INFECTION<input id="AUTO_INFECTION" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  IS_POPULATION_HIT_MAX<input id="IS_POPULATION_HIT_MAX" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  ANTI_VIRUS<input id="ANTI_VIRUS" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" disabled type="text" name="new_user_name" placeholder="0" class="input"><br>
-  <input type="submit" value="SEND TO DATABASE" class="btn"><br><br>
-</div>
 </html>
