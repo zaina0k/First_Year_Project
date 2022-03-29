@@ -1,10 +1,11 @@
 <?php
+$counter = 0;
 session_start();
 
     include("connection.php");
     include("functions.php");
-
     $user_data = check_login($con);
+    
 
     $date = $user_data['date' ];
     $id = $_SESSION['user_id'];
@@ -17,6 +18,80 @@ session_start();
         $stats_data = mysqli_fetch_assoc($result);
 
     }
+    
+    if(isset($_POST['p_change_btn'])){
+      $counter = $counter + 1;
+      echo $counter;
+      // something was posted from the change password form
+      //getting all of the data needed
+      $id = $_SESSION['user_id'];
+      $user_name = $user_data['user_name' ];
+      $password = $user_data['password' ];
+      $old_password = $_POST['old_password'];
+      $new_password = $_POST['new_password'];
+      $new_password2 = $_POST['new_password2'];
+      
+      //iff all of the fields contain something
+      if (!empty($old_password) && !empty($new_password) && !empty($new_password2)){
+        $query = "select * from users where user_name = '$user_name' limit 1";
+        $result = mysqli_query($con, $query);
+
+        if($result)
+        {
+            if($result && mysqli_num_rows($result) > 0)
+            {
+                $user_data = mysqli_fetch_assoc($result);
+                if(password_verify( $old_password, $user_data['password']))//if the old passwords are the same
+                {
+                    //if the new passwords are the same
+                    if($new_password == $new_password2){
+                      $new_hash_password = password_hash($new_password, PASSWORD_DEFAULT);//hash the new password
+                      // $sql = "UPDATE users SET password=$new_hash_password WHERE user_name=$user_name";//update query
+                      $sql = "UPDATE users SET password='$new_hash_password' WHERE user_name='$user_name'";
+
+                      if (mysqli_query($con, $sql)) {
+                        echo "Record updated successfully";
+                        
+                      } else {
+                        echo "Error updating record: " . mysqli_error($con);
+                      }
+                      
+                    }else{
+                      echo'new passwords do not match';
+                      echo'  <footer>
+                      <h2>new passwords do not match</h2>
+            </footer>';
+                    }
+                    
+                }else{
+                  echo 'old passwords do not match';
+                  echo'  <footer>
+                          <h2>old passwords do not match</h2>
+                        </footer>';
+                  //old passwords dont match
+                  
+                }
+            }else{
+              echo 'no data in user';
+              //no data in user
+              
+            }
+
+        }else{
+          echo 'user doesnt exist';
+          //user doesnt exist
+          
+        }
+      }else{
+        echo'not all inputs in boxes';
+        //not all inputs in boxes
+        
+      }
+    
+    }
+
+
+mysqli_close($con); 
 ?>  
 
 
@@ -27,6 +102,7 @@ session_start();
   <meta charset="utf-8">
   <title>Project IMAP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="Settings.css">
 </head>
 
 <body>
@@ -62,13 +138,37 @@ session_start();
     <div class="card text-center" style="width: 92em; height: 40em;">
       <div class = "card-body">
         <h5 class="card-title">SETTINGS</h5>
-        <p>Hello <?php echo $user_data['user_name' ]; ?></p>
+        <div style="float:centre">
+            <h2 id="testing">Hello, <?php echo $user_data['user_name' ]; ?></h2><br>
+      
+        <div> <br>
+
+        <div class="container_form container--change-password" style="float:left">
+
+          <form method="post" class="form" id="passwordform1">
+            <h2 class="form_title">Change Password</h2>
+
+            <input type="text" name="old_password" placeholder="Old Password" class="input" required><br><!--do you not need to use id here for the input tags? -->
+            <input type="text" name="new_password" placeholder="New Password" class="input" required><br>
+            <input type="text" name="new_password2" placeholder="Confirm Password" class="input" required><br>
+            <input type="submit" value="Update Password" class="btn" name="p_change_btn"><br><br>
+          </form>
+        </div>
+
+        <div style="float:right">
+          <h2>Manual upload to database</h2>
+          <input type="submit" value="MANUAL SAVE" class="btn"><br>
+        </div>
+
+        
       </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
+  <script src="settings.js"></script>
+  <!-- <footer>
+            <h2>theres nothing here yet</h2>
+  </footer> -->
 </body>
 
 </html>
