@@ -218,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           </div>
 
           <li class="nav-item">
-            <a class="nav-link"  href="Map.html">Map</a>
+            <a class="nav-link"  href="Map1.php">Map</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Achievements.html">Achievements</a>
