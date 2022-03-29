@@ -2,24 +2,6 @@
 
 session_start();
 
-include("connection.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-
-  // Only have three variable for testing
-
-    $day = $_POST['day'];
-    $infect_rate = $_POST['infect_rate'];
-    $data = $_POST['data'];
-
-    $query = "insert into data (day, infect_rate, data) values('$day', '$infect_rate', '$data')";
-    mysqli_query($con, $query);
-
-}
-
-
-
     include("connection.php");
     include("functions.php");
 
@@ -28,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $date = $user_data['date' ];
     $id = $_SESSION['user_id'];
     $query = "select * from stats where user_id ='$id' limit 1";
-
+            
     $result = mysqli_query($con, $query);
     if($result && mysqli_num_rows($result) > 0)
     {
@@ -38,6 +20,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+
+  // Only have three variable for testing
+
+
+    $upg = $_POST['upg'];
+
+    $pop = $_POST['population'];
+   
+
+
+    echo ("//////");
+    echo "<br>";
+    $db_upg=$stats_data['upg'];
+    $idtest = $stats_data['day'];
+    echo ("this is the day ");
+    echo $idtest;
+    echo "<br>";
+    echo ("this is the unseriallsied data from the database this should be the updated arrays when the user log ins ");
+    $un_upg = unserialize($db_upg);
+    echo $un_upg;
+    echo "<br>";
+
+
+    
+
+    echo ("this is  value of the upgardes as stored in the database");
+
+    echo $db_upg;
+
+    $upgrades_array = serialize($_POST['upg']);
+    $population_array = serialize($_POST['population']);
+
+  
+    $day = $_POST['day']; 
+    $infect_rate = $_POST['infect_rate'];
+    $data = $_POST['data'];
+    $click = $_POST['click'];
+    $auto_data = $_POST['auto_data'];
+    $auto_infection = $_POST['auto_infection'];
+
+
+
+
+
+    echo $infect_rate;
+
+
+
+
+    $query = "update stats set day='$day' , infect_chance= '$infect_rate', data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' where user_id = '$id' ";
+    mysqli_query($con, $query);
+}
 
 
 ?>
@@ -61,12 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
-      POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="new_user_name" placeholder="username" class="input"><br>
-      UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="new_user_name" placeholder="username" class="input"><br>
+      POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
+      UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
       DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
-      CLICK<input id="CLICK" type="text" name="new_user_name" placeholder="username" class="input"><br>
-      AUTO_DATA<input id="AUTO_DATA"  type="text" name="new_user_name" placeholder="username" class="input"><br>
-      AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="new_user_name" placeholder="username" class="input"><br>
+      CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
+      AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
+      AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
       INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
       </div>
       <input type="submit" value="SEND TO DATABASE"><br><br>
@@ -102,13 +138,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             <a class="nav-link" href="Achievements.html">Achievements</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Leaderboard.php">Leaderboard</a>
+            <a class="nav-link" href="Leaderboard.html">Leaderboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Profile.html">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Settings.php">Settings</a>
+            <a class="nav-link" href="Settings.html">Settings</a>
           </li>
 
         </ul>
@@ -185,8 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <!-- <h5 class="card-title">STATS</h5> -->
-        <h5 class="card-title"><?php echo $user_data['user_name' ]; ?></h5>
+        <h5 class="card-title">STATS <?php echo $un_upg?> </h5>
         <button onclick="current_stats(0)">SCOTLAND</button>
         <button onclick="current_stats(1)">ENGLAND</button>
         <button onclick="current_stats(2)">WALES</button>

@@ -21,6 +21,43 @@ var anti_virus_ticks_left = 400; //treat this as the "maximum" of AV effectivene
 
 var region_prices = ["0","10 KB","50 KB","250 KB","500 KB","1 MB","25 MB","100 MB","500 MB","10 GB","100 GB"];
 
+function load_from_database(){
+  day = parseInt(document.getElementById("db_DAY").innerHTML.slice(4));
+
+  var i = document.getElementById("db_POPULATIONS").innerHTML.slice(12);
+  i = i.slice(0,-1); //there is a space after the string, remove it
+  i = "["+i+"]"; //turns it into JSON.stringify format
+  i = JSON.parse(i); //turn into an array from string
+  populations_array = i;
+
+  var i = document.getElementById("db_UPGRADES").innerHTML.slice(15);
+  i = i.slice(0,-1);
+  i = "["+i+"]";
+  i = JSON.parse(i);
+  upgrades_array = i;
+
+  data = parseInt(document.getElementById("db_DATA").innerHTML.slice(5));
+  click = parseInt(document.getElementById("db_CLICK").innerHTML.slice(6));
+  auto_data = parseFloat(document.getElementById("db_AUTO_DATA").innerHTML.slice(11));
+  auto_infection = parseFloat(document.getElementById("db_AUTO_INFECTION").innerHTML.slice(16));
+
+  var i = document.getElementById("db_POP_MAX").innerHTML.slice(11);
+  i = i.slice(0,-1);
+  i = "["+i+"]";
+  i = JSON.parse(i);
+  is_population_hit_max = i;
+
+  anti_virus = parseFloat(document.getElementById("db_ANTI_VIRUS").innerHTML.slice(12));
+  anti_virus_ticks_left = parseInt(document.getElementById("db_ANTI_VIRUS_TICKS_LEFT").innerHTML.slice(23));
+
+  var i = document.getElementById("db_UNLOCKED_REGIONS").innerHTML.slice(18);
+  i = "["+i+"]";
+  i = JSON.parse(i);
+  unlocked_regions = i;
+  save();
+  load();
+}
+
 function purchase_region(x){
   var styleEl = document.createElement("style");
   document.head.appendChild(styleEl);
@@ -125,32 +162,6 @@ function check_win(){
        document.write("<br><button style='font-size:25px' onclick='reset()'>RESET</button>")
 
      }
-}
-
-function changeImage1(){
-  var image1 = document.getElementById('achievement1');
-  if (image1.src.match("new_img1")) {
-    image1.src = "images/img1.png";
-  } else {
-    image1.src = "images/new_img1.png";
-  }
-
-}
-function changeImage2(){
-  var image2 = document.getElementById('achievement2');
-  if (image2.src.match("new_img2")) {
-    image2.src = "images/img2.png";
-  } else {
-    image2.src = "images/new_img2.png";
-  }
-}
-function changeImage3(){
-  var image3 = document.getElementById('achievement3');
-  if (image3.src.match("new_img3")) {
-    image3.src = "images/img3.png";
-  } else {
-    image3.src = "images/new_img3.png";
-  }
 }
 
 function change_theme(theme){

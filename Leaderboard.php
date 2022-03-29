@@ -4,16 +4,19 @@ session_start();
 	include("connection.php");
 	include("functions.php");
 
-  $sql = "SELECT stats.user_id, stats.day, stats.data, stats.upg, users.user_name 
+
+  $sql = "SELECT stats.user_id, stats.day, stats.data, stats.upg, users.user_name
             FROM stats 
             INNER JOIN users ON stats.user_id = users.user_id 
-            WHERE stats.upg = '1,1,1,1,1,1,1,1,1,1,1,1' ORDER BY day DESC";
+            ORDER BY day ASC";
   $result = mysqli_query($con, $sql);
+
   $ldboard = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   mysqli_free_result($result);
 
   mysqli_close($con);
+  
 ?>
 
 
@@ -33,10 +36,9 @@ session_start();
   }
 
   .card-title{
-    font:bold 50px "Courier";
+    font:50px "Helvetica";
     text-align:center;
     color:white;
-    border:6px solid #ffffff;
     text-shadow: -3px 3px 0 #000,
     3px 3px 0 #000,
     3px -3px 0 #000,
@@ -45,7 +47,7 @@ session_start();
   }
 
   #players {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Helvetica";
     border-collapse: collapse;
     width: 50%;
     margin-left: auto;
@@ -53,27 +55,45 @@ session_start();
   }
 
   #players td, #players th {
-    border:1px solid #ddd;
     padding:8px;
-    text-align:right;
-
+    text-align:center;
   }
 
   #players th {
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: #1a368a;
-    color: white;
+    background-color: #212429;
+    color: #9FA0A5;
+    border:1px solid grey;
   }
 
-  #players td {
-    background-color: #ffffff;
+  #players td{
+    border:2px solid black;
+  }
+
+  #players tr:nth-child(even){
+    background-color: #79e36d;
     opacity:0.95;
   }
 
+  #players tr:nth-child(2n+3){
+    background-color: #fffeff;
+    opacity:0.95;
+  }
+  
+  #sentence{
+    background-image: linear-gradient(45deg, green, black);
+    color: white;
+    text-shadow: 2px 2px grey;
+  }
+
+  
   footer{
     width:100%;
     height:100%;;
+    padding:70px;
+    background-color:#121011;
+    user-select: none;
   }
 
   body{
@@ -113,30 +133,35 @@ session_start();
   <div class="card-columns" style="display: inline-block; float: left;width:100%; height:100%;">
     <div class="card_text-center">
       <div class = "card-body">
-        <h5 class="card-title">Global Leaderboard</h5>
+        <h5 class="card-title">IMAP Leaderboard</h5>
       </div>
       <table id="players">
         <tr>
           <th>Ranking</th>
           <th>Player</th>
           <th>Days</th>
-        </tr>
+          </tr>
 
         <?php 
         $x = 1;
-        foreach($ldboard as $player){?>
+        foreach($ldboard as $player){
+          $i = unserialize($player['upg']);
+          $y = substr($i, 30, 1);
+          if ($y == '1'){?>
           <tr>
           <td><?php echo $x;?></td>
-          <td><?php echo htmlspecialchars($player['user_name']); ?></td>
+          <td><?php echo htmlspecialchars(strtoupper($player['user_name'])); ?></td>
           <td><?php echo htmlspecialchars($player['day']); ?></td>
-        <?php
-         $x++;}
-         ?>
+          </tr>
+          <?php $x++;}}?>
+          <tr>
+            <td id="sentence" colspan="3">More and More Players are Trying to Terminate the World...</td>
+          </tr>
     </table>
     </div>
   </div>
     <footer>
-      
+      <p>&nbsp;</p>
     </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
