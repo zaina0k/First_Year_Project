@@ -50,40 +50,35 @@ session_start();
                       $sql = "UPDATE users SET password='$new_hash_password' WHERE user_name='$user_name'";
 
                       if (mysqli_query($con, $sql)) {
-                        echo "Record updated successfully";
+                        // echo "Record updated successfully";
+                        echo "";
                         
                       } else {
-                        echo "Error updating record: " . mysqli_error($con);
+                        // echo "Error updating record: " . mysqli_error($con);
                       }
                       
                     }else{
-                      echo'new passwords do not match';
-                      echo'  <footer>
-                      <h2>new passwords do not match</h2>
-            </footer>';
+                      // echo'new passwords do not match';
                     }
                     
                 }else{
-                  echo 'old passwords do not match';
-                  echo'  <footer>
-                          <h2>old passwords do not match</h2>
-                        </footer>';
+                  // echo 'old passwords do not match';
                   //old passwords dont match
                   
                 }
             }else{
-              echo 'no data in user';
+              // echo 'no data in user';
               //no data in user
               
             }
 
         }else{
-          echo 'user doesnt exist';
+          // echo 'user doesnt exist';
           //user doesnt exist
           
         }
       }else{
-        echo'not all inputs in boxes';
+        // echo'not all inputs in boxes';
         //not all inputs in boxes
         
       }
@@ -91,7 +86,7 @@ session_start();
     }
 
 
-mysqli_close($con); 
+// mysqli_close($con); 
 ?>  
 
 

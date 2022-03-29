@@ -119,9 +119,9 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="Leaderboard.php">Leaderboard</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="Profile.html">Profile</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="Settings.php">Settings</a>
           </li>

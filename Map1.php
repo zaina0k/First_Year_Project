@@ -85,29 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -249,9 +226,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           <li class="nav-item">
             <a class="nav-link" href="Leaderboard.php">Leaderboard</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="Profile.html">Profile</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="Settings.php">Settings</a>
           </li>
