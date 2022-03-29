@@ -377,9 +377,13 @@ function update(){ //this function ensures all the text and values are up to dat
 }
 
 function infect(){
-  if (is_population_hit_max[current_region_index] != 1){
+  if (is_population_hit_max[current_region_index] != 1 && (populations_array[current_region_index] + click) < max_populations_array[current_region_index]){
     populations_array[current_region_index] += click;
     data += 1;
+  }
+  else {
+    populations_array[current_region_index] = max_populations_array[current_region_index];
+    // is_population_hit_max[current_region_index] = 1;
   }
 }
 
@@ -616,7 +620,7 @@ function upgrade(num){
     }
   }
   if (num == 16){ //EXODIA
-    if (is_population_hit_max == [1,1,1,1,1,1,1,1,1,1,1] && data >= 100*(2**40) && upgrades_array[15] == 0){
+    if (document.getElementById("Completion_percentage").value == 100 && data >= 100*(2**40) && upgrades_array[15] == 0){
       data -= 100*(2**40);
       upgrades_array[15] = 1;
       document.getElementById("upgrade19").style.fill = "#cc3300";
@@ -649,6 +653,7 @@ function upgrade(num){
       data -= 3*(2**30);
       upgrades_array[17] = 1;
       auto_data += 10000;
+      document.getElementById("upgrade18").style.fill = "#cc3300";
       loadSvg();
       return false;
     }
@@ -770,11 +775,11 @@ function upgrade(num){
 function daily(){
   day += 1;
   //check if a region has reached its max population
-  for (var i = 0; i < regions_array.length; i++){
-    if (populations_array[i] >= max_populations_array[i]){
-      is_population_hit_max[i] = 1;
-    }
-  }
+  // for (var i = 0; i < regions_array.length; i++){
+  //   if (populations_array[i] >= max_populations_array[i]){
+  //     is_population_hit_max[i] = 1;
+  //   }
+  // }
 
   //mine_data
   for (var i = 0; i != (populations_array.length); i++){
@@ -785,9 +790,16 @@ function daily(){
   if (is_population_hit_max != [1,1,1,1,1,1,1,1,1,1,1]){
     while (true){
       var random = Math.floor(Math.random() * (populations_array.length));
-      if (is_population_hit_max[random]==0 && unlocked_regions[random]==1){
-        populations_array[random] += Math.floor(auto_infection-(auto_infection*(0.5*(anti_virus/100))));
-        break;
+      if (is_population_hit_max[random]==0 && unlocked_regions[random]==1) {
+        if ((populations_array[random] + Math.floor(auto_infection-(auto_infection*(0.5*(anti_virus/100))))) < max_populations_array[random]) {
+          populations_array[random] += Math.floor(auto_infection-(auto_infection*(0.5*(anti_virus/100))));
+          break;
+        }
+        else {
+          populations_array[random] = max_populations_array[random];
+          // is_population_hit_max[random] = 1;
+          break;
+        }
       }
   }
 }
@@ -1039,7 +1051,7 @@ function makeDraggable(evt){
 
 function loadSvg(){
   for (var i = 0; i < upgrades_array.length; i++) {
-    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12 && i != 17){
+    if (upgrades_array[i] != 0 && i != 0 && i != 2 && i != 5 && i != 12 && i != 19){
       document.getElementById("upgrade"+ (i + 2) +"-lock").style.display="none";
       document.getElementById("upgrade"+ (i + 2)).setAttribute("onclick", "upgrade("+ (i + 2) +")");
       document.getElementById("upgrade"+ (i + 2)).setAttribute("class", "upgrade");
