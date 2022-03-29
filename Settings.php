@@ -148,9 +148,9 @@ mysqli_close($con);
           <form method="post" class="form" id="passwordform1">
             <h2 class="form_title">Change Password</h2>
 
-            <input type="text" name="old_password" placeholder="Old Password" class="input"><br><!--do you not need to use id here for the input tags? -->
-            <input type="text" name="new_password" placeholder="New Password" class="input"><br>
-            <input type="text" name="new_password2" placeholder="Confirm Password" class="input"><br>
+            <input type="text" name="old_password" placeholder="Old Password" class="input" required><br><!--do you not need to use id here for the input tags? -->
+            <input type="text" name="new_password" placeholder="New Password" class="input" required><br>
+            <input type="text" name="new_password2" placeholder="Confirm Password" class="input" required><br>
             <input type="submit" value="Update Password" class="btn" name="p_change_btn"><br><br>
           </form>
         </div>
