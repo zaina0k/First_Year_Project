@@ -1,4 +1,3 @@
-
 function first_ach(){
   var image1 = document.getElementById('achievement1');
   upgrades_array = localStorage.getItem("upgrades_array");
@@ -150,6 +149,7 @@ function seventh_ach(){
      ach7_img.src = "images/ach7_dis.png";
 }
 }
+
 
 function eight_ach(){
   var ach8_img = document.getElementById('achievement8');
