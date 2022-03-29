@@ -4,12 +4,12 @@ session_start();
 
 include("connection.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
+if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 
   // Only have three variable for testing
-  
-    $day = $_POST['day']; 
+
+    $day = $_POST['day'];
     $infect_rate = $_POST['infect_rate'];
     $data = $_POST['data'];
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $date = $user_data['date' ];
     $id = $_SESSION['user_id'];
     $query = "select * from stats where user_id ='$id' limit 1";
-            
+
     $result = mysqli_query($con, $query);
     if($result && mysqli_num_rows($result) > 0)
     {
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $stats_data = mysqli_fetch_assoc($result);
 
     }
- 
+
 
 
 
