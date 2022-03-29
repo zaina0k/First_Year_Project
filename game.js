@@ -366,9 +366,13 @@ function update(){ //this function ensures all the text and values are up to dat
 }
 
 function infect(){
-  if (is_population_hit_max[current_region_index] != 1){
+  if (is_population_hit_max[current_region_index] != 1 && (populations_array[current_region_index] + click) < max_populations_array[current_region_index]){
     populations_array[current_region_index] += click;
     data += 1;
+  }
+  else {
+    populations_array[current_region_index] = max_populations_array[current_region_index] - 1;
+    is_population_hit_max[current_region_index] = 1;
   }
 }
 
