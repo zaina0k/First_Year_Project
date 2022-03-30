@@ -93,70 +93,6 @@ session_start();
       }
     }
 
-
-// mysqli_close($con); 
-//-----------------------------------------------------------------------------------------------------------------------------------------
-// if ($_SERVER["REQUEST_METHOD"] == "POST")
-// {
-
-//   // Only have three variable for testing
-
-
-//     $upg = $_POST['upg'];
-
-//     $pop = $_POST['population'];
-
-//     echo $pop;
-
-
-
-//     $db_upg=$stats_data['upg'];
-//     $idtest = $stats_data['day'];
-
-//     $un_upg = unserialize($db_upg);
-//     echo $un_upg;
-//     echo "<br>";
-
-
-
-
-//     echo ("this is  value of the upgardes as stored in the database");
-
-//     echo $db_upg;
-
-//     $upgrades_array = serialize($_POST['upg']);
-//     $population_array = serialize($_POST['population']);
-
-//     echo $population_array;
-
-//     $day = $_POST['day'];
-//     $infect_rate = $_POST['infect_rate'];
-//     $data = $_POST['data'];
-//     $click = $_POST['click'];
-//     $auto_data = $_POST['auto_data'];
-//     $auto_infection = $_POST['auto_infection'];
-//     $pop_max = serialize($_POST['pop_max']);
-//     $anti_virus = $_POST['anti_virus'];
-//     $anti_virus_ticks = $_POST['anit_virus_ticks'];
-//     $unlocked_regions = serialize($_POST['unlocked_regions']);
-// //values stored in database for current logged in user
-
-
-
-
-
-
-
-//     echo $infect_rate;
-
-
-
-
-//     $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
-//     mysqli_query($con, $query);
-//     echo("Error description: " . mysqli_error($con));
-// }
-// ----------------------------------------------------------------------------------------------------------------------------------
 ?>  
 
 
@@ -171,11 +107,7 @@ session_start();
 </head>
 
 <body>
-  <script>trying();  </script>
-<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 
-
-<!-- -------------------------------------------------------------------------------------------------------------------------- -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Project IMAP</a>
