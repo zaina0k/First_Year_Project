@@ -54,10 +54,10 @@ function load_from_database(){
   i = "["+i+"]";
   i = JSON.parse(i);
   unlocked_regions = i;
- 
+
   save();
   load();
-  
+
 }
 
 // function refresh(){
@@ -242,7 +242,7 @@ function reset(){
   globalThis.populations_array = [0,0,0,0,0,0,0,0,0,0,0]; //for example, array[0] = population of scotland
   globalThis.is_population_hit_max = [0,0,0,0,0,0,0,0,0,0,0];
   globalThis.current_region_index = 0; //the current region we're looking at. starts off as scotland
-c
+  
   globalThis.day = 0;
   globalThis.data = 0; //in bytes
   globalThis.data_in_units = 0;
