@@ -224,9 +224,8 @@ session_start();
           </form>
         </div>
 
-        <div style="float:right">
+        <!-- <div style="float:right">
           <h2>Manual upload to database</h2>
-          <!-- <input type="submit" value="MANUAL SAVE" class="btn"><br> -->
           <button type="button" class="btn">MANUAL SAVE</button><br><br>
           
           <button id="logout_btn" class="btn" >Logout</button>
@@ -236,8 +235,27 @@ session_start();
                     location.href = "signuplogin.php";
                 };
             </script>
+        </div> -->
+        <div style="float: right;">
+        <div class="offcanvas offcanvas-top" id="demo">
+        <div class="offcanvas-header">
+          <h1 class="offcanvas-title">Are you sure?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+         
         </div>
+        <div class="offcanvas-body">
+          <button class="btn btn-secondary" type="button" onclick="window.location.href = 'logout.php'">Yes</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="offcanvas" >No</button>
+        </div>
+      </div>
 
+      <div class="container-fluid mt-3" style="float: right;">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+          Log out
+        </button>
+      </div>
+      
+      </div>
 
 
       </div>
