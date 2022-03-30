@@ -18,7 +18,7 @@ session_start();
         $stats_data = mysqli_fetch_assoc($result);
 
     }
-    
+    echo "<script>var passing=false; </script>";
     if(isset($_POST['p_change_btn'])){
       $counter = $counter + 1;
       echo $counter;
@@ -51,103 +51,109 @@ session_start();
 
                       if (mysqli_query($con, $sql)) {
                         // echo "Record updated successfully";
-                        echo "";
+                        echo "<script>var tries=0; </script>";
+                        // echo"hello world";
+                        //password has been changed logic does not work
                         
                       } else {
                         // echo "Error updating record: " . mysqli_error($con);
+                        echo "<script>var passing=false; </script>";
                       }
                       
                     }else{
                       // echo'new passwords do not match';
+                      echo "<script>var passing=false; </script>";
                     }
                     
                 }else{
                   // echo 'old passwords do not match';
                   //old passwords dont match
-                  
+                  echo "<script>var passing=false; </script>";
                 }
             }else{
               // echo 'no data in user';
               //no data in user
+              echo "<script>var passing=false; </script>";
               
             }
 
         }else{
           // echo 'user doesnt exist';
           //user doesnt exist
+          echo "<script>var passing=false; </script>";
           
         }
       }else{
         // echo'not all inputs in boxes';
         //not all inputs in boxes
+        echo "<script>var passing=false; </script>";
         
       }
-    
     }
 
 
 // mysqli_close($con); 
 //-----------------------------------------------------------------------------------------------------------------------------------------
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
+// if ($_SERVER["REQUEST_METHOD"] == "POST")
+// {
 
-  // Only have three variable for testing
-
-
-    $upg = $_POST['upg'];
-
-    $pop = $_POST['population'];
-
-    echo $pop;
+//   // Only have three variable for testing
 
 
+//     $upg = $_POST['upg'];
 
-    $db_upg=$stats_data['upg'];
-    $idtest = $stats_data['day'];
+//     $pop = $_POST['population'];
 
-    $un_upg = unserialize($db_upg);
-    echo $un_upg;
-    echo "<br>";
+//     echo $pop;
 
 
 
+//     $db_upg=$stats_data['upg'];
+//     $idtest = $stats_data['day'];
 
-    echo ("this is  value of the upgardes as stored in the database");
-
-    echo $db_upg;
-
-    $upgrades_array = serialize($_POST['upg']);
-    $population_array = serialize($_POST['population']);
-
-    echo $population_array;
-
-    $day = $_POST['day'];
-    $infect_rate = $_POST['infect_rate'];
-    $data = $_POST['data'];
-    $click = $_POST['click'];
-    $auto_data = $_POST['auto_data'];
-    $auto_infection = $_POST['auto_infection'];
-    $pop_max = serialize($_POST['pop_max']);
-    $anti_virus = $_POST['anti_virus'];
-    $anti_virus_ticks = $_POST['anit_virus_ticks'];
-    $unlocked_regions = serialize($_POST['unlocked_regions']);
-//values stored in database for current logged in user
+//     $un_upg = unserialize($db_upg);
+//     echo $un_upg;
+//     echo "<br>";
 
 
+
+
+//     echo ("this is  value of the upgardes as stored in the database");
+
+//     echo $db_upg;
+
+//     $upgrades_array = serialize($_POST['upg']);
+//     $population_array = serialize($_POST['population']);
+
+//     echo $population_array;
+
+//     $day = $_POST['day'];
+//     $infect_rate = $_POST['infect_rate'];
+//     $data = $_POST['data'];
+//     $click = $_POST['click'];
+//     $auto_data = $_POST['auto_data'];
+//     $auto_infection = $_POST['auto_infection'];
+//     $pop_max = serialize($_POST['pop_max']);
+//     $anti_virus = $_POST['anti_virus'];
+//     $anti_virus_ticks = $_POST['anit_virus_ticks'];
+//     $unlocked_regions = serialize($_POST['unlocked_regions']);
+// //values stored in database for current logged in user
 
 
 
 
 
-    echo $infect_rate;
+
+
+//     echo $infect_rate;
 
 
 
 
-    $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
-    mysqli_query($con, $query);
-    echo("Error description: " . mysqli_error($con));
-}
+//     $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
+//     mysqli_query($con, $query);
+//     echo("Error description: " . mysqli_error($con));
+// }
 // ----------------------------------------------------------------------------------------------------------------------------------
 ?>  
 
@@ -163,29 +169,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 
 <body>
+  <script>trying();  </script>
 <!-- -------------------------------------------------------------------------------------------------------------------------- -->
-<div aria-readonly="$_POST"> <!-- readonly input unchangeable, can be set to invisible later -->
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
-  POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
-  UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
-  DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
-  CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
-  AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
-  AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
-  INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
-  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
-  ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
-  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
-  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
-
-  <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
-  </div>
-  <input type="submit" value="SEND TO DATABASE" name="send_data"><br><br>
-</form>
-<input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()" name="load_data">
-
 
 
 <!-- -------------------------------------------------------------------------------------------------------------------------- -->
@@ -231,17 +216,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           <form method="post" class="form" id="passwordform1">
             <h2 class="form_title">Change Password</h2>
 
-            <input type="text" name="old_password" placeholder="Old Password" class="input" required><br><!--do you not need to use id here for the input tags? -->
+            <input type="password" name="old_password" placeholder="Old Password" class="input" required><br><!--do you not need to use id here for the input tags? -->
             <input type="text" name="new_password" placeholder="New Password" class="input" required><br>
             <input type="text" name="new_password2" placeholder="Confirm Password" class="input" required><br>
-            <input type="submit" value="Update Password" class="btn" name="p_change_btn"><br><br>
+            <input type="submit" value="Update Password" class="btn" name="p_change_btn" onclick="trying()"><br>
+            <p id="testing_text"></p><br>
           </form>
         </div>
 
         <div style="float:right">
           <h2>Manual upload to database</h2>
           <!-- <input type="submit" value="MANUAL SAVE" class="btn"><br> -->
-          <button type="button" class="btn">MANUAL SAVE</button>
+          <button type="button" class="btn">MANUAL SAVE</button><br><br>
+          
           <button id="logout_btn" class="btn" >Logout</button>
 
             <script type="text/javascript">
