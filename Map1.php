@@ -232,6 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
               <image class= "funds" id="funds3" href="images/invalid-funds.png" x="0" y="0"/>
               <image class="purchased" id="purchased3" href="images/already-purchased.png" x="0" y="0"/>
+              <image class="notEnoughEffectiveness"id="not_enough_anti_virus3" href="images/anti-virus.png" x="0" y="0"/>
             </svg>
           </div>
         </span>
@@ -284,6 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
               <image class= "funds" id="funds2" href="images/invalid-funds.png" x="0" y="0"/>
               <image class="purchased" id="purchased2" href="images/already-purchased.png" x="0" y="0"/>
+              <image class="notEnoughEffectiveness"id="not_enough_anti_virus2" href="images/anti-virus.png" x="0" y="0"/>
             </svg>
           </div>
         </span>
@@ -367,6 +369,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
               <image class="funds" id="funds1" href="images/invalid-funds.png" x="0" y="0"/>
               <image class="purchased"id="purchased1" href="images/already-purchased.png" x="0" y="0"/>
+              <image class="notEnoughEffectiveness"id="not_enough_anti_virus1" href="images/anti-virus.png" x="0" y="0"/>
             </svg>
           </div>
         </span>

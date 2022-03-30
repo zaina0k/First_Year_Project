@@ -692,6 +692,9 @@ function upgrade(num){
     else if (data < 25*(2**10) && upgrades_array[19] == 0) {
       isTooExpensive = true;
     }
+    else if (anti_virus < 25 && upgrades_array[19] == 0){
+      isTooExpensiveAntiVirus = true;
+    }
     else {
       isPurchased = true;
     }
@@ -706,6 +709,9 @@ function upgrade(num){
     }
     else if (data < 250*(2**10) && upgrades_array[20] == 0) {
       isTooExpensive = true;
+    }
+    else if (anti_virus < 25 && upgrades_array[20] == 0) {
+      isTooExpensiveAntiVirus = true;
     }
     else {
       isPurchased = true;
@@ -722,6 +728,9 @@ function upgrade(num){
     else if (data < 250*(2**20) && upgrades_array[21] == 0) {
       isTooExpensive = true;
     }
+    else if (anti_virus < 25 && upgrades_array[21] == 0) {
+      isTooExpensiveAntiVirus = true;
+    }
     else {
       isPurchased = true;
     }
@@ -737,6 +746,9 @@ function upgrade(num){
     }
     else if (data < 75*(2**30) && upgrades_array[22] == 0) {
       isTooExpensive = true;
+    }
+    else if (anti_virus < 25 && upgrades_array[22] == 0) {
+      isTooExpensiveAntiVirus = true;
     }
     else {
       isPurchased = true;
@@ -773,6 +785,21 @@ function upgrade(num){
     document.getElementById("purchased3").style.display = "block";
 
     setTimeout(purchased, 2000);
+  }
+  else if (isTooExpensiveAntiVirus) {
+    document.getElementById("not_enough_anti_virus1").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("not_enough_anti_virus1").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("not_enough_anti_virus1").style.display = "block";
+
+    document.getElementById("not_enough_anti_virus2").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("not_enough_anti_virus2").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("not_enough_anti_virus2").style.display = "block";
+
+    document.getElementById("not_enough_anti_virus3").setAttribute("y", document.getElementById("svgcard").scrollTop);
+    document.getElementById("not_enough_anti_virus3").setAttribute("x", document.getElementById("svgcard").scrollLeft + 15);
+    document.getElementById("not_enough_anti_virus3").style.display = "block";
+
+    setTimeout(notEnoughEffectiveness, 2000);
   }
 }
 
@@ -1033,6 +1060,10 @@ function makeDraggable(evt){
     document.getElementById("purchased2").style.display = "none";
     document.getElementById("funds3").style.display= "none";
     document.getElementById("purchased3").style.display = "none";
+    document.getElementById("not_enough_anti_virus").style.display = "none";
+    document.getElementById("not_enough_anti_virus2").style.display = "none";
+    document.getElementById("not_enough_anti_virus3").style.display = "none";
+
     svg.style.cursor = "grabbing";
     offset = getMousePosition(evt);
     selectedElement = true;
@@ -1180,4 +1211,9 @@ function purchased(){
   document.getElementById("purchased1").style.display = "none";
   document.getElementById("purchased2").style.display = "none";
   document.getElementById("purchased3").style.display = "none";
+}
+function notEnoughEffectiveness(){
+  document.getElementById("not_enough_anti_virus").style.display = "none";
+  document.getElementById("not_enough_anti_virus2").style.display = "none";
+  document.getElementById("not_enough_anti_virus3").style.display = "none";
 }

@@ -300,6 +300,11 @@ p{
 	pointer-events: none;
 }
 
+.notEnoughEffectiveness {
+	display: none;
+	pointer-events: none;
+}
+
 #Data{
 
 }
