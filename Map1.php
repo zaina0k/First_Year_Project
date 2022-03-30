@@ -354,9 +354,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <button onclick="showUpgrades(0)">infections</button>
-        <button onclick="showUpgrades(1)">lethality</button>
-        <button onclick="showUpgrades(2)">anti-anti-virus</button>
+        <button onclick="showUpgrades(0)">Infections</button>
+        <button onclick="showUpgrades(1)">Lethality</button>
+        <button onclick="showUpgrades(2)">Antivirus Resistance</button>
         <h5 class="card-title">STATS</h5>
         <div id="Data">Data <p>0</p><div>0</div></div>
         <div id="Total_pop">Total Devices <p>0</p></div>
@@ -371,7 +371,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       <div class = "card-body">
         <div id="Day_display">DAY: <p id="Day">0</p></div>
         <div class="map-buttons">
-          <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
+          <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button><br>
           <button class="reset-button" onclick="reset()"> RESET </button><br>
           <!-- <input id="enter_data"><button onclick="set_data(0)">Set Data</button><br>
           <input id="enter_day"><button onclick="set_data(1)">Set Day</button><br>
