@@ -1,0 +1,321 @@
+.upgrade-div {
+	display: inline-block;
+	float: left;
+}
+
+.upgrade-button {
+	width: 110px;
+	height: 110px;
+	margin-top: -7px;
+}
+
+.upgrade-div span {
+  max-width: 0;
+  -webkit-transition: max-width 0.7s;
+  transition: max-width 0.7s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  background-image: url("images/background.png");
+	background-size: 110px;
+	margin-top: -7px;
+	margin-left: -110px;
+	cursor: pointer;
+}
+
+.upgrade-div span div {
+	width: 110px;
+	height: 110px;
+	padding: 5px;
+	overflow-wrap: normal;
+	white-space: normal;
+	font-size: 10px;
+	color: green;
+}
+
+.upgrade-div span div h1 {
+	font-size: 10px;
+}
+
+.card-body {
+	background-color: #909090;
+}
+
+.map-part-scotland {
+	cursor: pointer;
+}
+
+.map-part-scotland:hover{
+	fill: green;
+}
+
+.map-part-north-east {
+	cursor: pointer;
+}
+
+.map-part-north-east:hover{
+	fill: red;
+}
+
+.map-part-north-west {
+	cursor: pointer;
+}
+
+.map-part-north-west:hover{
+	fill: red;
+}
+
+.map-part-yorkshire {
+	cursor: pointer;
+}
+
+.map-part-yorkshire:hover{
+	fill: red;
+}
+
+.map-part-wales {
+	cursor: pointer;
+}
+
+.map-part-wales:hover{
+	fill: red;
+}
+
+.map-part-west-midlands {
+	cursor: pointer;
+}
+
+.map-part-west-midlands:hover{
+	fill: red;
+}
+
+.map-part-east-midlands {
+	cursor: pointer;
+}
+
+.map-part-east-midlands:hover{
+	fill: red;
+}
+
+.map-part-south-east {
+	cursor: pointer;
+}
+
+.map-part-south-east:hover{
+	fill: red;
+}
+
+.map-part-south-west {
+	cursor: pointer;
+}
+
+.map-part-south-west:hover{
+	fill: red;
+}
+
+.map-part-east-of-england {
+	cursor: pointer;
+}
+
+.map-part-east-of-england:hover{
+	fill: red;
+}
+
+.map-part-london {
+	cursor: pointer;
+}
+
+.map-part-london:hover{
+	fill: red;
+}
+
+
+
+.svg-div {
+	position: relative;
+	width: 0;
+	height: 0;
+}
+
+.map-svg {
+	position: absolute;
+}
+
+
+.reset-button {
+	position: relative;
+}
+
+.buttons-section {
+	margin-left: 50px;
+}
+
+.dropdown {
+	position:relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: fixed;
+	background-color: white;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(3, 3, 3, 0.2);
+	border: 1px solid black;
+	border-radius: 3px;
+	z-index: 1;
+	text-align: center;
+  }
+
+  .dropdown:hover .dropdown-content {
+	display: block;
+	min-width: 50px;
+	max-width: 200px;
+  }
+
+p{
+	border: 1px solid;
+	display: inline-block;
+	padding: 5px;
+}
+
+.theme_botton{
+	border: 2px solid rgb(50, 50, 53);
+	-webkit-border-radius:55%;
+    -moz-border-radius:55%;
+    border-radius:55%;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 7px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
+
+.darkmode{
+	width: 50px;
+	height: 50px;
+}
+
+.node{
+	fill: red;
+	pointer-events: none;
+	fill-opacity: 0.3;
+	fill-rule: nonzero;
+}
+
+.upgrade {
+  fill: white;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.locked {
+  fill: white;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.upgrade:hover {
+  cursor: pointer;
+  fill: grey;
+}
+
+.connector {
+  fill: white;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.5;
+}
+
+.lock {
+  fill: black;
+	pointer-events: none;
+}
+
+.buttons-section {
+	margin-left: -15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+.svgupgrades {
+  background-color: grey;
+}
+
+.upgrade-icon {
+	pointer-events: none;
+	width: 75px;
+}
+
+.shade {
+	fill-opacity: 0.3;
+	color: black;
+	pointer-events: none;
+}
+
+.buttons-section {
+	cursor: grab;
+}
+
+#description-base {
+	display: none;
+}
+
+#description-overlay {
+	display: none;
+}
+
+#description-cost {
+	display: none;
+}
+
+#description-image {
+	display: none;
+	width: 75px;
+}
+
+.distort {
+	display: none;
+	width: 1200px;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.funds {
+	display: none;
+	pointer-events: none;
+}
+
+.purchased {
+	display: none;
+	pointer-events: none;
+}
+
+#Data{
+
+}
+
+#Total_pop{
+
+}
+
+#Region{
+
+}
+
+#Infection_chance{
+
+}
+
+#Day_display{
+
+}
