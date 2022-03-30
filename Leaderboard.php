@@ -118,7 +118,7 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link"  href="Map1.php">Map</a>
+            <a class="nav-link"  href="Map.html">Map</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Achievements.html">Achievements</a>
@@ -137,10 +137,9 @@ session_start();
   <div class="card-columns" style="display: inline-block; float: left;width:100%; height:100%;">
     <div class="card_text-center">
       <div class = "card-body">
-        <h5 class="card-title">IMAP Leaderboard</h5>
+        <h5 class="card-title">IMAP Top 10 Leaderboard</h5>
       </div>
       <table id="players">
-        <tr><td id = 'completed' colspan='4'>GOAL ACHIEVED PLAYERS</td></tr>
         <tr>
           <th>Ranking</th>
           <th>Player</th>
@@ -155,7 +154,7 @@ session_start();
             $upgarray = unserialize($player['upg']);
             $poparray = unserialize($player['population']);
             $upgcheck = substr($upgarray, 30, 1);   
-            if ($upgcheck == '0'){?>
+            if ($upgcheck == '1'){?>
             <tr>
             <td><?php echo $x;?></td>
             <td><?php echo htmlspecialchars(strtoupper($player['user_name'])); ?></td>
@@ -170,8 +169,13 @@ session_start();
             <progress id="Completion_percentage" value=<?php echo $sum;?> max="100"></td>
             </tr>
           <?php $x++;}}?>
+          <?php 
+          $y = 11-$x;
+          for($i = 0; $i < $y; $i++){
+            echo '<tr>'.'<td>'.htmlspecialchars($i+$x).'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'<td>'.'</td>'.'</tr>';
+          }?>
           <tr>
-            <td id="sentence" colspan="3">More and More Players are Trying to Terminate the World...</td>
+            <td id="sentence" colspan="4">More and More Players are Trying to Terminate the World...</td>
           </tr>
     </table>
     <br><br><br><br>
