@@ -412,7 +412,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
             <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
             </div>
-            <input type="submit" value="SAVE TO DATABASE"><br><br>
+            <input type="submit" value="SAVE TO DATABASE">
           </form>
           <input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()">
         </div>

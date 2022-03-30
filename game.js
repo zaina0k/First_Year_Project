@@ -564,6 +564,7 @@ function upgrade(num){
       upgrades_array[11] = 1;
       auto_infection += 100000;
       document.getElementById("upgrade12").style.fill = "#cc3300";
+      loadSvg();
       return false;
     }
     else if (data < (2**40) && upgrades_array[11] == 0) {
@@ -624,6 +625,7 @@ function upgrade(num){
       data -= 100*(2**40);
       upgrades_array[15] = 1;
       document.getElementById("upgrade19").style.fill = "#cc3300";
+      loadSvg();
       return false;
     }
     else if (data < 100*(2**40) && upgrades_array[15] == 0) {
@@ -671,6 +673,7 @@ function upgrade(num){
       data += total; //adds current total population to data, one time use (use wisely)
       upgrades_array[18] = 1;
       document.getElementById("upgrade19").style.fill = "#cc3300";
+      loadSvg();
       return false;
     }
     else {
@@ -729,6 +732,7 @@ function upgrade(num){
       upgrades_array[22] = 1;
       anti_virus -= 25;
       document.getElementById("upgrade23").style.fill = "#cc3300";
+      loadSvg();
       return false;
     }
     else if (data < 75*(2**30) && upgrades_array[22] == 0) {
@@ -1102,10 +1106,10 @@ function loadSvg(){
       document.getElementById("shade17").style.display="none";
     }
     else if (upgrades_array[i] != 0 && i == 19) {
-      document.getElementById("upgrade20-lock").style.display="none";
-      document.getElementById("upgrade20").setAttribute("onclick", "upgrade(20)");
-      document.getElementById("upgrade20").setAttribute("class", "upgrade");
-      document.getElementById("shade20").style.display="none";
+      document.getElementById("upgrade22-lock").style.display="none";
+      document.getElementById("upgrade22").setAttribute("onclick", "upgrade(22)");
+      document.getElementById("upgrade22").setAttribute("class", "upgrade");
+      document.getElementById("shade22").style.display="none";
       document.getElementById("upgrade21-lock").style.display="none";
       document.getElementById("upgrade21").setAttribute("onclick", "upgrade(21)");
       document.getElementById("upgrade21").setAttribute("class", "upgrade");
