@@ -29,7 +29,7 @@ session_start();
                     {
                         $_SESSION['user_id'] = $user_data['user_id'];
     
-                        header("Location: Map.php");
+                        header("Location: Map1.php");
                         die;
                     }
                 }
