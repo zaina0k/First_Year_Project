@@ -87,6 +87,68 @@ session_start();
 
 
 // mysqli_close($con); 
+//-----------------------------------------------------------------------------------------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+
+  // Only have three variable for testing
+
+
+    $upg = $_POST['upg'];
+
+    $pop = $_POST['population'];
+
+    echo $pop;
+
+
+
+    $db_upg=$stats_data['upg'];
+    $idtest = $stats_data['day'];
+
+    $un_upg = unserialize($db_upg);
+    echo $un_upg;
+    echo "<br>";
+
+
+
+
+    echo ("this is  value of the upgardes as stored in the database");
+
+    echo $db_upg;
+
+    $upgrades_array = serialize($_POST['upg']);
+    $population_array = serialize($_POST['population']);
+
+    echo $population_array;
+
+    $day = $_POST['day'];
+    $infect_rate = $_POST['infect_rate'];
+    $data = $_POST['data'];
+    $click = $_POST['click'];
+    $auto_data = $_POST['auto_data'];
+    $auto_infection = $_POST['auto_infection'];
+    $pop_max = serialize($_POST['pop_max']);
+    $anti_virus = $_POST['anti_virus'];
+    $anti_virus_ticks = $_POST['anit_virus_ticks'];
+    $unlocked_regions = serialize($_POST['unlocked_regions']);
+//values stored in database for current logged in user
+
+
+
+
+
+
+
+    echo $infect_rate;
+
+
+
+
+    $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
+    mysqli_query($con, $query);
+    echo("Error description: " . mysqli_error($con));
+}
+// ----------------------------------------------------------------------------------------------------------------------------------
 ?>  
 
 
@@ -101,6 +163,32 @@ session_start();
 </head>
 
 <body>
+<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+<div aria-readonly="$_POST"> <!-- readonly input unchangeable, can be set to invisible later -->
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
+  POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
+  UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
+  DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
+  CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
+  AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
+  AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
+  INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
+  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
+  ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
+  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
+  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
+
+  <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
+  </div>
+  <input type="submit" value="SEND TO DATABASE" name="send_data"><br><br>
+</form>
+<input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()" name="load_data">
+
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------- -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Project IMAP</a>
@@ -110,7 +198,7 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link"  href="Map.html">Map</a>
+            <a class="nav-link"  href="Map1.php">Map</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Achievements.html">Achievements</a>
@@ -118,9 +206,9 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="Leaderboard.php">Leaderboard</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="Profile.html">Profile</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="Settings.php">Settings</a>
           </li>
@@ -136,7 +224,7 @@ session_start();
         <div style="float:centre">
             <h2 id="testing">Hello, <?php echo $user_data['user_name' ]; ?></h2><br>
       
-        <div> <br>
+        <div>
 
         <div class="container_form container--change-password" style="float:left">
 
@@ -152,13 +240,24 @@ session_start();
 
         <div style="float:right">
           <h2>Manual upload to database</h2>
-          <input type="submit" value="MANUAL SAVE" class="btn"><br>
+          <!-- <input type="submit" value="MANUAL SAVE" class="btn"><br> -->
+          <button type="button" class="btn">MANUAL SAVE</button>
+          <button id="logout_btn" class="btn" >Logout</button>
+
+            <script type="text/javascript">
+                document.getElementById("logout_btn").onclick = function () {
+                    location.href = "signuplogin.php";
+                };
+            </script>
         </div>
 
-        
+
+
       </div>
     </div>
   </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="settings.js"></script>
   <!-- <footer>
