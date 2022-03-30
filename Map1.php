@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <!-- form used to displayed data waiting to be sent to the database -->
 
-<div aria-readonly="$_POST"> <!-- readonly input unchangeable, can be set to invisible later -->
+<div aria-readonly="$_POST" style="display: none;"> <!-- readonly input unchangeable, can be set to invisible later -->
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
   DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
