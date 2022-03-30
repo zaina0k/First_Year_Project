@@ -9,9 +9,12 @@ function trying(){
         document.getElementById("testing_text").innerHTML = "Incorrect password "+remaining+" tries remaining...";
         if (tries>4){
             window.location.replace("signuplogin.php");
+
         }
+    
     }else{
         document.getElementById("testing_text").innerHTML = "Password has been updated";
+        window.alert("hello world2");
     }
     
 

@@ -6,6 +6,7 @@ function first_ach(){
     image1.src = "images/img1.png";
   } else if(upgrades_array[0] == 1 && image1.src.match("images/img1.png") ){
      alert("You have the achievement!");
+     image1.src = "images/new_img1.png";
   }
     else if(upgrades_array[0] != 1 && image1.src.match("images/img1.png")){
      alert("You don't have this achievement");
