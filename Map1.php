@@ -133,25 +133,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 
 
-
-
-<div>
-  <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
-  <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
-  <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
-  <h2 id="db_UPGRADES">upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
-  <h2 id="db_DATA">data  <?php echo $stats_data['data']?> </h2>
-  <h2 id="db_CLICK">click  <?php echo $stats_data['click']?> </h2>
-  <h2 id="db_AUTO_DATA">auto data  <?php echo $stats_data['Auto_data']?> </h2>
-  <h2 id="db_AUTO_INFECTION">auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
-  <h2 id="db_POP_MAX"> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
-  <h2 id="db_ANTI_VIRUS">anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
-  <h2 id="db_ANTI_VIRUS_TICKS_LEFT" id="db_DAY">anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
-  <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
-  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
-</div>
-
-
 <body onload="setCard()">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -500,4 +481,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+<div>
+  <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
+  <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
+  <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
+  <h2 id="db_UPGRADES">upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
+  <h2 id="db_DATA">data  <?php echo $stats_data['data']?> </h2>
+  <h2 id="db_CLICK">click  <?php echo $stats_data['click']?> </h2>
+  <h2 id="db_AUTO_DATA">auto data  <?php echo $stats_data['Auto_data']?> </h2>
+  <h2 id="db_AUTO_INFECTION">auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
+  <h2 id="db_POP_MAX"> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
+  <h2 id="db_ANTI_VIRUS">anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
+  <h2 id="db_ANTI_VIRUS_TICKS_LEFT" id="db_DAY">anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
+  <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
+  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
+</div>
 </html>
