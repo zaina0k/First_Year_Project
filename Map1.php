@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 
-<div class="panel">
+<div class="panel" style="display: none;">
 <!--  -->
   <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
   <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
@@ -153,45 +153,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 <body onload="setCard()">
-
-
-
-
-<!-- form used to displayed data waiting to be sent to the database -->
-
-<div aria-readonly="$_POST" style="display: none;"> <!-- readonly input unchangeable, can be set to invisible later -->
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
-  POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
-  UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
-  DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
-  CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
-  AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
-  AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
-  INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
-  POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
-  ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
-  ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
-  UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
-
-  <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
-  </div>
-  <input type="submit" value="SEND TO DATABASE"><br><br>
-</form>
-<input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()">
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -432,9 +393,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <div class="map-buttons">
           <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
           <button class="reset-button" onclick="reset()"> RESET </button><br>
-          <input id="enter_data"><button onclick="set_data(0)">Set Data</button><br>
-          <input id="enter_day"><button onclick="set_data(1)">Set Day</button><br>
-          <input id="enter_pop"><button onclick="set_data(2)">Set Population in current region</button>
+          <!-- form used to displayed data waiting to be sent to the database -->
+          <div aria-readonly="$_POST" style="display: none;"> <!-- readonly input unchangeable, can be set to invisible later -->
+
+          <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            DAY<input id="DAY" name="day" placeholder="username" class="input" ><br>
+            POPULATIONS_ARRAY<input id="POPULATIONS_ARRAY" type="text" name="population" placeholder="username" class="input"><br>
+            UPGRADES_ARRAY<input id="UPGRADES_ARRAY" type="text" name="upg" placeholder="username" class="input"><br>
+            DATA<input id="DATA" type="text" name="data" placeholder="username" class="input"><br>
+            CLICK<input id="CLICK" type="text" name="click" placeholder="username" class="input"><br>
+            AUTO_DATA<input id="AUTO_DATA"  type="text" name="auto_data" placeholder="username" class="input"><br>
+            AUTO_INFECTION<input id="AUTO_INFECTION" type="text" name="auto_infection" placeholder="username" class="input"><br>
+            INFECT_CHANCE<input id="INFECT_CHANCE" type="text" name="infect_rate" placeholder="username" class="input"><br>
+            POP_MAX<input id="IS_POPULATION_HIT_MAX" type="text" name="pop_max" placeholder="username" class="input"><br>
+            ANTI_VIRUS<input id="ANTI_VIRUS" type="text" name="anti_virus" placeholder="username" class="input"><br>
+            ANTI_VIRUS_TICKS_LEFT<input id="ANTI_VIRUS_TICKS_LEFT" type="text" name="anit_virus_ticks" placeholder="username" class="input"><br>
+            UNLOCKED_REGIONS<input id="UNLOCKED_REGIONS" type="text" name="unlocked_regions" placeholder="username" class="input"><br>
+
+            <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
+            </div>
+            <input type="submit" value="SAVE TO DATABASE"><br><br>
+          </form>
+          <input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()">
         </div>
         <div class="svg-div">
           <svg class="map-svg" id="svg" width="1270" height="700">
