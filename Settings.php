@@ -18,7 +18,7 @@ session_start();
         $stats_data = mysqli_fetch_assoc($result);
 
     }
-    echo "<script>passing=false; </script>";
+    echo "<script>var passing=false; </script>";
     if(isset($_POST['p_change_btn'])){
       $counter = $counter + 1;
       echo $counter;
@@ -52,43 +52,41 @@ session_start();
                       if (mysqli_query($con, $sql)) {
                         // echo "Record updated successfully";
                         echo "<script>var tries=0; </script>";
-                        echo "<script>passing=true; </script>";
-                        echo '<script>document.getElementById("testing_text").innerHTML = "Password has been updated";</script>';
                         // echo"hello world";
                         //password has been changed logic does not work
                         
                       } else {
                         // echo "Error updating record: " . mysqli_error($con);
-                        echo "<script>passing=false; </script>";
+                        echo "<script>var passing=false; </script>";
                       }
                       
                     }else{
                       // echo'new passwords do not match';
-                      echo "<script>passing=false; </script>";
+                      echo "<script>var passing=false; </script>";
                     }
                     
                 }else{
                   // echo 'old passwords do not match';
                   //old passwords dont match
-                  echo "<script>passing=false; </script>";
+                  echo "<script>var passing=false; </script>";
                 }
             }else{
               // echo 'no data in user';
               //no data in user
-              echo "<script>passing=false; </script>";
+              echo "<script>var passing=false; </script>";
               
             }
 
         }else{
           // echo 'user doesnt exist';
           //user doesnt exist
-          echo "<script>passing=false; </script>";
+          echo "<script>var passing=false; </script>";
           
         }
       }else{
         // echo'not all inputs in boxes';
         //not all inputs in boxes
-        echo "<script>passing=false; </script>";
+        echo "<script>var passing=false; </script>";
         
       }
     }
