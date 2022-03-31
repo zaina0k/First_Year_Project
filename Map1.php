@@ -481,7 +481,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-<div>
+<div style="display: none;">
   <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
   <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
   <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
