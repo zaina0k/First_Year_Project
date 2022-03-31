@@ -90,12 +90,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="stylesheet" type="text/css" href="signup.css">
-
-
-    <script>
-        localStorage.clear();
-        </script>
-        
 </head>
 <body>
     <!-- General -->
@@ -143,4 +137,3 @@ session_start();
 </body>
 <script src="signup.js"></script>
 </html>
-
