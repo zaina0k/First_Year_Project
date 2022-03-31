@@ -356,7 +356,7 @@ function update(){ //this function ensures all the text and values are up to dat
   for (var i=0; i != populations_array.length; i++){total+=populations_array[i]};
   document.getElementById("Completion_percentage").value = ((total/65185724)*100);
   document.getElementById("Completion_percentage_number").innerHTML = (Math.trunc(((total/65185724)*100)*100)/100+"%");
-  document.getElementById("Total_pop").innerHTML = ("Total Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
+  document.getElementById("Total_pop").innerHTML = ("Total Infected Devices <p>"+total+"</p> <p style='border: none; font-size: 0.75em;'>(+"+auto_infection+" per day)</p>");
   if (unlocked_regions[current_region_index] == 1){//if unlocked, show the region's population
     document.getElementById("Region").innerHTML = (regions_array[current_region_index]+" <p>"+populations_array[current_region_index]);
   }
