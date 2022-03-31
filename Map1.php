@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $pop = $_POST['population'];
 
-    // echo $pop;
+    echo $pop;
 
 
 
@@ -38,20 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $idtest = $stats_data['day'];
 
     $un_upg = unserialize($db_upg);
-    // echo $un_upg;
-    // echo "<br>";
-    //
-    //
-    //
-    //
-    // echo ("this is  value of the upgardes as stored in the database");
+    echo $un_upg;
+    echo "<br>";
 
-    // echo $db_upg;
+
+
+
+    echo ("this is  value of the upgardes as stored in the database");
+
+    echo $db_upg;
 
     $upgrades_array = serialize($_POST['upg']);
     $population_array = serialize($_POST['population']);
 
-    // echo $population_array;
+    echo $population_array;
 
     $day = $_POST['day'];
     $infect_rate = $_POST['infect_rate'];
@@ -71,16 +71,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 
-    // echo $infect_rate;
+    echo $infect_rate;
 
 
 
 
     $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
     mysqli_query($con, $query);
-    // echo("Error description: " . mysqli_error($con));
-
-    header("Refresh:0");
+    echo("Error description: " . mysqli_error($con));
 }
 
 
@@ -89,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head onload="reset()">
+<head>
   <meta charset="utf-8" width="device-width" user-scalable="no">
   <title>Project IMAP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -133,7 +131,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 
 
+
+
+<div class="panel" style="display: none;">
+<!--  -->
+  <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
+  <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
+  <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
+  <h2 id="db_UPGRADES">upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
+  <h2 id="db_DATA">data  <?php echo $stats_data['data']?> </h2>
+  <h2 id="db_CLICK">click  <?php echo $stats_data['click']?> </h2>
+  <h2 id="db_AUTO_DATA">auto data  <?php echo $stats_data['Auto_data']?> </h2>
+  <h2 id="db_AUTO_INFECTION">auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
+  <h2 id="db_POP_MAX"> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
+  <h2 id="db_ANTI_VIRUS">anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
+  <h2 id="db_ANTI_VIRUS_TICKS_LEFT" id="db_DAY">anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
+  <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
+  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
+</div>
+
+
+
 <body onload="setCard()">
+
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -354,9 +374,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </div>
     <div class="card text-center" style="width: 30em; height: 20em; overflow-y: scroll;">
       <div class = "card-body">
-        <button onclick="showUpgrades(0)">Infections</button>
-        <button onclick="showUpgrades(1)">Lethality</button>
-        <button onclick="showUpgrades(2)">Antivirus Resistance</button>
+        <button onclick="showUpgrades(0)">infections</button>
+        <button onclick="showUpgrades(1)">lethality</button>
+        <button onclick="showUpgrades(2)">anti-anti-virus</button>
         <h5 class="card-title">STATS</h5>
         <div id="Data">Data <p>0</p><div>0</div></div>
         <div id="Total_pop">Total Devices <p>0</p></div>
@@ -371,13 +391,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       <div class = "card-body">
         <div id="Day_display">DAY: <p id="Day">0</p></div>
         <div class="map-buttons">
-          <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button><br>
+          <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
           <button class="reset-button" onclick="reset()"> RESET </button><br>
-          <!-- <input id="enter_data"><button onclick="set_data(0)">Set Data</button><br>
-          <input id="enter_day"><button onclick="set_data(1)">Set Day</button><br>
-          <input id="enter_pop"><button onclick="set_data(2)">Set Population in current region</button> -->
           <!-- form used to displayed data waiting to be sent to the database -->
-
           <div aria-readonly="$_POST" style="display: none;"> <!-- readonly input unchangeable, can be set to invisible later -->
 
           <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -396,9 +412,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
             <!--  this part add all the feilds that are left the one on the right of map on the dev branch map -->
             </div>
-            <input type="submit" value="SAVE (to database)" onclick="">
+            <input type="submit" value="SAVE TO DATABASE"><br><br>
           </form>
-          <input type="submit" value="LOAD (from database)" onclick="load_from_database()">
+          <input type="submit" value="LOAD FROM DATABASE" onclick="load_from_database()">
         </div>
         <div class="svg-div">
           <svg class="map-svg" id="svg" width="1270" height="700">
@@ -481,19 +497,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-<div style="display: none;">
-  <h2>Username:<?php echo $user_data['user_name' ]; ?></h2><br><br>
-  <h2 id="db_DAY">DAY <?php echo $stats_data['day']?> </h2>
-  <h2 id="db_POPULATIONS">populations <?php  echo unserialize($stats_data['population'])?> </h2>
-  <h2 id="db_UPGRADES">upgrades array  <?php echo unserialize($stats_data['upg'])?> </h2>
-  <h2 id="db_DATA">data  <?php echo $stats_data['data']?> </h2>
-  <h2 id="db_CLICK">click  <?php echo $stats_data['click']?> </h2>
-  <h2 id="db_AUTO_DATA">auto data  <?php echo $stats_data['Auto_data']?> </h2>
-  <h2 id="db_AUTO_INFECTION">auto infection  <?php echo $stats_data['Auto_infection']?> </h2>
-  <h2 id="db_POP_MAX"> pop max   <?php echo unserialize($stats_data['POP_MAX'])?> </h2>
-  <h2 id="db_ANTI_VIRUS">anti virus  <?php echo $stats_data['ANTI_VIRUS']?> </h2>
-  <h2 id="db_ANTI_VIRUS_TICKS_LEFT" id="db_DAY">anti virus ticks left  <?php echo $stats_data['ANTI_VIRUS_TICKS']?> </h2>
-  <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
-  <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
-</div>
 </html>
