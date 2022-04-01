@@ -118,7 +118,7 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link"  href="Map.html">Map</a>
+            <a class="nav-link"  href="Map1.php">Map</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Achievements.html">Achievements</a>
