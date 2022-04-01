@@ -30,28 +30,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $pop = $_POST['population'];
 
-    echo $pop;
-
+  
 
 
     $db_upg=$stats_data['upg'];
     $idtest = $stats_data['day'];
 
     $un_upg = unserialize($db_upg);
-    echo $un_upg;
-    echo "<br>";
 
 
 
 
-    echo ("this is  value of the upgardes as stored in the database");
 
-    echo $db_upg;
+ 
 
     $upgrades_array = serialize($_POST['upg']);
     $population_array = serialize($_POST['population']);
 
-    echo $population_array;
+  
 
     $day = $_POST['day'];
     $infect_rate = $_POST['infect_rate'];
@@ -71,14 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 
-    echo $infect_rate;
 
 
 
 
     $query = "update stats set day='$day' , data= '$data' ,upg = '$upgrades_array' , population ='$population_array' , Auto_data = '$auto_data' , Auto_infection = '$auto_infection' , POP_MAX = '$pop_max' , ANTI_VIRUS= '$anti_virus' , ANTI_VIRUS_TICKS = '$anti_virus_ticks' ,UNLOCKED_REGIONS = '$unlocked_regions' where user_id = '$id' ";
     mysqli_query($con, $query);
-    echo("Error description: " . mysqli_error($con));
 }
 
 
@@ -149,6 +143,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   <h2 id="db_UNLOCKED_REGIONS">UNLOCKED REGIONS: <?php echo unserialize($stats_data['UNLOCKED_REGIONS']); ?></h2><br><br>
   <h2>You Total Score is : <?php echo $stats_data['total_score'] ; ?></h2><br><br>
 </div>
+
+<script>
+function showoverlay() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
 
 
 
@@ -386,6 +390,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       </div>
     </div>
   </div>
+
+
+
+
+
   <div class="card-columns" style="display: inline-block; float: left;">
       <div class="card text-center" style="width: 64em; height: 40em;">
       <div class = "card-body">
@@ -393,6 +402,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <div class="map-buttons">
           <button id='infect_button' onclick='infect()'>INFECT 1 DEVICE</button>
           <button class="reset-button" onclick="reset()"> RESET </button><br>
+
+
+          <html>
+<head>
+<style>
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.76);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 25px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+</style>
+</head>
+<body>
+
+<div id="overlay" onclick="off()">
+  <div id="text">How to play the Game :<br>
+    - Start by infecting devices in Scotland <br>
+    - Once you have enough Data ( in game currency), start upgrading your virus , such as increasing its Lethality <br>
+    - Unlock new regions by clicking on the RED AREAS of the map and purchasing them with Stolen Data, so you can infect the whole poplualtion <br>
+    - Be careful , a Anti-Virus will be released this will reduce the effectiveness of your virus meaning less data will be stolen , make sure you buy the Anti-Virus upgrade<br>
+    - Compete with friends on the leaderboard , see who can infect the whole poluation in the shortest days <br>
+  </div>
+</div>
+
+<div >
+  <button style = "position:fixed; right:45px; top:69px;" button style="margin:5px;" onclick="showoverlay()"> <img src="https://www.pngitem.com/pimgs/m/136-1368203_computer-icons-tutorial-information-learning-education-tutorial-clipart.png" height ="50" width="50"></button>
+</div>
+
+
+<audio loop id="player" src="ncs.mp3"></audio>
+<div > 
+  <button style = "position:fixed; left:500px; top:69px;" onclick="document.getElementById('player').play()"> <img src="data:image/png;base64,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" height ="45" width="45"></button> 
+  
+  
+  <button style = "position:fixed; left:580px; top:69px;"onclick="document.getElementById('player').pause()"> <img src="https://pngset.com/images/audio-volume-no-speaker-mute-sound-social-media-icon-facebook-symbol-text-number-rug-transparent-png-778873.png" height ="45" width="45"></button> 
+</div>
+
+   
+</body>
+</html> 
+
+
+
+
+
+
           <!-- form used to displayed data waiting to be sent to the database -->
           <div aria-readonly="$_POST" style="display: none;"> <!-- readonly input unchangeable, can be set to invisible later -->
 
